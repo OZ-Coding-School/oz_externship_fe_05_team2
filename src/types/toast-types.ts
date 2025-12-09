@@ -1,17 +1,14 @@
-export type Toast =
-  | SmallToast
-  | BigToast
-  | {
-      id: number;
-      status: "success" | "danger";
-      text: string;
-    };
-
-export interface SmallToast {
-  type: "small";
+export interface BaseToast {
+  id: number;
+  status: "success" | "danger";
+  text: string;
+}
+export interface SmallToast extends BaseToast {
+  variant: "small";
 }
 
-export interface BigToast {
-  type: "big";
+export interface BigToast extends BaseToast {
+  variant: "big";
   title: string;
 }
+export type Toast = SmallToast | BigToast;
