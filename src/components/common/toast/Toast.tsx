@@ -8,9 +8,13 @@ interface ToastProps {
 
 export default function Toast({ toast }: ToastProps) {
   const { variant } = toast;
-  return variant === "big" ? (
-    <BigToast bigToast={toast} />
-  ) : (
-    <SmallToast smallToast={toast} />
+  return (
+    <div className="animate-fade-in-out-toast">
+      {variant === "big" ? (
+        <BigToast bigToast={toast} />
+      ) : (
+        <SmallToast smallToast={toast} />
+      )}
+    </div>
   );
 }
