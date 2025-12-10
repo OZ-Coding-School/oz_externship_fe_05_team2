@@ -1,11 +1,16 @@
-import ToastBox from "@/components/common/toast/ToastBox";
+import RootLayout from "@/components/layout/RootLayout";
+import { Home } from "@/pages";
+import { BrowserRouter, Route, Routes } from "react-router";
 
 function App() {
   return (
-    <div>
-      {/* 추후 레이아웃으로 아래 컴포넌트 옮기기 */}
-      <ToastBox />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
