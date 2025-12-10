@@ -1,17 +1,16 @@
 import { cn } from "@/lib/utils";
-import { type InputHTMLAttributes, forwardRef } from "react";
+import { type InputHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Check } from "lucide-react";
 
-const inputVariants = cva(
-  "w-full rounded-md border-2 px-4 py-3 text-sm placeholder:text-neutral-400 focus:outline-none transition-all duration-200 disabled:bg-neutral-100 disabled:text-neutral-400",
+const containerVariants = cva(
+  "flex items-center w-full rounded-md border-2 bg-white transition-all duration-200",
   {
     variants: {
       variant: {
-        default: "border-neutral-300 bg-white focus:border-primary-500",
-        danger:
-          "border-danger focus:border-danger bg-white placeholder:text-danger",
-        success: "border-success focus:border-success bg-white pr-10",
+        default: "border-neutral-300 focus-within:border-primary-500",
+        danger: "border-danger focus-within:border-danger",
+        success: "border-success focus-within:border-success",
       },
     },
     defaultVariants: {
@@ -22,40 +21,52 @@ const inputVariants = cva(
 
 interface InputProps
   extends InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {
+    VariantProps<typeof containerVariants> {
   errorMessage?: string;
   inputClassName?: string;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, inputClassName, variant, errorMessage, ...props }, ref) => {
-    const currentVariant = errorMessage ? "danger" : variant;
+const Input = ({
+  className,
+  inputClassName,
+  variant,
+  errorMessage,
+  ref,
+  ...props
+}: InputProps) => {
+  const currentVariant = errorMessage ? "danger" : variant;
 
-    return (
-      <div className={cn("relative", className)}>
-        <div className="relative flex items-center">
-          <input
-            ref={ref}
-            className={cn(
-              inputVariants({ variant: currentVariant }),
-              inputClassName
-            )}
-            {...props}
-          />
-
-          {currentVariant === "success" && (
-            <span className="text-success absolute top-1/2 right-3 -translate-y-1/2 text-lg font-bold">
-              <Check />
-            </span>
+  return (
+    <div className={cn("flex flex-col", className)}>
+      <div
+        className={cn(
+          containerVariants({ variant: currentVariant }),
+          props.disabled && "cursor-not-allowed bg-neutral-100 text-neutral-400"
+        )}
+      >
+        <input
+          ref={ref}
+          className={cn(
+            "w-full border-none bg-transparent px-4 py-3 text-sm outline-none placeholder:text-neutral-400 disabled:cursor-not-allowed",
+            currentVariant === "danger" && "placeholder:text-danger",
+            inputClassName
           )}
-        </div>
-        {errorMessage && (
-          <p className="text-danger mt-1 text-xs">*{errorMessage}</p>
+          {...props}
+        />
+
+        {currentVariant === "success" && (
+          <span className="text-success pointer-events-none flex items-center justify-center pr-3">
+            <Check size={20} strokeWidth={3} />
+          </span>
         )}
       </div>
-    );
-  }
-);
 
-Input.displayName = "Input";
+      {errorMessage && (
+        <p className="text-danger mt-1 text-xs font-medium">*{errorMessage}</p>
+      )}
+    </div>
+  );
+};
+
 export default Input;
