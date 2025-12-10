@@ -8,7 +8,7 @@ export default function Textarea({
   return (
     <textarea
       className={cn(
-        "min-h-[120px] w-full resize-none rounded-sm border border-neutral-300 bg-neutral-100 px-4 py-3 text-sm transition-all duration-200 placeholder:text-neutral-400",
+        "resize-none rounded-sm border border-neutral-300 bg-neutral-100 px-4 py-3 text-sm transition-all duration-200 placeholder:text-neutral-400",
         "focus:border-neutral-400 focus:outline-none",
         className
       )}
