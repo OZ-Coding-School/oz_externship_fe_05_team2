@@ -1,9 +1,3 @@
-const HomePage = () => {
-  return (
-    <div>
-      <h1>Home Page</h1>
-    </div>
-  );
-};
+import Home from "@/pages/Home";
 
-export default HomePage;
+export { Home };
