@@ -1,5 +1,4 @@
 import ToastBox from "@/components/common/toast/ToastBox";
-import "./App.css";
 
 function App() {
   return (
