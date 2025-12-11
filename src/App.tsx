@@ -1,8 +1,7 @@
 import { RootLayout } from "@/components/layout";
 import { Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
-import NotFound from "@/pages/NotFound";
-
+import NotFound from "@/components/common/NotFound/NotFound";
 function App() {
   return (
     <BrowserRouter>
