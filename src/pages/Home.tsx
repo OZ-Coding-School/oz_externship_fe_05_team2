@@ -22,7 +22,12 @@ const MAIN_IMAGES: Record<mainContents, string> = {
 } as const;
 
 const BUTTON_COMMON_STYLE =
-  "rounded-full px-4 py-3 sm:px-7 sm:py-4 font-medium";
+  "rounded-full px-4 py-3 sm:px-7 sm:py-4 font-medium transition-colors ease-in-out cursor-pointer";
+
+const BUTTON_SELECTED_STYLE = "text-primary-50 bg-primary-600";
+
+const BUTTON_UNSELECTED_STYLE =
+  "hover:bg-primary-400 hover:text-primary-50 bg-white text-neutral-400";
 
 export default function Home() {
   const [content, setContent] = useState<mainContents>("exam");
@@ -41,7 +46,9 @@ export default function Home() {
               }}
               className={cn(
                 BUTTON_COMMON_STYLE,
-                "text-primary-50 bg-primary-600"
+                content === "exam"
+                  ? BUTTON_SELECTED_STYLE
+                  : BUTTON_UNSELECTED_STYLE
               )}
             >
               쪽지시험
@@ -50,7 +57,12 @@ export default function Home() {
               onClick={() => {
                 setContent("qna");
               }}
-              className={cn(BUTTON_COMMON_STYLE, "bg-white text-neutral-400")}
+              className={cn(
+                BUTTON_COMMON_STYLE,
+                content === "qna"
+                  ? BUTTON_SELECTED_STYLE
+                  : BUTTON_UNSELECTED_STYLE
+              )}
             >
               질의응답
             </button>
@@ -58,7 +70,12 @@ export default function Home() {
               onClick={() => {
                 setContent("community");
               }}
-              className={cn(BUTTON_COMMON_STYLE, "bg-white text-neutral-400")}
+              className={cn(
+                BUTTON_COMMON_STYLE,
+                content === "community"
+                  ? BUTTON_SELECTED_STYLE
+                  : BUTTON_UNSELECTED_STYLE
+              )}
             >
               커뮤니티
             </button>
