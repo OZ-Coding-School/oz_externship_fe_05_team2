@@ -36,7 +36,10 @@ export default function Home() {
     <div className="flex flex-col items-center bg-neutral-50 px-5 py-32">
       <div className="flex w-full max-w-5xl flex-col gap-16">
         <section className="flex w-full flex-col items-center justify-center gap-16">
-          <h1 className="text-center text-3xl font-bold break-keep sm:text-5xl">
+          <h1
+            key={content + "-text"}
+            className="animate-fade-in-blur text-center text-3xl font-bold break-keep not-odd:sm:text-5xl"
+          >
             {MAIN_TEXTS[content]}
           </h1>
           <div className="flex items-center justify-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-2">
@@ -80,7 +83,12 @@ export default function Home() {
               커뮤니티
             </button>
           </div>
-          <img src={MAIN_IMAGES[content]} className="w-full" alt="main-image" />
+          <img
+            key={content + "-image"}
+            src={MAIN_IMAGES[content]}
+            className="animate-fade-in-blur w-full"
+            alt={content + "-image"}
+          />
         </section>
         <img src={BannerImage} className="w-full" alt="banner-image" />
       </div>
