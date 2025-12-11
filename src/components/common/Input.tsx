@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { type InputHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Check } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 
 const containerVariants = cva(
   "flex items-center w-full rounded-md border-2 bg-white transition-all duration-200",
@@ -57,7 +57,7 @@ const Input = ({
 
         {currentVariant === "success" && (
           <span className="text-success pointer-events-none flex items-center justify-center pr-3">
-            <Check size={20} strokeWidth={3} />
+            <CheckIcon size={20} strokeWidth={3} />
           </span>
         )}
       </div>
