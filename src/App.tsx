@@ -1,7 +1,9 @@
 import { RootLayout } from "@/components/layout";
 import { Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
-import NotFound from "@/components/common/NotFound/NotFound";
+import NotFound from "@/components/common/NotFound/NotFound404";
+import NotFoundExam from "@/components/common/NotFound/NotFoundExam";
+
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +17,7 @@ function App() {
           <Route path="/my-page" element={<div>마이페이지</div>} />
 
           <Route path="*" element={<NotFound />} />
+          <Route path="/exam" element={<NotFoundExam />} />
         </Route>
       </Routes>
     </BrowserRouter>
