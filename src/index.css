@@ -62,3 +62,31 @@ body {
     }
   }
 }
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  .dropdown-menu-scroll {
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      margin-top: 2px;
+      margin-bottom: 138px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-neutral-300;
+
+      border: 5px solid transparent;
+      border-radius: 999px;
+      background-clip: padding-box;
+    }
+  }
+}
