@@ -47,3 +47,18 @@ body {
     }
   }
 }
+
+@theme {
+  --animate-fade-in-blur: fade-in-blur 700ms ease-in-out;
+
+  @keyframes fade-in-blur {
+    from {
+      opacity: 0;
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+}
