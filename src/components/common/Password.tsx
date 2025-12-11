@@ -22,6 +22,7 @@ const passwordContainerVariants = cva(
 interface PasswordInputProps
   extends InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof passwordContainerVariants> {
+  helperText?: string;
   errorMessage?: string;
   successMessage?: string;
   inputClassName?: string;
@@ -32,6 +33,7 @@ const PasswordInput = ({
   className,
   inputClassName,
   variant,
+  helperText,
   errorMessage,
   successMessage,
   ref,
@@ -82,6 +84,11 @@ const PasswordInput = ({
       {!errorMessage && successMessage && (
         <p className="text-success mt-1 text-xs font-medium">
           *{successMessage}
+        </p>
+      )}
+      {!errorMessage && !successMessage && helperText && (
+        <p className="mt-1 text-xs font-medium text-neutral-400">
+          *{helperText}
         </p>
       )}
     </div>
