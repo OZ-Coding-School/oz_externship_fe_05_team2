@@ -1,27 +1,12 @@
 import { cn } from "@/lib/utils";
 import { type InputHTMLAttributes } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import { CheckIcon } from "lucide-react";
-
-const containerVariants = cva(
-  "flex items-center w-full rounded-md border-2 bg-white transition-all duration-200",
-  {
-    variants: {
-      variant: {
-        default: "border-neutral-300 focus-within:border-primary-500",
-        danger: "border-danger focus-within:border-danger",
-        success: "border-success focus-within:border-success",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+import { inputContainerVariants } from "@/lib/inputContainerVariant";
 
 interface InputProps
   extends InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof containerVariants> {
+    VariantProps<typeof inputContainerVariants> {
   errorMessage?: string;
   inputClassName?: string;
   ref?: React.Ref<HTMLInputElement>;
@@ -41,7 +26,7 @@ const Input = ({
     <div className={cn("flex flex-col", className)}>
       <div
         className={cn(
-          containerVariants({ variant: currentVariant }),
+          inputContainerVariants({ variant: currentVariant }),
           props.disabled && "cursor-not-allowed bg-neutral-100 text-neutral-400"
         )}
       >

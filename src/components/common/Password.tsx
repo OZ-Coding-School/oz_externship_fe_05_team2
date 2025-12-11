@@ -1,27 +1,12 @@
 import { cn } from "@/lib/utils";
 import { type InputHTMLAttributes, useState } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-
-const passwordContainerVariants = cva(
-  "flex items-center w-full rounded-md border bg-white transition-all duration-200",
-  {
-    variants: {
-      variant: {
-        default: "border-neutral-300 focus-within:border-black",
-        danger: "border-danger focus-within:border-danger",
-        success: "border-success focus-within:border-success",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+import { inputContainerVariants } from "@/lib/inputContainerVariant";
 
 interface PasswordInputProps
   extends InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof passwordContainerVariants> {
+    VariantProps<typeof inputContainerVariants> {
   helperText?: string;
   errorMessage?: string;
   successMessage?: string;
@@ -51,9 +36,7 @@ const PasswordInput = ({
 
   return (
     <div className={cn("flex flex-col", className)}>
-      <div
-        className={cn(passwordContainerVariants({ variant: currentVariant }))}
-      >
+      <div className={cn(inputContainerVariants({ variant: currentVariant }))}>
         <input
           ref={ref}
           type={isVisible ? "text" : "password"}
