@@ -4,6 +4,7 @@ import {
   CommunityImage,
   BannerImage,
 } from "@/assets/images/landing-images";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 type mainContents = "exam" | "qna" | "community";
@@ -20,6 +21,9 @@ const MAIN_IMAGES: Record<mainContents, string> = {
   community: CommunityImage,
 } as const;
 
+const BUTTON_COMMON_STYLE =
+  "rounded-full px-4 py-3 sm:px-7 sm:py-4 font-medium";
+
 export default function Home() {
   const [content, setContent] = useState<mainContents>("exam");
 
@@ -35,7 +39,10 @@ export default function Home() {
               onClick={() => {
                 setContent("exam");
               }}
-              className="text-primary-50 bg-primary-600 rounded-full px-7 py-4 font-medium"
+              className={cn(
+                BUTTON_COMMON_STYLE,
+                "text-primary-50 bg-primary-600"
+              )}
             >
               쪽지시험
             </button>
@@ -43,7 +50,7 @@ export default function Home() {
               onClick={() => {
                 setContent("qna");
               }}
-              className="rounded-full bg-white px-7 py-4 font-medium text-neutral-400"
+              className={cn(BUTTON_COMMON_STYLE, "bg-white text-neutral-400")}
             >
               질의응답
             </button>
@@ -51,7 +58,7 @@ export default function Home() {
               onClick={() => {
                 setContent("community");
               }}
-              className="rounded-full bg-white px-7 py-4 font-medium text-neutral-400"
+              className={cn(BUTTON_COMMON_STYLE, "bg-white text-neutral-400")}
             >
               커뮤니티
             </button>
