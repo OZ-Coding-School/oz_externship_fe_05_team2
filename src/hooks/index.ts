@@ -1,5 +1,5 @@
-//hooks
 import useToast from "@/hooks/useToast";
 import useWindowSize from "@/hooks/useWindowSize";
+import useOutsideInteraction from "@/hooks/useOutsideInteraction";
 
-export { useToast, useWindowSize };
+export { useToast, useWindowSize, useOutsideInteraction };
