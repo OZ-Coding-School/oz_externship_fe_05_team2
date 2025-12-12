@@ -1,3 +1,5 @@
+import Footer from "@/components/layout/footer/Footer";
+
 import {
   CAMP_LIST,
   INFO_LIST,
@@ -9,5 +11,5 @@ import type {
   FooterSnsLinkItem,
 } from "@/components/layout/footer/types";
 
-export { CAMP_LIST, INFO_LIST, SNS_LIST };
+export { Footer, CAMP_LIST, INFO_LIST, SNS_LIST };
 export type { FooterLinkItem, FooterSnsLinkItem };
