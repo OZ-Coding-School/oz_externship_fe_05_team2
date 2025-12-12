@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
   DropdownTrigger,
   DropdownContent,
@@ -10,6 +10,7 @@ import {
   type SelectedOption,
 } from "@/components/common/dropdown";
 import { cn } from "@/lib/utils";
+import { useOutsideInteraction } from "@/hooks";
 
 interface DropdownProps {
   onChange: (newValue: string) => void;
@@ -30,7 +31,6 @@ function Dropdown({
   const [selectedOption, setSelectedOption] = useState<SelectedOption>(null);
   const [customInputValue, setCustomInputValue] = useState("");
   const [isCustomInputFocused, setIsCustomInputFocused] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const isCustomOptionSelected =
     allowCustomInput && selectedOption?.label === CUSTOM_OPTION.label;
   const placeholder = selectedOption?.label ?? DEFAULT_PLACEHOLDER;
@@ -57,16 +57,9 @@ function Dropdown({
     if (event.key === "Escape") closeMenu();
   };
 
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (!dropdownRef.current) return;
-      if (!dropdownRef.current.contains(event.target as Node)) closeMenu();
-    };
-
-    document.addEventListener("mousedown", handleOutsideClick);
-
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, []);
+  const dropdownRef = useOutsideInteraction<HTMLDivElement>([
+    { type: "mousedown", handler: () => closeMenu() },
+  ]);
 
   return (
     <div
