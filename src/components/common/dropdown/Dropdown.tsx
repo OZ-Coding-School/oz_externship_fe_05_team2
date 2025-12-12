@@ -9,7 +9,6 @@ import {
   type DropdownOption,
   type SelectedOption,
 } from "@/components/common/dropdown";
-import { cn } from "@/lib/utils";
 import { useOutsideInteraction } from "@/hooks";
 
 interface DropdownProps {
@@ -17,7 +16,7 @@ interface DropdownProps {
   options: DropdownOption[];
   disabled?: boolean;
   allowCustomInput?: boolean;
-  className?: string;
+  customInputHeight?: number;
 }
 
 function Dropdown({
@@ -25,7 +24,7 @@ function Dropdown({
   options,
   disabled,
   allowCustomInput = false,
-  className,
+  customInputHeight = 120,
 }: DropdownProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<SelectedOption>(null);
@@ -63,7 +62,7 @@ function Dropdown({
 
   return (
     <div
-      className={cn("relative flex flex-col gap-0.5", className)}
+      className="relative flex flex-col gap-0.5"
       onKeyDown={handleKeyDown}
       ref={dropdownRef}
     >
@@ -90,6 +89,7 @@ function Dropdown({
           onChange={handleCustomInputValueChange}
           onFocus={handleCustomInputFocus}
           onBlur={handleCustomInputBlur}
+          height={customInputHeight}
         />
       )}
     </div>
