@@ -90,3 +90,36 @@ body {
     }
   }
 }
+
+@theme {
+  --animate-loading-bounce: loading-bounce 1s linear infinite;
+
+  @keyframes loading-bounce {
+    0%,
+    40% {
+      transform: translateY(0%);
+    }
+
+    20% {
+      transform: translateY(-180%);
+    }
+  }
+}
+
+@layer utilities {
+  .animation-delay-50 {
+    animation-delay: 50ms;
+  }
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+}
