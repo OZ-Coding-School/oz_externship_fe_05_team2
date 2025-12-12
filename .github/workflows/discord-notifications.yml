@@ -78,6 +78,9 @@ jobs:
                 "nelfen")
                  MENTIONS="$MENTIONS <@801386532882743326>"
                  ;;
+                 "JaeHyunLee123")
+                 MENTIONS="$MENTIONS <@338615685498273792>"
+                 ;;
                 *)
                   MENTIONS="$MENTIONS @$login"
                   ;;
@@ -92,6 +95,7 @@ jobs:
                 "jihyekim830") MENTIONS="<@1113730073250496553>" ;;
                 "lea2047-bot") MENTIONS="<@867267810858238022>" ;;
                 "nelfen") MENTIONS="<@801386532882743326>" ;;
+                "JaeHyunLee123") MENTIONS="<@338615685498273792>" ;;
                 *) MENTIONS="@$CURRENT_REVIEWER" ;;
               esac
             fi
@@ -181,6 +185,9 @@ jobs:
               ;;
             "nelfen")
               AUTHOR_MENTION="<@801386532882743326>"
+              ;;
+            "JaeHyunLee123")
+              AUTHOR_MENTION="<@338615685498273792>"
               ;;
             *)
               AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
