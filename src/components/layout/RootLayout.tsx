@@ -1,10 +1,11 @@
 import ToastBox from "@/components/common/toast/ToastBox";
 import { Outlet } from "react-router";
+import Header from "@/components/Header";
 
 export default function RootLayout() {
   return (
     <div>
-      {/*TODO: 헤더 및 푸터 추가 */}
+      <Header />
       <Outlet />
       <ToastBox />
     </div>
