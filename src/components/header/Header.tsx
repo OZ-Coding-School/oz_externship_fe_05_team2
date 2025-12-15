@@ -22,7 +22,7 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
+    <header className="sticky top-0 z-20 border-b border-gray-200 bg-white">
       <div className="flex h-8 items-center justify-center bg-black text-xs">
         <span className="text-white">
           🚨 선착순 모집! 국비지원 받고 4주 완성
