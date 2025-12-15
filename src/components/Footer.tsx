@@ -13,7 +13,10 @@ function Footer({
 }: FooterProps) {
   return (
     <footer className={cn("w-full bg-neutral-800 py-20", className)}>
-      <div style={{ maxWidth: contentContainerMaxWidth }} className="mx-auto">
+      <div
+        style={{ maxWidth: contentContainerMaxWidth }}
+        className="mx-auto p-5"
+      >
         <img src={FooterLogoImage} alt="오즈코딩스쿨 로고" className="w-40" />
         <ul className="grid grid-cols-1 gap-3 pt-10 text-lg font-light text-neutral-300">
           {CAMP_LIST.map((item) => (
