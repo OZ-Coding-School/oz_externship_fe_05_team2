@@ -4,10 +4,7 @@ import {
   SnsDefaultIcon,
   YoutubeIcon,
 } from "@/assets/icons/sns-icons";
-import type {
-  FooterLinkItem,
-  FooterSnsLinkItem,
-} from "@/components/layout/footer";
+import type { FooterLinkItem, FooterSnsLinkItem } from "@/types";
 
 export const CAMP_LIST: FooterLinkItem[] = [
   { label: "초격차캠프", link: "" },
