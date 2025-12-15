@@ -1,10 +1,10 @@
 import { useState } from "react";
-import type { ReactNode } from "react";
 import { Link } from "react-router";
-import UserMenu from "./header/UserMenu";
-import { HeaderLogo } from "@/assets/images/landing-images";
+import UserMenu from "@/components/header/UserMenu";
+import type { HeaderLinkProps } from "@/types/header-types";
+import { HeaderLogo } from "@/assets/images/logo-images";
 
-const HeaderLink = ({ to, children }: { to: string; children: ReactNode }) => (
+const HeaderLink = ({ to, children }: HeaderLinkProps) => (
   <Link
     to={to}
     className="font-medium text-gray-700 transition-colors hover:text-violet-600"
@@ -29,8 +29,11 @@ export default function Header() {
           <div className="flex space-x-8">
             <nav className="hidden items-center space-x-16 md:flex">
               <Link to="/" className="flex items-center space-x-2">
-                <img src={HeaderLogo} alt="오즈코딩스쿨 로고" />
+                <div className="text-2xl font-bold">
+                  <img src={HeaderLogo} alt="헤더로고" />
+                </div>
               </Link>
+
               <HeaderLink to="/community">커뮤니티</HeaderLink>
               <HeaderLink to="/qna">질의응답</HeaderLink>
             </nav>

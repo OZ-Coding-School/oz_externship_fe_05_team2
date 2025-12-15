@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { UserIcon } from "lucide-react";
-
-interface DropdownItemProps {
-  children: React.ReactNode;
-  to?: string;
-  onClick?: () => void;
-  className?: string;
-}
+import { UserIcon } from "@/assets/icons/interface-icons/";
+import type { DropdownItemProps, UserMenuProps } from "@/types/header-types";
 
 const DropdownItem = ({
   onClick,
@@ -33,10 +27,6 @@ const DropdownItem = ({
   );
 };
 
-interface UserMenuProps {
-  onLogout: () => void;
-}
-
 export default function UserMenu({ onLogout }: UserMenuProps) {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isStudent, setIsStudent] = useState(false);
@@ -48,12 +38,12 @@ export default function UserMenu({ onLogout }: UserMenuProps) {
         className="flex items-center space-x-2 rounded-lg px-4 py-2 transition-colors hover:bg-gray-100"
       >
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-400">
-          <UserIcon className="h-5 w-5 text-white" />
+          <img src={UserIcon} alt="유저아이콘" />
         </div>
       </button>
 
       {showUserMenu && (
-        <div className="absolute right-0 mt-2 flex w-48 flex-col rounded-lg border border-gray-200 bg-white px-4 py-2 shadow-lg">
+        <div className="absolute left-0 mt-2 flex w-48 -translate-x-3/4 flex-col rounded-lg border border-gray-200 bg-white px-4 py-2 shadow-lg">
           <div className="mb-2">
             <span className="block text-sm font-medium text-gray-900">
               오즈오즈
