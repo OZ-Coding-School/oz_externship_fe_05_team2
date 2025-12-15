@@ -1,6 +1,7 @@
 import { MODAL_ANIMATION_TIME_MS } from "@/constants";
 import { useModalContext } from "@/hooks";
 import { cn } from "@/lib/utils";
+import { XIcon } from "lucide-react";
 import {
   useEffect,
   useState,
@@ -11,15 +12,17 @@ import {
 interface ModalContentProps extends ComponentProps<"div"> {
   children: ReactNode;
   isPositionCenter?: boolean;
+  hasCloseIcon?: boolean;
 }
 
 export default function ModalContent({
   children,
   className,
   isPositionCenter = true,
+  hasCloseIcon = true,
   ...props
 }: ModalContentProps) {
-  const { isOpen } = useModalContext();
+  const { isOpen, close } = useModalContext();
   const [show, setShow] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -52,6 +55,17 @@ export default function ModalContent({
       )}
       {...props}
     >
+      {hasCloseIcon && (
+        <div className="flex items-center justify-end">
+          <button
+            onClick={() => {
+              close();
+            }}
+          >
+            <XIcon />
+          </button>
+        </div>
+      )}
       {children}
     </div>
   );
