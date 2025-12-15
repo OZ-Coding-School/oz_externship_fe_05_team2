@@ -3,7 +3,6 @@ import { Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import NotFound404 from "@/components/common/NotFound/NotFound404";
-import NotFoundCommunity from "@/components/common/NotFound/NotFoundCommunity";
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
           <Route path="/my-page" element={<div>마이페이지</div>} />
 
           <Route path="*" element={<NotFound404 />} />
-          <Route path="/exam" element={<NotFoundCommunity />} />
         </Route>
       </Routes>
     </BrowserRouter>
