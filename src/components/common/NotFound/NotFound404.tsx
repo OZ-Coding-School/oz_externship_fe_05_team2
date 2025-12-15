@@ -1,10 +1,15 @@
+import { cn } from "@/lib/utils";
+
 type NotFoundProps = {
   className?: string;
 };
-export default function NotFound({ className = "" }: NotFoundProps) {
+export default function NotFound({ className }: NotFoundProps) {
   return (
     <div
-      className={`w-full flex flex-col items-center py-70 text-center ${className}`}
+      className={cn(
+        "w-full flex flex-col items-center py-70 text-center",
+        className
+      )}
     >
       <div className="text-xl font-bold bg-purple-100 text-purple-700 px-6 py-2 rounded-md mb-6">
         404
@@ -29,4 +34,3 @@ export default function NotFound({ className = "" }: NotFoundProps) {
     </div>
   );
 }
-

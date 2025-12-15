@@ -1,19 +1,28 @@
+import { cn } from "@/lib/utils";
+
 type NotFoundExamProps = {
   className?: string;
   iconClassName?: string;
 };
+
 export default function NotFoundExam({
-  className = "",
-  iconClassName = "",
+  className,
+  iconClassName,
 }: NotFoundExamProps) {
   return (
     <div
-      className={`flex w-full flex-col items-center pt-72 text-center ${className}`}
+      className={cn(
+        "flex w-full flex-col items-center pt-72 text-center",
+        className
+      )}
     >
       <div className="flex w-full justify-center">
         <div className="flex flex-col items-center">
           <svg
-            className={`mb-10 h-40 w-40 stroke-gray-300 opacity-50 ${iconClassName}`}
+            className={cn(
+              "mb-10 h-40 w-40 stroke-gray-300 opacity-50",
+              iconClassName
+            )}
             viewBox="0 0 24 24"
             fill="none"
           >
@@ -31,4 +40,3 @@ export default function NotFoundExam({
     </div>
   );
 }
-
