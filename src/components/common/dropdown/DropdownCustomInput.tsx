@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { MAX_CUSTOM_INPUT_LENGTH } from "@/components/common/dropdown";
+import { MAX_CUSTOM_INPUT_LENGTH } from "@/constants";
+import { cn } from "@/lib";
 
 interface DropdownCustomInputProps {
   value: string;

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 interface DropdownTriggerProps {

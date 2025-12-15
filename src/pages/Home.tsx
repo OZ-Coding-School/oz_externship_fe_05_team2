@@ -4,7 +4,7 @@ import {
   CommunityImage,
   BannerImage,
 } from "@/assets/images/landing-images";
-import MainContentSelector from "@/components/MainContentSelector";
+import { MainContentSelector } from "@/components";
 import { useWindowSize } from "@/hooks";
 import { useEffect, useRef, useState } from "react";
 

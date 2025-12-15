@@ -1,4 +1,4 @@
-import RootLayout from "@/components/layout/RootLayout";
+import { RootLayout } from "@/components/layout";
 import { Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
 

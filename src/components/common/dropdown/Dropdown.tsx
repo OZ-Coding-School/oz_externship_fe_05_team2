@@ -3,14 +3,15 @@ import {
   DropdownTrigger,
   DropdownContent,
   DropdownCustomInput,
-  DEFAULT_PLACEHOLDER,
-  CUSTOM_OPTION,
-  MAX_CUSTOM_INPUT_LENGTH,
-  type DropdownOption,
-  type SelectedOption,
 } from "@/components/common/dropdown";
 import { useOutsideInteraction } from "@/hooks";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
+import type { DropdownOption, SelectedOption } from "@/types";
+import {
+  CUSTOM_OPTION,
+  DEFAULT_PLACEHOLDER,
+  MAX_CUSTOM_INPUT_LENGTH,
+} from "@/constants";
 
 interface DropdownProps {
   onChange: (newValue: string) => void;
