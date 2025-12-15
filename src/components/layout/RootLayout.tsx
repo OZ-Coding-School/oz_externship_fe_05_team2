@@ -1,4 +1,5 @@
 import ToastBox from "@/components/common/toast/ToastBox";
+import Footer from "@/components/Footer";
 import { Outlet } from "react-router";
 import Header from "@/components/header/Header";
 
@@ -8,6 +9,7 @@ export default function RootLayout() {
       <Header />
       <Outlet />
       <ToastBox />
+      <Footer />
     </div>
   );
 }
