@@ -1,24 +1,43 @@
 import { cn } from "@/lib";
-import type { ComponentProps } from "react";
+import { Link } from "react-router";
+
+interface SideBarTapButtonProps {
+  to: string;
+  isActive?: boolean;
+  disabled?: boolean;
+  children: React.ReactNode;
+}
 
 function SideBarTapButton({
-  className,
+  to,
+  isActive = false,
+  disabled = false,
   children,
-  ...props
-}: ComponentProps<"button">) {
+}: SideBarTapButtonProps) {
   return (
-    <button
-      className={cn(
-        "w-[152px] py-0.5 pl-5 text-left text-base font-bold text-neutral-400 transition-colors ease-in-out focus:outline-none",
-        "hover:text-primary-500 hover:bg-primary-100 hover:rounded-sm",
-        "active:border-l-primary-500 active:rounded-none active:border-l-2 active:bg-white",
-        "disabled:pointer-events-none disabled:rounded-sm disabled:bg-neutral-200 disabled:font-normal disabled:text-neutral-400 disabled:select-none",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </button>
+    <div className="relative">
+      <div
+        className={cn(
+          "pointer-events-none absolute top-0 left-0 h-full w-0.5 bg-transparent select-none",
+          { "bg-primary-500": isActive }
+        )}
+      ></div>
+      <Link
+        to={to}
+        className={cn(
+          "block w-full py-1 pl-5 text-left font-semibold text-neutral-400 transition-colors ease-in-out focus:outline-none",
+          "hover:text-primary-500 hover:bg-primary-100 hover:rounded-sm",
+          {
+            "text-primary-500": isActive,
+            "pointer-events-none rounded-sm bg-neutral-200 font-normal text-neutral-400 select-none":
+              disabled,
+          }
+        )}
+        tabIndex={disabled ? -1 : 0}
+      >
+        {children}
+      </Link>
+    </div>
   );
 }
 
