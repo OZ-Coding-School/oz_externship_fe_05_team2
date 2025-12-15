@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
 import type { mainContents } from "@/pages/Home";
 
 const BUTTON_COMMON_STYLE =

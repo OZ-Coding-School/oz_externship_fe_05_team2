@@ -1,8 +1,7 @@
-import { cn } from "@/lib/utils";
+import { cn, inputContainerVariants } from "@/lib";
 import { type InputHTMLAttributes, useState } from "react";
 import { type VariantProps } from "class-variance-authority";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { inputContainerVariants } from "@/lib/inputContainerVariant";
 
 interface PasswordInputProps
   extends InputHTMLAttributes<HTMLInputElement>,

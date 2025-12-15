@@ -1,4 +1,4 @@
-import type { Toast } from "@/types/toast-types";
+import type { Toast } from "@/types";
 import { create } from "zustand";
 
 interface ToastStore {

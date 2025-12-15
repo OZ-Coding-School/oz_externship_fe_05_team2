@@ -1,5 +1,5 @@
 import { useToastStore } from "@/store";
-import type { BigToast, SmallToast } from "@/types/toast-types";
+import type { BigToast, SmallToast } from "@/types";
 
 const TIMEOUT = 3000;
 

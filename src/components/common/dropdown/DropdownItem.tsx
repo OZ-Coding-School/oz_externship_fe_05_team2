@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
+import type { DropdownOption } from "@/types";
 import { CheckIcon } from "lucide-react";
-import { type DropdownOption } from "@/components/common/dropdown";
 
 interface DropdownItemProps {
   option: DropdownOption;

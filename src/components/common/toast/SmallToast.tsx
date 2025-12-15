@@ -1,4 +1,4 @@
-import type { SmallToast } from "@/types/toast-types";
+import type { SmallToast } from "@/types";
 import { BanIcon, CheckIcon } from "lucide-react";
 
 interface SmallToastProps {

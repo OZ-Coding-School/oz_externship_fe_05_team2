@@ -1,10 +1,7 @@
-import {
-  DropdownItem,
-  CUSTOM_OPTION,
-  type DropdownOption,
-  type SelectedOption,
-} from "@/components/common/dropdown";
-import { cn } from "@/lib/utils";
+import { DropdownItem } from "@/components/common/dropdown";
+import { CUSTOM_OPTION } from "@/constants";
+import { cn } from "@/lib";
+import type { DropdownOption, SelectedOption } from "@/types";
 
 interface DropdownContentProps {
   isMenuOpen: boolean;

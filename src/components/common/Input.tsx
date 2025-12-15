@@ -1,8 +1,7 @@
-import { cn } from "@/lib/utils";
+import { cn, inputContainerVariants } from "@/lib";
 import { type InputHTMLAttributes } from "react";
 import { type VariantProps } from "class-variance-authority";
 import { CheckIcon } from "lucide-react";
-import { inputContainerVariants } from "@/lib/inputContainerVariant";
 
 interface InputProps
   extends InputHTMLAttributes<HTMLInputElement>,
