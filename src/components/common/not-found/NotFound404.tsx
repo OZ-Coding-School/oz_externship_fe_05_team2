@@ -1,23 +1,24 @@
 import { cn } from "@/lib/utils";
 
-type NotFoundProps = {
+type NotFound404Props = {
   className?: string;
 };
-export default function NotFound({ className }: NotFoundProps) {
+
+export default function NotFound404({ className }: NotFound404Props) {
   return (
     <div
       className={cn(
-        "w-full flex flex-col items-center py-70 text-center",
+        "flex w-full flex-col items-center py-70 text-center",
         className
       )}
     >
-      <div className="text-xl font-bold bg-purple-100 text-purple-700 px-6 py-2 rounded-md mb-6">
+      <div className="mb-6 rounded-md bg-purple-100 px-6 py-2 text-xl font-bold text-purple-700">
         404
       </div>
       <div className="flex flex-col items-center">
-        <div className="w-72 h-72 opacity-40">
+        <div className="h-72 w-72 opacity-40">
           <svg
-            className="w-full h-full stroke-gray-300"
+            className="h-full w-full stroke-gray-300"
             viewBox="0 0 24 24"
             fill="none"
           >
@@ -25,7 +26,7 @@ export default function NotFound({ className }: NotFoundProps) {
             <line x1="21" y1="3" x2="3" y2="21" />
           </svg>
         </div>
-        <p className="text-gray-500 text-lg font-medium leading-relaxed">
+        <p className="text-lg leading-relaxed font-medium text-gray-500">
           페이지를 불러올 수 없어요
           <br />
           잠시 뒤 다시 시도해보세요!
