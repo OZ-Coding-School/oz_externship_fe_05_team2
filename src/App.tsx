@@ -2,7 +2,7 @@ import { RootLayout } from "@/components/layout";
 import { Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import NotFound404 from "@/components/common/NotFound/NotFound404";
+import NotFound404 from "@/components/common/not-found/NotFound404";
 
 function App() {
   return (
