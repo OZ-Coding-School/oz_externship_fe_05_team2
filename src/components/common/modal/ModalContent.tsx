@@ -45,7 +45,7 @@ export default function ModalContent({
   return (
     <div
       className={cn(
-        "fixed z-50 flex min-w-64 transform flex-col rounded-xl bg-white transition-all",
+        "fixed z-50 flex min-w-64 transform flex-col rounded-xl bg-white p-6 transition-all",
         isPositionCenter
           ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           : "",
@@ -56,13 +56,13 @@ export default function ModalContent({
       {...props}
     >
       {hasCloseIcon && (
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end p-1.5">
           <button
             onClick={() => {
               close();
             }}
           >
-            <XIcon />
+            <XIcon className="size-5 text-neutral-400" />
           </button>
         </div>
       )}
