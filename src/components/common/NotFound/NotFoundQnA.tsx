@@ -1,19 +1,19 @@
-type NotFoundExamProps = {
+type NotFoundQnAProps = {
   className?: string;
   iconClassName?: string;
 };
-export default function NotFoundExam({
+export default function NotFoundQnA({
   className = "",
   iconClassName = "",
-}: NotFoundExamProps) {
+}: NotFoundQnAProps) {
   return (
     <div
-      className={`flex w-full flex-col items-center pt-72 text-center ${className}`}
+      className={`w-full flex flex-col items-center pt-72 text-center ${className}`}
     >
-      <div className="flex w-full justify-center">
+      <div className="flex justify-center w-full">
         <div className="flex flex-col items-center">
           <svg
-            className={`mb-10 h-40 w-40 stroke-gray-300 opacity-50 ${iconClassName}`}
+            className={`w-40 h-40 stroke-gray-300 opacity-50 mb-10 ${iconClassName}`}
             viewBox="0 0 24 24"
             fill="none"
           >
@@ -23,12 +23,12 @@ export default function NotFoundExam({
             <circle cx="17" cy="17" r="3" />
             <line x1="19" y1="19" x2="21" y2="21" />
           </svg>
-          <p className="mb-10 text-2xl text-gray-400">
-            아직 응시할 시험이 없어요.
-          </p>
+            <p className="text-gray-400 text-2xl mb-10">
+               아직 등록된 질문이 없어요 <br />
+               궁금한 점을 남겨보세요!
+            </p>
         </div>
       </div>
     </div>
   );
 }
-

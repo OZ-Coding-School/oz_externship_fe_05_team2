@@ -1,11 +1,11 @@
-type NotFoundExamProps = {
+type NotFoundCommunityProps = {
   className?: string;
   iconClassName?: string;
 };
-export default function NotFoundExam({
+export default function NotFoundCommunity({
   className = "",
   iconClassName = "",
-}: NotFoundExamProps) {
+}: NotFoundCommunityProps) {
   return (
     <div
       className={`w-full flex flex-col items-center pt-72 text-center ${className}`}
