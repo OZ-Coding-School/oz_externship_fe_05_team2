@@ -1,0 +1,1 @@
+export const MODAL_ANIMATION_TIME_MS = 120;

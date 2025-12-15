@@ -1,3 +1,4 @@
+import { MODAL_ANIMATION_TIME_MS } from "@/constants";
 import { useModalContext } from "@/hooks";
 import { cn } from "@/lib/utils";
 import {
@@ -6,8 +7,6 @@ import {
   type ComponentProps,
   type ReactNode,
 } from "react";
-
-const MODAL_ANIMATION_TIME_MS = 120;
 
 interface ModalContentProps extends ComponentProps<"div"> {
   children: ReactNode;
