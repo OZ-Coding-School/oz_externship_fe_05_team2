@@ -1,7 +1,18 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { Link } from "react-router";
 import { UserIcon } from "@/assets/icons/interface-icons/";
-import type { DropdownItemProps, UserMenuProps } from "@/types/header-types";
+
+interface DropdownItemProps {
+  children: ReactNode;
+  to?: string;
+  onClick?: () => void;
+  className?: string;
+}
+
+interface UserMenuProps {
+  onLogout: () => void;
+}
 
 const DropdownItem = ({
   onClick,

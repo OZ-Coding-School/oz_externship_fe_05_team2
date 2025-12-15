@@ -1,7 +1,7 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { Link } from "react-router";
 import UserMenu from "@/components/header/UserMenu";
-import type { HeaderLinkProps } from "@/types/header-types";
 import { HeaderLogo } from "@/assets/images/logo-images";
 
 const HeaderLink = ({ to, children }: HeaderLinkProps) => (
@@ -12,6 +12,11 @@ const HeaderLink = ({ to, children }: HeaderLinkProps) => (
     {children}
   </Link>
 );
+
+interface HeaderLinkProps {
+  to: string;
+  children: ReactNode;
+}
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
