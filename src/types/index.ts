@@ -6,6 +6,7 @@ import type {
   ExamStatus,
   ExamCategory,
   ExamCategoryOption,
+  Exam,
 } from "@/types/exam-types";
 
 export type {
@@ -20,4 +21,5 @@ export type {
   ExamStatus,
   ExamCategory,
   ExamCategoryOption,
+  Exam,
 };
