@@ -16,6 +16,7 @@ const HeaderLink = ({ to, children }: HeaderLinkProps) => (
 interface HeaderLinkProps {
   to: string;
   children: ReactNode;
+  className?: string;
 }
 
 export default function Header() {
@@ -49,16 +50,13 @@ export default function Header() {
               <UserMenu onLogout={() => setIsLoggedIn(false)} />
             ) : (
               <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => setIsLoggedIn(true)}
-                  className="px-4 py-2 font-medium text-gray-700 transition-colors hover:text-blue-600"
-                >
+                <HeaderLink to="/login" className="px-4 py-2">
                   로그인
-                </button>
+                </HeaderLink>
                 <span className="text-gray-300">|</span>
-                <button className="px-4 py-2 font-medium text-gray-700 transition-colors hover:text-blue-600">
+                <HeaderLink to="/join" className="px-4 py-2">
                   회원가입
-                </button>
+                </HeaderLink>
               </div>
             )}
           </div>
