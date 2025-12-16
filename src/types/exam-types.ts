@@ -26,3 +26,9 @@ export interface Exam {
   is_done: boolean;
   duration_time: number;
 }
+
+export interface ExamListResponse {
+  page: number;
+  has_next: boolean;
+  results: Exam[];
+}
