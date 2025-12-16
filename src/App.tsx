@@ -14,11 +14,11 @@ import  { useState } from "react";
 import MyPageLayout from "@/components/layout/MyPageLayout";  
 
 
+
 function ExamPage() { return <div>쪽지시험 화면</div>; }
 function ProfilePage() { return <div>내 정보 화면</div>; }
 function PasswordChangePage() { return <div>비밀번호 변경 화면</div>; }
 function WithdrawPage() { return <div>회원 탈퇴 화면</div>; }
-
 
 function MyPageWrapper() {
   const [selectedMenu, setSelectedMenu] = useState('profile');
@@ -62,9 +62,9 @@ function App() {
           <Route path="/my-page" element={<MyPageWrapper />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
-
         <Route path="/exam" element={<ExamLayout />}>
           <Route path=":deploymentId" element={<TakeExam />} />
+        <Route path="/exam" element={<div>쪽지시험 레이아웃</div>}>
           <Route
             path=":deploymentId/result/:submissionId"
             element={<div>쪽지시험 결과</div>}
