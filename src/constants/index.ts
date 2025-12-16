@@ -5,7 +5,10 @@ import {
   CUSTOM_OPTION,
   MAX_CUSTOM_INPUT_LENGTH,
 } from "@/constants/dropdown-constants";
-import { EXAM_CATEGORY_OPTIONS } from "@/constants/exam-constants";
+import {
+  EXAM_CATEGORY_OPTIONS,
+  EXAM_SUBJECT_ICON_MAP,
+} from "@/constants/exam-constants";
 
 export {
   CAMP_LIST,
@@ -16,4 +19,5 @@ export {
   CUSTOM_OPTION,
   MAX_CUSTOM_INPUT_LENGTH,
   EXAM_CATEGORY_OPTIONS,
+  EXAM_SUBJECT_ICON_MAP,
 };
