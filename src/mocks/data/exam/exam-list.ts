@@ -5,6 +5,7 @@ const LAST_PAGE = 10;
 const EXAM_LIST: Exam[] = [
   {
     id: 101,
+    submission_id: 333,
     exam: {
       id: 1,
       title: "HTML 기초",
@@ -27,6 +28,7 @@ const EXAM_LIST: Exam[] = [
   },
   {
     id: 102,
+    submission_id: null,
     exam: {
       id: 2,
       title: "AWS 심화",
@@ -49,6 +51,7 @@ const EXAM_LIST: Exam[] = [
   },
   {
     id: 103,
+    submission_id: null,
     exam: {
       id: 3,
       title: "Github 응용",
@@ -71,6 +74,7 @@ const EXAM_LIST: Exam[] = [
   },
   {
     id: 104,
+    submission_id: null,
     exam: {
       id: 4,
       title: "React 심화",
@@ -93,6 +97,7 @@ const EXAM_LIST: Exam[] = [
   },
   {
     id: 105,
+    submission_id: null,
     exam: {
       id: 5,
       title: "JavaScript 응용",

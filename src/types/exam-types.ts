@@ -6,6 +6,7 @@ export type ExamCategoryOption = { label: string; value: ExamCategory };
 
 export interface Exam {
   id: number;
+  submission_id: number | null;
   exam: {
     id: number;
     title: string;
