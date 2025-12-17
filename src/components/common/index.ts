@@ -5,6 +5,7 @@ import LoadingUi from "@/components/common/LoadingUi";
 import Password from "@/components/common/Password";
 import SideBarTapButton from "@/components/common/SideBarTapButton";
 import Textarea from "@/components/common/Textarea";
+import LinkButton from "@/components/common/LinkButton";
 
 export {
   Dropdown,
@@ -14,4 +15,5 @@ export {
   Password,
   SideBarTapButton,
   Textarea,
+  LinkButton,
 };
