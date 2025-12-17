@@ -12,31 +12,10 @@ import {
 } from "@/pages";
 import  { useState } from "react";
 import MyPageLayout from "@/components/layout/MyPageLayout";  
+import MyPage from '@/pages/MyPage';
 
-function ExamPage() { return <div>쪽지시험 화면</div>; }
-function ProfilePage() { return <div>내 정보 화면</div>; }
-function PasswordChangePage() { return <div>비밀번호 변경 화면</div>; }
-function WithdrawPage() { return <div>회원 탈퇴 화면</div>; }
 
-function MyPageWrapper() {
-  const [selectedMenu, setSelectedMenu] = useState('profile');
 
-  const renderContent = () => {
-    switch(selectedMenu) {
-      case 'exam': return <ExamPage />;
-      case 'profile': return <ProfilePage />;
-      case 'password': return <PasswordChangePage />;
-      case 'withdraw': return <WithdrawPage />;
-      default: return <ProfilePage />;
-    }
-  };
-
-  return (
-    <MyPageLayout selectedMenu={selectedMenu} onSelectMenu={setSelectedMenu}>
-      {renderContent()}
-    </MyPageLayout>
-  );
-}
 
 function App() {
   return (
@@ -57,7 +36,8 @@ function App() {
           <Route path="/my-page/exams" element={<Exams />} />
           <Route path="/my-page" />
           <Route path="/my-page/exams" element={<Exams />} />
-          <Route path="/my-page" element={<MyPageWrapper />} />
+          <Route path="/my-page" element={<MyPageWrapper />} /> 
+          <Route path="/my-page" element={<MyPage />} />             
           <Route path="*" element={<NotFound404 />} />
         </Route>
         <Route path="/exam" element={<ExamLayout />}>
