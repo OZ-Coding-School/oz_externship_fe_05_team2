@@ -17,9 +17,14 @@ function ExamCategorySelector({
         <li key={item.value}>
           <button
             type="button"
-            className={cn("pb-2", "hover:text-primary-700", {
-              "text-primary-700": item.value === category,
-            })}
+            className={cn(
+              "pb-2",
+              "hover:text-primary-700",
+              "focus:outline-none",
+              {
+                "text-primary-700": item.value === category,
+              }
+            )}
             onClick={() => onChange(item.value)}
           >
             {item.label}
