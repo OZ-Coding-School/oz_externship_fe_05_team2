@@ -1,14 +1,14 @@
 import { cn } from "@/lib/utils";
 
-type NotFound404Props = {
+type NotFoundProps = {
   className?: string;
   statusCode?: number | string;
 };
 
-export default function NotFound404({
+export default function NotFound({
   className,
   statusCode = 404,
-}: NotFound404Props) {
+}: NotFoundProps) {
   return (
     <div
       className={cn(
