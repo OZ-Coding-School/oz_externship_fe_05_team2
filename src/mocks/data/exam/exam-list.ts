@@ -99,7 +99,7 @@ const EXAM_LIST: Exam[] = [
       thumbnail_img_url: "default_img_url",
       subject: {
         id: 14,
-        title: "JS",
+        title: "Javascript",
         thumbnail_img_url: "https://cdn.ozcoding/js.png",
       },
     },
@@ -116,10 +116,14 @@ const EXAM_LIST: Exam[] = [
 ];
 
 export const getExamListResponse = (page: number): ExamListResponse => {
-  const results = Array.from(
-    { length: PAGE_SIZE },
-    (_, index) => EXAM_LIST[index % EXAM_LIST.length]
-  );
+  const results = Array.from({ length: PAGE_SIZE }, (_, index) => {
+    const exam = EXAM_LIST[index % EXAM_LIST.length];
+
+    return {
+      ...exam,
+      id: Date.now() + exam.id, // 유니크한 임의의 아이디 생성
+    };
+  });
 
   return {
     page,
