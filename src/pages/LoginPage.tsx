@@ -1,14 +1,11 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
-import SocialLoginButton from "@/components/auth/SocialLoginButton";
+import { Input, Button, Password } from "@/components/common";
 import { LoginSchema, type LoginSchemaType } from "@/schemas/authSchemas";
 import HeaderLogo from "@/assets/images/logo-images/header-logo.png";
-import { kakao, naver } from "@/assets/icons/login-icons";
 import { useNavigate } from "react-router";
-import { Password } from "@/components/common";
+import { KakaoLoginButton, NaverLoginButton } from "@/components/auth";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -46,12 +43,8 @@ export function LoginPage() {
       <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="px-4 py-8 sm:px-4">
           <div className="mb-4 flex flex-col gap-3">
-            <SocialLoginButton provider="kakao" icon={kakao}>
-              카카오 간편 로그인 / 가입
-            </SocialLoginButton>
-            <SocialLoginButton provider="naver" icon={naver}>
-              네이버 간편 로그인 / 가입
-            </SocialLoginButton>
+            <KakaoLoginButton>카카오 간편 로그인 / 가입</KakaoLoginButton>
+            <NaverLoginButton>네이버 간편 로그인 / 가입</NaverLoginButton>
           </div>
 
           <form

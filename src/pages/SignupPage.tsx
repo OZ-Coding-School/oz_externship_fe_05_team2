@@ -1,7 +1,6 @@
 import { Link } from "react-router";
-import SocialLoginButton from "@/components/auth/SocialLoginButton";
 import HeaderLogo from "@/assets/images/logo-images/header-logo.png";
-import { kakao, naver } from "@/assets/icons/login-icons";
+import { KakaoLoginButton, NaverLoginButton } from "@/components/auth";
 
 export function SignupPage() {
   return (
@@ -24,12 +23,8 @@ export function SignupPage() {
       <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="px-4 py-8 sm:px-4">
           <div className="mb-4 flex flex-col gap-3">
-            <SocialLoginButton provider="kakao" icon={kakao}>
-              카카오로 3초만에 가입하기
-            </SocialLoginButton>
-            <SocialLoginButton provider="naver" icon={naver}>
-              네이버로 가입하기
-            </SocialLoginButton>
+            <KakaoLoginButton>카카오로 3초만에 가입하기</KakaoLoginButton>
+            <NaverLoginButton>네이버로 가입하기</NaverLoginButton>
             <div className="flex flex-col items-center">
               <Link
                 to="/email-signup"
