@@ -33,6 +33,7 @@ function MyPageWrapper() {
     }
   };
 
+import { NotFound404 } from "@/components/common/not-found"; 
 
 function App() {
   return (
