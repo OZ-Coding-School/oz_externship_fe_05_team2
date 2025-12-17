@@ -16,23 +16,32 @@ const menuItems = [
 export default function MyPageLayout({ children, selectedMenu, onSelectMenu }: LayoutProps) {
   return (
     <div className="flex h-screen">
-      <aside className="w-48 bg-white border-r border-gray-200 p-6 flex flex-col space-y-3">
-        {menuItems.map(({ id, label }) => (
-          <button
-            key={id}
-            onClick={() => onSelectMenu(id)}
-            className={`text-left text-sm font-medium px-3 py-2 rounded-md transition select-none
-              ${
-                selectedMenu === id
-                  ? 'bg-purple-600 text-white'
-                  : 'text-purple-700 hover:bg-purple-200'
-              }`}
-          >
-            {label}
-          </button>
-        ))}
+      {/* 사이드바 */}
+      <aside className="w-1/4 bg-white py-6 flex flex-col space-y-3">
+        {menuItems.map(({ id, label }) => {
+          const isSelected = selectedMenu === id;
+          return (
+            <button
+              key={id}
+              onClick={() => onSelectMenu(id)}
+              className={`w-full flex justify-end items-center text-sm font-medium px-3 py-2 rounded-md transition select-none
+                ${
+                  isSelected
+                    ? 'text-purple-700 font-semibold bg-white'
+                    : 'text-purple-400 hover:bg-purple-50'
+                }`}
+            >
+              {isSelected && (
+                <span className="w-0.5 h-6 bg-purple-600 mr-1"></span>
+              )}
+              <span>{label}</span>
+            </button>
+          );
+        })}
       </aside>
-      <main className="flex-1 p-10 overflow-auto bg-white">
+
+      {/* 콘텐츠 영역 */}
+      <main className="w-3/4 p-10 overflow-auto bg-white">
         {children}
       </main>
     </div>
