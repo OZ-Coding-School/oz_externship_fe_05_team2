@@ -13,8 +13,6 @@ import {
 import  { useState } from "react";
 import MyPageLayout from "@/components/layout/MyPageLayout";  
 
-
-
 function ExamPage() { return <div>쪽지시험 화면</div>; }
 function ProfilePage() { return <div>내 정보 화면</div>; }
 function PasswordChangePage() { return <div>비밀번호 변경 화면</div>; }
