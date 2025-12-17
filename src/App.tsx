@@ -2,8 +2,8 @@ import { RootLayout } from "@/components/layout";
 import { Exams, Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { NotFound } from "@/components/common/not-found";
-import { LoginPage } from "@/pages/LoginPage";
-import { SignupPage } from "@/pages/SignupPage";
+import LoginPage from "@/pages/LoginPage";
+import SignupPage from "@/pages/SignupPage";
 
 function App() {
   return (

@@ -7,7 +7,7 @@ import HeaderLogo from "@/assets/images/logo-images/header-logo.png";
 import { useNavigate } from "react-router";
 import { KakaoLoginButton, NaverLoginButton } from "@/components/auth";
 
-export function LoginPage() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const {
     register,
