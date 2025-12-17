@@ -1,10 +1,14 @@
 import { cn } from "@/lib/utils";
 
-type NotFound404Props = {
+type NotFoundProps = {
   className?: string;
+  statusCode?: number | string;
 };
 
-export default function NotFound404({ className }: NotFound404Props) {
+export default function NotFound({
+  className,
+  statusCode = 404,
+}: NotFoundProps) {
   return (
     <div
       className={cn(
@@ -13,7 +17,7 @@ export default function NotFound404({ className }: NotFound404Props) {
       )}
     >
       <div className="mb-6 rounded-md bg-purple-100 px-6 py-2 text-xl font-bold text-purple-700">
-        404
+        {statusCode}
       </div>
       <div className="flex flex-col items-center">
         <div className="h-72 w-72 opacity-40">
