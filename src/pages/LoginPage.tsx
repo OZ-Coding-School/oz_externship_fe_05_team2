@@ -43,7 +43,7 @@ export function LoginPage() {
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="px-4 py-8 sm:px-4">
           <div className="mb-4 flex flex-col gap-3">
             <SocialLoginButton provider="kakao" icon={kakao}>

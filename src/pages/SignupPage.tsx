@@ -21,19 +21,19 @@ export function SignupPage() {
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="px-4 py-8 sm:px-4">
           <div className="mb-4 flex flex-col gap-3">
             <SocialLoginButton provider="kakao" icon={kakao}>
               카카오로 3초만에 가입하기
             </SocialLoginButton>
             <SocialLoginButton provider="naver" icon={naver}>
-              네이버로 3초만에 가입하기
+              네이버로 가입하기
             </SocialLoginButton>
             <div className="flex flex-col items-center">
               <Link
                 to="/email-signup"
-                className="text-neutral-600 underline underline-offset-2"
+                className="mt-2 text-neutral-600 underline underline-offset-2"
               >
                 일반회원 가입
               </Link>
