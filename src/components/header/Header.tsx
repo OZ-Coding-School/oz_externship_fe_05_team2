@@ -54,7 +54,7 @@ export default function Header() {
                   로그인
                 </HeaderLink>
                 <span className="text-gray-300">|</span>
-                <HeaderLink to="/join" className="px-4 py-2">
+                <HeaderLink to="/signup" className="px-4 py-2">
                   회원가입
                 </HeaderLink>
               </div>

@@ -1,8 +1,14 @@
 import { RootLayout } from "@/components/layout";
 import { Exams, Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
+<<<<<<< HEAD
 import { NotFound } from "@/components/common/not-found";
 import LoginPage from "@/pages/LoginPage";
+=======
+import { LoginPage } from "@/pages/LoginPage";
+import { NotFound404 } from "@/components/common/not-found";
+import { SignupPage } from "@/pages/SignupPage";
+>>>>>>> 9c1a6ff (feat: 피드백 적용 / 회원가입 페이지 구현 (#65))
 
 function App() {
   return (
@@ -17,7 +23,16 @@ function App() {
           <Route path="/my-page" element={<div>마이페이지</div>} />
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<LoginPage />} />
+<<<<<<< HEAD
           <Route path="/join" element={<div>회원가입 페이지</div>} />
+=======
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/email-signup"
+            element={<div>일반회원 가입 페이지</div>}
+          />
+          <Route path="*" element={<NotFound404 />} />
+>>>>>>> 9c1a6ff (feat: 피드백 적용 / 회원가입 페이지 구현 (#65))
         </Route>
 
         {/* TODO 레이아웃, 페이지 컴포넌트로 변경하기 */}

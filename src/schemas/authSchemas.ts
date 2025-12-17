@@ -1,27 +1,13 @@
 import * as z from "zod";
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-export const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, "이메일을 입력해주세요.")
-    .refine((v) => emailRegex.test(v), {
-      message: "올바른 이메일 형식이 아닙니다.",
-    }),
-
+export const LoginSchema = z.object({
+  email: z.email({ message: "이메일 형식이 올바르지 않습니다." }),
   password: z.string().min(1, { message: "비밀번호를 입력해주세요." }),
 });
 
-export const joinSchema = z
+export const SignupSchema = z
   .object({
-    email: z
-      .string()
-      .min(1, "이메일을 입력해주세요.")
-      .refine((v) => emailRegex.test(v), {
-        message: "올바른 이메일 형식이 아닙니다.",
-      }),
-
+    email: z.email({ message: "이메일 형식이 올바르지 않습니다." }),
     password: z
       .string()
       .min(8, { message: "비밀번호는 8자 이상이어야 합니다." })
@@ -51,5 +37,5 @@ export const joinSchema = z
     path: ["passwordConfirm"],
   });
 
-export type LoginSchemaType = z.infer<typeof loginSchema>;
-export type JoinSchemaType = z.infer<typeof joinSchema>;
+export type LoginSchemaType = z.infer<typeof LoginSchema>;
+export type JoinSchemaType = z.infer<typeof SignupSchema>;
