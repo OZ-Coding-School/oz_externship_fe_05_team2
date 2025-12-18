@@ -9,6 +9,12 @@ const getExamList = http.get(
     const page = Number(url.searchParams.get("page"));
 
     return HttpResponse.json(getExamListResponse(page));
+
+    // 에러 테스트 코드
+    // return HttpResponse.json(
+    //   { error_detail: "자격 인증 데이터가 제공되지 않았습니다." },
+    //   { status: 401 }
+    // );
   }
 );
 
