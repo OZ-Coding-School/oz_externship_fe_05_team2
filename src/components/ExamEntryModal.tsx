@@ -2,7 +2,7 @@ import { Button, Input } from "@/components/common";
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
 import { SubjectThumbnail } from "@/components";
 import { useState } from "react";
-import { useExamCodeVerification } from "@/hooks";
+import { useExamCodeVerification } from "@/hooks/api";
 import { useNavigate } from "react-router";
 
 interface ExamEntryModalProps {
