@@ -1,19 +1,22 @@
 import { cn } from "@/lib";
-import { Link } from "react-router";
+import type { ComponentProps, ElementType } from "react";
 
-interface SideBarTapButtonProps {
-  to: string;
+type SideBarTapButtonProps<T extends ElementType = "button"> = {
+  as?: T;
   isActive?: boolean;
   disabled?: boolean;
   children: React.ReactNode;
-}
+} & ComponentProps<T>;
 
-function SideBarTapButton({
-  to,
+function SideBarTapButton<T extends ElementType = "button">({
+  as,
   isActive = false,
   disabled = false,
   children,
-}: SideBarTapButtonProps) {
+  ...props
+}: SideBarTapButtonProps<T>) {
+  const Component = as ?? "button";
+
   return (
     <div className="relative">
       <div
@@ -22,8 +25,7 @@ function SideBarTapButton({
           { "bg-primary-500": isActive }
         )}
       ></div>
-      <Link
-        to={to}
+      <Component
         className={cn(
           "block w-full py-1 pl-5 text-left font-semibold text-neutral-400 transition-colors ease-in-out focus:outline-none",
           "hover:text-primary-500 hover:bg-primary-100 hover:rounded-sm",
@@ -34,9 +36,10 @@ function SideBarTapButton({
           }
         )}
         tabIndex={disabled ? -1 : 0}
+        {...props}
       >
         {children}
-      </Link>
+      </Component>
     </div>
   );
 }
