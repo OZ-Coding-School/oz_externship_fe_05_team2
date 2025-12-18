@@ -4,11 +4,12 @@ import { Link } from "react-router";
 import { Input, Button, Password } from "@/components/common";
 import { LoginSchema, type LoginSchemaType } from "@/schemas/authSchemas";
 import HeaderLogo from "@/assets/images/logo-images/header-logo.png";
-import { useNavigate } from "react-router";
 import { KakaoLoginButton, NaverLoginButton } from "@/components/auth";
+import { useLoginMutation } from "@/hooks/useAuth";
 
 export default function LoginPage() {
-  const navigate = useNavigate();
+  const { mutate: loginFn, isPending, isError, error } = useLoginMutation();
+
   const {
     register,
     handleSubmit,
@@ -19,8 +20,7 @@ export default function LoginPage() {
   });
 
   const onSubmit = (data: LoginSchemaType) => {
-    console.log("로그인 성공 데이터:", data);
-    navigate("/");
+    loginFn(data);
   };
 
   return (
@@ -78,12 +78,20 @@ export default function LoginPage() {
               </button>
             </div>
 
+            {isError && (
+              <div className="mb-2 text-center text-sm font-medium text-red-500">
+                {error?.response?.data?.message || "로그인에 실패했습니다."}
+              </div>
+            )}
+
             <Button
               type="submit"
-              disabled={!isValid}
-              className={!isValid ? "bg-gray-300 hover:bg-gray-300" : ""}
+              disabled={!isValid || isPending}
+              className={
+                !isValid || isPending ? "bg-gray-300 hover:bg-gray-300" : ""
+              }
             >
-              일반회원 로그인
+              {isPending ? "로그인 중..." : "일반회원 로그인"}
             </Button>
           </form>
         </div>

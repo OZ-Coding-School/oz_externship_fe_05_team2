@@ -23,7 +23,7 @@ export default function BaseSocialButton({
         className
       )}
     >
-      {icon && <img src={icon} alt="social logo" className="h-5 w-5" />}
+      {icon && <img src={icon} alt="social logo" className="h-4 w-4" />}
       {children}
     </button>
   );

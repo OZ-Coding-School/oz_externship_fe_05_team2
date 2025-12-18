@@ -1,4 +1,4 @@
-import kakao from "@/assets/icons/login-icons/kakao.png";
-import naver from "@/assets/icons/login-icons/naver.png";
+import kakao from "@/assets/icons/login-icons/kakao.svg";
+import naver from "@/assets/icons/login-icons/naver.svg";
 
 export { kakao, naver };

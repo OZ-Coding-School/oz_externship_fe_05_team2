@@ -1,8 +1,14 @@
-import { useState } from "react";
 import type { ReactNode } from "react";
 import { Link } from "react-router";
 import UserMenu from "@/components/header/UserMenu";
 import { HeaderLogo } from "@/assets/images/logo-images";
+import { useAuthStore } from "@/store/useAuthStore";
+
+interface HeaderLinkProps {
+  to: string;
+  children: ReactNode;
+  className?: string;
+}
 
 const HeaderLink = ({ to, children }: HeaderLinkProps) => (
   <Link
@@ -13,14 +19,8 @@ const HeaderLink = ({ to, children }: HeaderLinkProps) => (
   </Link>
 );
 
-interface HeaderLinkProps {
-  to: string;
-  children: ReactNode;
-  className?: string;
-}
-
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, logout } = useAuthStore();
 
   return (
     <header className="sticky top-0 z-20 border-b border-gray-200 bg-white">
@@ -47,16 +47,12 @@ export default function Header() {
 
           <div className="hidden items-center space-x-4 md:flex">
             {isLoggedIn ? (
-              <UserMenu onLogout={() => setIsLoggedIn(false)} />
+              <UserMenu onLogout={logout} />
             ) : (
               <div className="flex items-center space-x-2">
-                <HeaderLink to="/login" className="px-4 py-2">
-                  로그인
-                </HeaderLink>
+                <HeaderLink to="/login">로그인</HeaderLink>
                 <span className="text-gray-300">|</span>
-                <HeaderLink to="/signup" className="px-4 py-2">
-                  회원가입
-                </HeaderLink>
+                <HeaderLink to="/signup">회원가입</HeaderLink>
               </div>
             )}
           </div>
