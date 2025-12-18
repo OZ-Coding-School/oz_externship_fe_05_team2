@@ -14,12 +14,12 @@ export interface Cohort {
 
 export interface Course {
   id: number;
-  name: NavigatorStorage;
+  name: string;
   tag: string;
   thumbnail_img_url: string;
 }
 
-export type AvailableCoursesList = {
+export interface AvailableCourse {
   cohort: Omit<Cohort, "status">;
   course: Pick<Course, "id" | "name">;
-}[];
+}
