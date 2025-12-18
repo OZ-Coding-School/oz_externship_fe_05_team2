@@ -37,8 +37,8 @@ function Exams() {
   if (isError)
     return <NotFound statusCode={error.response?.status ?? error.message} />;
   return (
-    <section className="flex min-h-[60vh] flex-col">
-      <h1 className="mb-10 text-[32px] font-bold">쪽지시험</h1>
+    <section className="flex min-h-dvh flex-col">
+      <h1 className="mb-10 text-4xl font-bold">쪽지시험</h1>
       <ExamCategorySelector
         category={category}
         onChange={handleCategoryClick}

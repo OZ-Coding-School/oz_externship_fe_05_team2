@@ -43,14 +43,14 @@ function ExamEntryModal({
           응시하기
         </Button>
       </ModalTrigger>
-      <ModalContent className="min-h-[360px] w-[400px] p-6">
+      <ModalContent className="w-96 p-6">
         <div className="mb-5 flex flex-col items-center gap-1">
           <SubjectThumbnail
             thumbnailUrl={subjectThumbnailUrl}
             subjectTitle={subjectTitle}
           />
-          <span className="mt-1 text-[19px] font-semibold">{subjectTitle}</span>
-          <p className="text-[14px] font-semibold tracking-tight">
+          <span className="mt-1 text-lg font-semibold">{subjectTitle}</span>
+          <p className="text-sm font-semibold tracking-tight">
             <span className="text-neutral-600">{`총 ${questionCount}문항 ㆍ `}</span>
             <span className="text-primary-600">{`제한시간 ${durationTime}분`}</span>
           </p>

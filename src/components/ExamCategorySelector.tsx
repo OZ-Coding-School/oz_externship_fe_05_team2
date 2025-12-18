@@ -12,7 +12,7 @@ function ExamCategorySelector({
   onChange,
 }: ExamCategorySelectorProps) {
   return (
-    <ul className="flex gap-[30px] border-b-2 border-b-neutral-300 text-[20px] font-semibold text-neutral-400 transition-colors ease-in-out">
+    <ul className="flex gap-7 border-b-2 border-b-neutral-300 text-xl font-semibold text-neutral-400 transition-colors ease-in-out">
       {EXAM_CATEGORY_OPTIONS.map((item) => (
         <li key={item.value}>
           <button
@@ -30,7 +30,7 @@ function ExamCategorySelector({
             {item.label}
           </button>
           <div
-            className={cn("h-[3px] w-full", {
+            className={cn("h-0.5 w-full", {
               "bg-primary-700": item.value === category,
             })}
           ></div>
