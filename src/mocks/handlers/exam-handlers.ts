@@ -1,13 +1,13 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { http, HttpResponse } from "msw";
-import { EXAM_LIST } from "@/mocks/data/exam-data";
+import { examList } from "@/mocks/data/exam-data";
 import type { ExamListResponse } from "@/types";
 
 const PAGE_SIZE = 5;
 const LAST_PAGE = 10;
 const getExamListResponse = (page: number): ExamListResponse => {
   const results = Array.from({ length: PAGE_SIZE }, (_, index) => {
-    const exam = EXAM_LIST[index % EXAM_LIST.length];
+    const exam = examList[index % examList.length];
 
     return {
       ...exam,

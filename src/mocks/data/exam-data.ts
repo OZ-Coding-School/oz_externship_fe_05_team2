@@ -1,6 +1,6 @@
 import type { Exam } from "@/types";
 
-export const EXAM_LIST: Exam[] = [
+export const examList: Exam[] = [
   {
     id: 101,
     submission_id: 333,
