@@ -1,5 +1,6 @@
 import { http, HttpResponse, type PathParams } from "msw";
-import { MOCK_LOGIN_RESPONSE } from "@/mocks/data/auth";
+import { mockLoginResponse } from "@/mocks/data/auth";
+import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import type { LoginRequest } from "@/types/api-request-type/auth-request-type";
 import type {
   LoginResponse,
@@ -10,12 +11,12 @@ const loginHandler = http.post<
   PathParams,
   LoginRequest,
   LoginResponse | ErrorResponse
->("/api/v1/auth/login", async ({ request }) => {
+>(`${MSW_BASE_URL}${API_PATHS.accounts.login}`, async ({ request }) => {
   const requestBody = await request.json();
   const { email, password } = requestBody;
 
   if (email === "test@gmail.com" && password === "1234") {
-    return HttpResponse.json(MOCK_LOGIN_RESPONSE, { status: 200 });
+    return HttpResponse.json(mockLoginResponse, { status: 200 });
   }
 
   return HttpResponse.json(

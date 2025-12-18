@@ -1,6 +1,6 @@
 import type { LoginResponse } from "@/types/api-response-type/auth-response-type";
 
-export const MOCK_LOGIN_RESPONSE: LoginResponse = {
+export const mockLoginResponse: LoginResponse = {
   accessToken: "mock-access-token-12345",
   refreshToken: "mock-refresh-token-67890",
   user: {

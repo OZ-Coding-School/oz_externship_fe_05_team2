@@ -38,4 +38,4 @@ export const SignupSchema = z
   });
 
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
-export type JoinSchemaType = z.infer<typeof SignupSchema>;
+export type SignupSchemaType = z.infer<typeof SignupSchema>;
