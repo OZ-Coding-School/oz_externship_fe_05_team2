@@ -4,8 +4,8 @@ import { persist } from "zustand/middleware";
 interface AuthState {
   isLoggedIn: boolean;
   accessToken: string | null;
-  login: (token: string) => void;
-  logout: () => void;
+  setAccessToken: (token: string) => void;
+  deleteAccessToken: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -14,11 +14,11 @@ export const useAuthStore = create<AuthState>()(
       isLoggedIn: false,
       accessToken: null,
 
-      login: (token) => {
+      setAccessToken: (token) => {
         set({ isLoggedIn: true, accessToken: token });
       },
 
-      logout: () => {
+      deleteAccessToken: () => {
         set({ isLoggedIn: false, accessToken: null });
       },
     }),

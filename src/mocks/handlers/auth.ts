@@ -1,6 +1,6 @@
 import { http, HttpResponse, type PathParams } from "msw";
 import { MOCK_LOGIN_RESPONSE } from "@/mocks/data/auth";
-import type { LoginRequest } from "@/types/api-response-type/auth-request-type";
+import type { LoginRequest } from "@/types/api-request-type/auth-request-type";
 import type {
   LoginResponse,
   ErrorResponse,

@@ -20,7 +20,7 @@ const HeaderLink = ({ to, children }: HeaderLinkProps) => (
 );
 
 export default function Header() {
-  const { isLoggedIn, logout } = useAuthStore();
+  const { isLoggedIn, deleteAccessToken } = useAuthStore();
 
   return (
     <header className="sticky top-0 z-20 border-b border-gray-200 bg-white">
@@ -47,7 +47,7 @@ export default function Header() {
 
           <div className="hidden items-center space-x-4 md:flex">
             {isLoggedIn ? (
-              <UserMenu onLogout={logout} />
+              <UserMenu onLogout={deleteAccessToken} />
             ) : (
               <div className="flex items-center space-x-2">
                 <HeaderLink to="/login">로그인</HeaderLink>

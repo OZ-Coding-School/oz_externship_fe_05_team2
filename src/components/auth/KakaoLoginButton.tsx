@@ -1,5 +1,6 @@
 import BaseSocialButton from "@/components/auth/BaseSocialButton";
 import { kakao } from "@/assets/icons/login-icons";
+import { cn } from "@/lib";
 
 interface KakaoLoginButtonProps {
   className?: string;
@@ -18,7 +19,7 @@ export default function KakaoLoginButton({
     <BaseSocialButton
       onClick={handleLogin}
       icon={kakao}
-      className={`bg-[#FEE500] text-[#000000] hover:bg-[#FDD835] ${className}`}
+      className={cn("bg-yellow-300 text-black hover:bg-yellow-200", className)}
     >
       {children || "카카오 로그인"}
     </BaseSocialButton>

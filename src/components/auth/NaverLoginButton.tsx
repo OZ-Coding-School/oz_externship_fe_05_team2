@@ -1,5 +1,6 @@
 import BaseSocialButton from "@/components/auth/BaseSocialButton";
 import { naver } from "@/assets/icons/login-icons";
+import { cn } from "@/lib";
 
 interface NaverLoginButtonProps {
   className?: string;
@@ -18,7 +19,7 @@ export default function NaverLoginButton({
     <BaseSocialButton
       onClick={handleLogin}
       icon={naver}
-      className={`bg-[#03C75A] text-white hover:bg-[#02B351] ${className}`}
+      className={cn(`bg-green-500 text-white hover:bg-green-400`, className)}
     >
       {children || "네이버 로그인"}
     </BaseSocialButton>

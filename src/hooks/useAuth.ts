@@ -19,14 +19,14 @@ interface ErrorResponse {
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
-  const { login } = useAuthStore();
+  const { setAccessToken } = useAuthStore();
 
   return useMutation<LoginResponse, AxiosError<ErrorResponse>, LoginSchemaType>(
     {
       mutationFn: loginUser,
       onSuccess: (data) => {
         console.log("로그인 성공!", data);
-        login(data.accessToken);
+        setAccessToken(data.accessToken);
         navigate("/");
       },
       onError: (error) => {
