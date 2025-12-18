@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { examHandlers } from "@/mocks/handlers/exam";
+import { examHandlers } from "@/mocks/handlers/exam-handlers";
 
 export const handlers = [
   http.get("/api/hello", () => {

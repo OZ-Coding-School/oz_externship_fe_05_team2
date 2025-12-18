@@ -1,8 +1,6 @@
-import type { Exam, ExamListResponse } from "@/types";
+import type { Exam } from "@/types";
 
-const PAGE_SIZE = 5;
-const LAST_PAGE = 10;
-const EXAM_LIST: Exam[] = [
+export const EXAM_LIST: Exam[] = [
   {
     id: 101,
     submission_id: 333,
@@ -119,20 +117,3 @@ const EXAM_LIST: Exam[] = [
     duration_time: 20,
   },
 ];
-
-export const getExamListResponse = (page: number): ExamListResponse => {
-  const results = Array.from({ length: PAGE_SIZE }, (_, index) => {
-    const exam = EXAM_LIST[index % EXAM_LIST.length];
-
-    return {
-      ...exam,
-      id: Date.now() + exam.id, // 유니크한 임의의 아이디 생성
-    };
-  });
-
-  return {
-    page,
-    has_next: page < LAST_PAGE,
-    results,
-  };
-};
