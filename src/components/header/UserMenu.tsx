@@ -1,42 +1,11 @@
 import { useState } from "react";
-import type { ReactNode } from "react";
 import { Link } from "react-router";
 import { UserIcon } from "@/assets/icons/interface-icons/";
-
-interface DropdownItemProps {
-  children: ReactNode;
-  to?: string;
-  onClick?: () => void;
-  className?: string;
-}
+import { SideBarTapButton } from "@/components/common";
 
 interface UserMenuProps {
   onLogout: () => void;
 }
-
-const DropdownItem = ({
-  onClick,
-  to,
-  children,
-  className = "",
-}: DropdownItemProps) => {
-  const baseClass =
-    "block w-full px-2 py-2.5 text-left text-sm text-gray-700 hover:bg-purple-100 hover:text-violet-600 transition-colors";
-
-  if (to) {
-    return (
-      <Link to={to} className={`${baseClass} ${className}`}>
-        {children}
-      </Link>
-    );
-  }
-
-  return (
-    <button onClick={onClick} className={`${baseClass} ${className}`}>
-      {children}
-    </button>
-  );
-};
 
 export default function UserMenu({ onLogout }: UserMenuProps) {
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -66,12 +35,16 @@ export default function UserMenu({ onLogout }: UserMenuProps) {
           <hr className="my-2 border-gray-200" />
 
           {!isStudent && (
-            <DropdownItem onClick={() => setIsStudent(true)}>
+            <SideBarTapButton as="button" onClick={() => setIsStudent(true)}>
               수강생 등록(임시)
-            </DropdownItem>
+            </SideBarTapButton>
           )}
-          <DropdownItem to="/my-page">마이페이지</DropdownItem>
-          <DropdownItem onClick={onLogout}>로그아웃(임시)</DropdownItem>
+          <SideBarTapButton as={Link} to="/my-page">
+            마이페이지
+          </SideBarTapButton>
+          <SideBarTapButton as="button" onClick={onLogout}>
+            로그아웃(임시)
+          </SideBarTapButton>
         </div>
       )}
     </div>
