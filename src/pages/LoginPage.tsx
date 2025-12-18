@@ -5,7 +5,7 @@ import { Input, Button, Password } from "@/components/common";
 import { LoginSchema, type LoginSchemaType } from "@/schemas/authSchemas";
 import HeaderLogo from "@/assets/images/logo-images/header-logo.png";
 import { KakaoLoginButton, NaverLoginButton } from "@/components/auth";
-import { useLoginMutation } from "@/hooks/useAuth";
+import { useLoginMutation } from "@/hooks/useLogin";
 
 export default function LoginPage() {
   const { mutate: loginFn, isPending, isError, error } = useLoginMutation();
