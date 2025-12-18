@@ -7,6 +7,8 @@ export const API_PATHS = {
     deployments: {
       base: `${API_PREFIX}/exams/deployments`,
       list: (page: number) => `${API_PREFIX}/exams/deployments?page=${page}`,
+      checkCode: (deploymentId: number) =>
+        `${API_PREFIX}/exams/deployments/${deploymentId}/check-code`,
     },
   },
 } as const;
