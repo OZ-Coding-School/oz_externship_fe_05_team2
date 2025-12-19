@@ -22,12 +22,9 @@ function App() {
 
         {/* TODO 레이아웃, 페이지 컴포넌트로 변경하기 */}
         <Route path="/exam" element={<div>쪽지시험 레이아웃</div>}>
+          <Route path=":deploymentId" element={<div>쪽지시험 응시</div>} />
           <Route
-            path="start/:deploymentId"
-            element={<div>쪽지시험 응시</div>}
-          />
-          <Route
-            path="result/:submissionId"
+            path=":deploymentId/result/:submissionId"
             element={<div>쪽지시험 결과</div>}
           />
         </Route>
