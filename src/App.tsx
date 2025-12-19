@@ -10,10 +10,11 @@ import {
   Home,
   TakeExam,
 } from "@/pages";
-import  { useState } from "react";
 import MyPageLayout from "@/components/layout/MyPageLayout";  
-import MyPage from '@/pages/MyPage';
+import ProfilePage from '@/pages/ProfilePage'; 
 
+function ExamPage() { return <div>쪽지시험 화면</div>; }
+function PasswordChangePage() { return <div>비밀번호 변경 화면</div>; }
 
 
 
@@ -38,6 +39,11 @@ function App() {
           <Route path="/my-page/exams" element={<Exams />} />
           <Route path="/my-page" element={<MyPageWrapper />} /> 
           <Route path="/my-page" element={<MyPage />} />             
+          <Route path="/my-page" element={<MyPageLayout />}>
+          <Route path="exam" element={<ExamPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="password" element={<PasswordChangePage />} />
+      </Route>
           <Route path="*" element={<NotFound404 />} />
         </Route>
         <Route path="/exam" element={<ExamLayout />}>
