@@ -1,17 +1,18 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { http, HttpResponse } from "msw";
-import { examList } from "@/mocks/data/exam-data";
-import type { ExamListResponse } from "@/types";
+import { examList, questionList } from "@/mocks/data/exam-data";
+import type { ExamListResponse, ExamQuestionListResponse } from "@/types";
 
 const PAGE_SIZE = 5;
 const LAST_PAGE = 10;
 const getExamListResponse = (page: number): ExamListResponse => {
   const results = Array.from({ length: PAGE_SIZE }, (_, index) => {
     const exam = examList[index % examList.length];
+    const id = page === 1 ? index : index + PAGE_SIZE * page;
 
     return {
       ...exam,
-      id: Date.now() + exam.id, // 유니크한 임의의 아이디 생성
+      id,
     };
   });
 
@@ -51,4 +52,25 @@ const checkExamCode = http.post(
   }
 );
 
-export const examHandlers = [getExamList, checkExamCode];
+const getExamQuestionList = http.get(
+  `${MSW_BASE_URL}${API_PATHS.exams.deployments.base}/:deploymentId`,
+  ({ params }) => {
+    const { deploymentId } = params;
+
+    if (deploymentId === "1")
+      return HttpResponse.json<ExamQuestionListResponse>({
+        exam_id: 1,
+        exam_name: "TypeScript 기본 문법 테스트",
+        duration_time: 30,
+        elapsed_time: 0,
+        cheating_count: 0,
+        questions: questionList,
+      });
+    return HttpResponse.json(
+      { error_detail: "해당 시험 정보를 찾을 수 없습니다." },
+      { status: 404 }
+    );
+  }
+);
+
+export const examHandlers = [getExamList, checkExamCode, getExamQuestionList];

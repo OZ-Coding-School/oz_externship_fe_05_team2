@@ -1,6 +1,6 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { api } from "@/lib";
-import type { ExamListResponse } from "@/types";
+import type { ExamListResponse, ExamQuestionListResponse } from "@/types";
 
 export const checkExamCode = (
   deploymentId: number,
@@ -16,6 +16,16 @@ export const getExamList = async (
 ): Promise<ExamListResponse> => {
   const response = await api.get(
     `${MSW_BASE_URL}${API_PATHS.exams.deployments.list(page)}`
+  );
+
+  return response.data;
+};
+
+export const getExamQuestionList = async (
+  deploymentId: number
+): Promise<ExamQuestionListResponse> => {
+  const response = await api.get(
+    `${MSW_BASE_URL}${API_PATHS.exams.deployments.questionList(deploymentId)}`
   );
 
   return response.data;
