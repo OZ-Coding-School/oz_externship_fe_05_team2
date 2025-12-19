@@ -57,8 +57,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/my-page" />
           <Route path="/my-page/exams" element={<Exams />} />
+          <Route path="/my-page" />
+          <Route path="/my-page/exams" element={<Exams />} />
           <Route path="/my-page" element={<MyPageWrapper />} />
-
           <Route path="*" element={<NotFound404 />} />
         </Route>
 
