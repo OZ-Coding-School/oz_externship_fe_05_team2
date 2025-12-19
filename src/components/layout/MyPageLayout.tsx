@@ -16,7 +16,11 @@
     const isActive = currentPathSegment === id;
     return (
       <div key={id} className="ml-70"> 
+<<<<<<< HEAD
         <SideBarTapButton to ={id} isActive={isActive}>
+=======
+        <SideBarTapButton to={id} isActive={isActive}>
+>>>>>>> 45088ac (refactor: 공통레이아웃 수정 및 프로필페이지(진행중)추가 (#64))
           {label}
         </SideBarTapButton>
       </div>
@@ -29,4 +33,7 @@
       </div>
     );
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45088ac (refactor: 공통레이아웃 수정 및 프로필페이지(진행중)추가 (#64))

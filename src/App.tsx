@@ -1,6 +1,4 @@
 import { ExamLayout, RootLayout } from "@/components/layout";
-import { BrowserRouter, Route, Routes } from "react-router";
-import { NotFound404 } from "@/components/common/not-found";
 import { NotFound } from "@/components/common/not-found";
 import {
   LoginPage,
@@ -10,9 +8,11 @@ import {
   Home,
   TakeExam,
 } from "@/pages";
-import MyPageLayout from "@/components/layout/MyPageLayout";  
-import ProfilePage from '@/pages/ProfilePage'; 
 import ProfileEdit from '@/pages/ProfileEditPage';
+import { BrowserRouter, Route, Routes } from "react-router"; 
+import { NotFound404 } from "@/components/common/not-found";
+import MyPageLayout from "@/components/layout/MyPageLayout";
+import ProfilePage from '@/pages/ProfilePage'; 
 
 function ExamPage() { return <div>쪽지시험 화면</div>; }
 function PasswordChangePage() { return <div>비밀번호 변경 화면</div>; }
@@ -58,6 +58,11 @@ function App() {
           <Route path="exam" element={<ExamPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="profileedit" element={<ProfileEdit />} /> 
+          <Route path="password" element={<PasswordChangePage />} />
+      </Route>
+          <Route path="/my-page" element={<MyPageLayout />}>
+          <Route path="exam" element={<ExamPage />} />
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="password" element={<PasswordChangePage />} />
       </Route>
           <Route path="*" element={<NotFound404 />} />
