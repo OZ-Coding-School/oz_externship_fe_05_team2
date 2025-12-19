@@ -64,3 +64,12 @@ interface ExamQuestionContentProps {
 }
 
 export type ExamQuestionContentComponent = React.FC<ExamQuestionContentProps>;
+
+export interface ExamQuestionListResponse {
+  exam_id: number;
+  exam_name: string;
+  duration_time: number;
+  elapsed_time: number;
+  cheating_count: number;
+  questions: Question[];
+}
