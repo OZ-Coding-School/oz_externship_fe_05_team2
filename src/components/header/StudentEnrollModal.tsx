@@ -14,7 +14,8 @@ export default function StudentEnrollModal() {
   const { data: availableCourses, isPending: isAvailableCoursePending } =
     useAvailableCourses();
 
-  const { mutate: enrollStudent } = useEnrollStudent();
+  const { mutate: enrollStudent, isPending: isEnrollStudentPending } =
+    useEnrollStudent();
 
   const [selectedCourseId, setSelectedCourseId] = useState("");
   const [selectedCohortId, setSelectedCohortId] = useState("");
@@ -92,7 +93,13 @@ export default function StudentEnrollModal() {
             </>
           )}
         </div>
-        <Button onClick={onEnrollButtonClick}>등록하기</Button>
+        <Button
+          onClick={onEnrollButtonClick}
+          disabled={!selectedCohortId || isEnrollStudentPending}
+          className="flex items-center justify-center"
+        >
+          {isEnrollStudentPending ? <LoadingUi /> : "등록하기"}
+        </Button>
       </ModalContent>
     </Modal>
   );
