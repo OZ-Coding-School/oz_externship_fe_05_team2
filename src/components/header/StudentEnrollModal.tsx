@@ -1,0 +1,87 @@
+import { Button, Dropdown, SideBarTapButton } from "@/components/common";
+import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
+import { useAvailableCourses, useEnrollStudent } from "@/hooks/api";
+import type { DropdownOption } from "@/types";
+import { CheckIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+
+export default function StudentEnrollModal() {
+  const { data: availableCourses } = useAvailableCourses();
+
+  const { mutate: enrollStudent } = useEnrollStudent();
+
+  const [selectedCourseId, setSelectedCourseId] = useState("");
+  const [selectedCohortId, setSelectedCohortId] = useState("");
+
+  const [courses, setCourses] = useState<DropdownOption[]>([]);
+  const [cohorts, setCohorts] = useState<DropdownOption[]>([]);
+
+  //선택 가능한 코스 설정
+  useEffect(() => {
+    if (!availableCourses) return;
+
+    const newCourses: DropdownOption[] = [];
+
+    availableCourses.forEach((availableCourse) => {
+      const courseDropdownOption: DropdownOption = {
+        label: availableCourse.course.name,
+        value: String(availableCourse.course.id),
+      };
+
+      newCourses.push(courseDropdownOption);
+    });
+
+    setCourses(newCourses);
+  }, [availableCourses]);
+
+  //선택 가능한 기수 설정
+  useEffect(() => {
+    if (!(selectedCourseId && availableCourses)) return;
+
+    const newCohorts: DropdownOption[] = [];
+
+    availableCourses.forEach((availableCourse) => {
+      if (selectedCourseId === String(availableCourse.course.id)) {
+        const cohortDropdownOption: DropdownOption = {
+          label: `${availableCourse.cohort.number}기`,
+          value: String(availableCourse.cohort.id),
+        };
+
+        newCohorts.push(cohortDropdownOption);
+      }
+    });
+
+    setCohorts(newCohorts);
+  }, [selectedCourseId, availableCourses]);
+
+  const onEnrollButtonClick = () => {
+    enrollStudent({ cohortId: Number(selectedCohortId) });
+  };
+
+  const handleCourseChange = (newValue: string) =>
+    setSelectedCourseId(newValue);
+  const handleCohortChange = (newValue: string) =>
+    setSelectedCohortId(newValue);
+
+  return (
+    <Modal>
+      <ModalTrigger>
+        <SideBarTapButton>수강생 등록</SideBarTapButton>
+      </ModalTrigger>
+      <ModalContent className="flex flex-col gap-10">
+        <div className="flex flex-col items-center justify-center gap-4">
+          <CheckIcon className="bg-primary-300 text-primary-500 size-7 rounded-full" />
+          <span className="text-lg font-semibold">내 과정 선택하기</span>
+          <span className="text-sm text-neutral-400">
+            해당하는 과정과 기수를 선택 해주세요.
+          </span>
+        </div>
+        <div className="flex w-full max-w-sm flex-col gap-8">
+          <Dropdown options={courses} onChange={handleCourseChange} />
+          <Dropdown options={cohorts} onChange={handleCohortChange} />
+        </div>
+        <Button onClick={onEnrollButtonClick}>등록하기</Button>
+      </ModalContent>
+    </Modal>
+  );
+}

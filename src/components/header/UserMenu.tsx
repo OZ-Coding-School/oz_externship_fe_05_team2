@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { UserIcon } from "@/assets/icons/interface-icons/";
 import { SideBarTapButton } from "@/components/common";
+import StudentEnrollModal from "@/components/header/StudentEnrollModal";
 
 interface UserMenuProps {
   onLogout: () => void;
@@ -34,11 +35,7 @@ export default function UserMenu({ onLogout }: UserMenuProps) {
           </div>
           <hr className="my-2 border-gray-200" />
 
-          {!isStudent && (
-            <SideBarTapButton as="button" onClick={() => setIsStudent(true)}>
-              수강생 등록(임시)
-            </SideBarTapButton>
-          )}
+          {!isStudent && <StudentEnrollModal />}
           <SideBarTapButton as={Link} to="/my-page">
             마이페이지
           </SideBarTapButton>
