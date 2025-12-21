@@ -9,7 +9,7 @@ type EnrollStudentMutationOptions = Omit<
 >;
 
 export default function useEnrollStudent(
-  options: EnrollStudentMutationOptions
+  options?: EnrollStudentMutationOptions
 ) {
   return useMutation({
     mutationFn: async ({ cohortId }) => {

@@ -9,7 +9,7 @@ type AvailableCoursesQueryOptions = Omit<
 >;
 
 export default function useAvailableCourses(
-  options: AvailableCoursesQueryOptions
+  options?: AvailableCoursesQueryOptions
 ) {
   return useQuery<AvailableCourse[]>({
     queryKey: ["enrollment", "available-courses"],
