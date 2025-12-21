@@ -5,6 +5,7 @@ import {
   SideBarTapButton,
 } from "@/components/common";
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
+import { useToast } from "@/hooks";
 import { useAvailableCourses, useEnrollStudent } from "@/hooks/api";
 import type { DropdownOption } from "@/types";
 import { CheckIcon } from "lucide-react";
@@ -14,8 +15,25 @@ export default function StudentEnrollModal() {
   const { data: availableCourses, isPending: isAvailableCoursePending } =
     useAvailableCourses();
 
+  const { triggerToast } = useToast();
+
   const { mutate: enrollStudent, isPending: isEnrollStudentPending } =
-    useEnrollStudent();
+    useEnrollStudent({
+      onSuccess: () => {
+        triggerToast({
+          variant: "small",
+          status: "success",
+          text: "수강생 등록을 완료했습니다.",
+        });
+      },
+      onError: () => {
+        triggerToast({
+          variant: "small",
+          status: "danger",
+          text: "수강생 등록에 실패했습니다. 잠시후 다시 시도해주세요.",
+        });
+      },
+    });
 
   const [selectedCourseId, setSelectedCourseId] = useState("");
   const [selectedCohortId, setSelectedCohortId] = useState("");
