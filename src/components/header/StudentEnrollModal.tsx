@@ -1,4 +1,9 @@
-import { Button, Dropdown, SideBarTapButton } from "@/components/common";
+import {
+  Button,
+  Dropdown,
+  LoadingUi,
+  SideBarTapButton,
+} from "@/components/common";
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
 import { useAvailableCourses, useEnrollStudent } from "@/hooks/api";
 import type { DropdownOption } from "@/types";
@@ -6,7 +11,8 @@ import { CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function StudentEnrollModal() {
-  const { data: availableCourses } = useAvailableCourses();
+  const { data: availableCourses, isPending: isAvailableCoursePending } =
+    useAvailableCourses();
 
   const { mutate: enrollStudent } = useEnrollStudent();
 
@@ -76,9 +82,15 @@ export default function StudentEnrollModal() {
             해당하는 과정과 기수를 선택 해주세요.
           </span>
         </div>
-        <div className="flex w-full max-w-sm flex-col gap-8">
-          <Dropdown options={courses} onChange={handleCourseChange} />
-          <Dropdown options={cohorts} onChange={handleCohortChange} />
+        <div className="flex w-full max-w-sm flex-col items-center gap-8">
+          {isAvailableCoursePending ? (
+            <LoadingUi />
+          ) : (
+            <>
+              <Dropdown options={courses} onChange={handleCourseChange} />
+              <Dropdown options={cohorts} onChange={handleCohortChange} />
+            </>
+          )}
         </div>
         <Button onClick={onEnrollButtonClick}>등록하기</Button>
       </ModalContent>
