@@ -13,5 +13,6 @@ export const API_PATHS = {
   },
   accounts: {
     login: `${API_PREFIX}/accounts/login`,
+    availableCourses: `${API_PREFIX}/accounts/available-courses`,
   },
 } as const;
