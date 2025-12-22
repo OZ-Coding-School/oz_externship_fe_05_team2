@@ -7,6 +7,10 @@ import {
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
 import { useExternalModalController, useToast } from "@/hooks";
 import { useAvailableCourses, useEnrollStudent } from "@/hooks/api";
+import {
+  createCohortsDropdownOptions,
+  createCoursesDropdownOptions,
+} from "@/lib";
 import type { DropdownOption } from "@/types";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -49,16 +53,7 @@ export default function StudentEnrollModal() {
   useEffect(() => {
     if (!availableCourses) return;
 
-    const newCourses: DropdownOption[] = [];
-
-    availableCourses.forEach((availableCourse) => {
-      const courseDropdownOption: DropdownOption = {
-        label: availableCourse.course.name,
-        value: String(availableCourse.course.id),
-      };
-
-      newCourses.push(courseDropdownOption);
-    });
+    const newCourses = createCoursesDropdownOptions(availableCourses);
 
     setCourses(newCourses);
   }, [availableCourses]);
@@ -67,18 +62,10 @@ export default function StudentEnrollModal() {
   useEffect(() => {
     if (!(selectedCourseId && availableCourses)) return;
 
-    const newCohorts: DropdownOption[] = [];
-
-    availableCourses.forEach((availableCourse) => {
-      if (selectedCourseId === String(availableCourse.course.id)) {
-        const cohortDropdownOption: DropdownOption = {
-          label: `${availableCourse.cohort.number}기`,
-          value: String(availableCourse.cohort.id),
-        };
-
-        newCohorts.push(cohortDropdownOption);
-      }
-    });
+    const newCohorts = createCohortsDropdownOptions(
+      availableCourses,
+      selectedCourseId
+    );
 
     setCohorts(newCohorts);
   }, [selectedCourseId, availableCourses]);
