@@ -5,6 +5,7 @@ import useEnrollStudent from "@/hooks/api/useEnrollStudent";
 import useSendEmail from "@/hooks/api/verification/useSendEmail";
 import useVerifyEmail from "@/hooks/api/verification/useVerifyEmail";
 import useSendSMS from "@/hooks/api/verification/useSendSMS";
+import useVerifySMS from "@/hooks/api/verification/useVerifySMS";
 
 export {
   useExamList,
@@ -14,4 +15,5 @@ export {
   useSendEmail,
   useVerifyEmail,
   useSendSMS,
+  useVerifySMS,
 };
