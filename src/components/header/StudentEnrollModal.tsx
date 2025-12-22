@@ -93,10 +93,10 @@ export default function StudentEnrollModal() {
       <ModalTrigger>
         <SideBarTapButton>수강생 등록</SideBarTapButton>
       </ModalTrigger>
-      <ModalContent className="flex flex-col gap-10">
+      <ModalContent className="flex w-full max-w-sm flex-col gap-10">
         <div className="flex flex-col items-center justify-center gap-4">
           <CheckIcon className="bg-primary-300 text-primary-500 size-7 rounded-full" />
-          <span className="text-lg font-semibold">내 과정 선택하기</span>
+          <span className="text-xl font-semibold">내 과정 선택하기</span>
           <span className="text-sm text-neutral-400">
             해당하는 과정과 기수를 선택 해주세요.
           </span>
@@ -106,8 +106,16 @@ export default function StudentEnrollModal() {
             <LoadingUi />
           ) : (
             <>
-              <Dropdown options={courses} onChange={handleCourseChange} />
-              <Dropdown options={cohorts} onChange={handleCohortChange} />
+              <Dropdown
+                options={courses}
+                onChange={handleCourseChange}
+                className="w-full"
+              />
+              <Dropdown
+                options={cohorts}
+                onChange={handleCohortChange}
+                className="w-full"
+              />
             </>
           )}
         </div>
