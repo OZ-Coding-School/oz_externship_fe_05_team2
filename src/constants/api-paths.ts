@@ -2,6 +2,8 @@ export const MSW_BASE_URL = "https://msw.local";
 
 const API_PREFIX = "/api/v1";
 
+const VERIFICATION_API_PREFIX = "/accounts/verification";
+
 export const API_PATHS = {
   exams: {
     deployments: {
@@ -15,5 +17,11 @@ export const API_PATHS = {
     login: `${API_PREFIX}/accounts/login`,
     availableCourses: `${API_PREFIX}/accounts/available-courses`,
     enrollStudent: `${API_PREFIX}/accounts/enroll-student`,
+    verification: {
+      sendEmail: `${VERIFICATION_API_PREFIX}/send-email`,
+      verfiyEmail: `${VERIFICATION_API_PREFIX}/verify-email`,
+      sendSMS: `${VERIFICATION_API_PREFIX}/send-sms`,
+      verfiySMS: `${VERIFICATION_API_PREFIX}/verify-sms`,
+    },
   },
 } as const;
