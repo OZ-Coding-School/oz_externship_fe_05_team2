@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 import { examHandlers } from "@/mocks/handlers/exam-handlers";
-import { authHandlers } from "@/mocks/handlers/auth";
+import { authHandlers } from "@/mocks/handlers/auth-handlers";
 
 export const handlers = [
   ...authHandlers,
