@@ -2,8 +2,7 @@ import { RootLayout } from "@/components/layout";
 import { Exams, Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { NotFound } from "@/components/common/not-found";
-import { LoginPage, SignupPage } from "@/pages";
-import EmailSignupPage from "./pages/EmailSignupPage";
+import { LoginPage, SignupPage, EmailSignupPage } from "@/pages";
 
 function App() {
   return (
