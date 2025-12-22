@@ -5,9 +5,9 @@ import {
   SideBarTapButton,
 } from "@/components/common";
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
-import { useToast } from "@/hooks";
+import { useExternalModalController, useToast } from "@/hooks";
 import { useAvailableCourses, useEnrollStudent } from "@/hooks/api";
-import type { DropdownOption, ModalContextType } from "@/types";
+import type { DropdownOption } from "@/types";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -17,20 +17,7 @@ export default function StudentEnrollModal() {
 
   const { triggerToast } = useToast();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const modalController: ModalContextType = {
-    isOpen: isModalOpen,
-    open: () => {
-      setIsModalOpen(true);
-    },
-    close: () => {
-      setIsModalOpen(false);
-    },
-    toggle: () => {
-      setIsModalOpen((prev) => !prev);
-    },
-  };
+  const modalController = useExternalModalController();
 
   const { mutate: enrollStudent, isPending: isEnrollStudentPending } =
     useEnrollStudent({
