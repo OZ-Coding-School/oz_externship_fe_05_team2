@@ -1,7 +1,8 @@
 import ModalOverlay from "@/components/common/modal/ModalOverlay";
-import type { ModalContent, ModalTrigger } from "@/components/common/modal";
+import { ModalContent, ModalTrigger } from "@/components/common/modal";
 import { ModalContext } from "@/hooks";
-import { useState, type ReactElement } from "react";
+import React, { useState, type ReactElement } from "react";
+import { createPortal } from "react-dom";
 
 type ModalChildren =
   | ReactElement<typeof ModalTrigger>
@@ -21,6 +22,16 @@ export default function Modal({ children, isOverlay = true }: ModalProps) {
 
   const toggle = () => setIsOpen((prev) => !prev);
 
+  const modalRoot = document.getElementById("modal-root")!;
+
+  const trigger = React.Children.map(children, (child) =>
+    child.type === ModalTrigger ? child : null
+  );
+
+  const content = React.Children.map(children, (child) =>
+    child.type === ModalContent ? child : null
+  );
+
   return (
     <ModalContext.Provider
       value={{
@@ -30,8 +41,15 @@ export default function Modal({ children, isOverlay = true }: ModalProps) {
         toggle,
       }}
     >
-      {isOverlay ? <ModalOverlay /> : null}
-      <div>{children}</div>
+      {trigger}
+      {isOpen &&
+        createPortal(
+          <>
+            {isOverlay ? <ModalOverlay /> : null}
+            {content}
+          </>,
+          modalRoot
+        )}
     </ModalContext.Provider>
   );
 }
