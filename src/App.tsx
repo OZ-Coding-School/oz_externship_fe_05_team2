@@ -3,6 +3,7 @@ import { Exams, Home } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { NotFound } from "@/components/common/not-found";
 import { LoginPage, SignupPage } from "@/pages";
+import EmailSignupPage from "./pages/EmailSignupPage";
 
 function App() {
   return (
@@ -17,10 +18,7 @@ function App() {
           <Route path="/my-page" element={<div>마이페이지</div>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route
-            path="/email-signup"
-            element={<div>일반회원 가입 페이지</div>}
-          />
+          <Route path="/email-signup" element={<EmailSignupPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
