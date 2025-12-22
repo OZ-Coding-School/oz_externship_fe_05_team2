@@ -61,4 +61,33 @@ const postVerifyEmail = http.post(
   }
 );
 
-export const verificationHandlers = [postSendEmail, postVerifyEmail];
+const postSendSMS = http.post(
+  `${MSW_BASE_URL}${API_PATHS.accounts.verification.sendSMS}`,
+  async ({ request }) => {
+    const { phone_number } = (await request.clone().json()) as {
+      phone_number: string;
+    };
+
+    if (!phone_number) {
+      return HttpResponse.json(
+        {
+          error_detail: {
+            phone_number: ["이 필드는 필수 항목입니다."],
+          },
+        },
+        { status: 400 }
+      );
+    }
+
+    return HttpResponse.json(
+      { detail: "휴대폰 인증 코드가 전송되었습니다." },
+      { status: 200 }
+    );
+  }
+);
+
+export const verificationHandlers = [
+  postSendEmail,
+  postVerifyEmail,
+  postSendSMS,
+];
