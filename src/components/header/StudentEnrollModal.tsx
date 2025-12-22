@@ -7,7 +7,7 @@ import {
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
 import { useToast } from "@/hooks";
 import { useAvailableCourses, useEnrollStudent } from "@/hooks/api";
-import type { DropdownOption } from "@/types";
+import type { DropdownOption, ModalContextType } from "@/types";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -17,6 +17,21 @@ export default function StudentEnrollModal() {
 
   const { triggerToast } = useToast();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const modalController: ModalContextType = {
+    isOpen: isModalOpen,
+    open: () => {
+      setIsModalOpen(true);
+    },
+    close: () => {
+      setIsModalOpen(false);
+    },
+    toggle: () => {
+      setIsModalOpen((prev) => !prev);
+    },
+  };
+
   const { mutate: enrollStudent, isPending: isEnrollStudentPending } =
     useEnrollStudent({
       onSuccess: () => {
@@ -25,6 +40,8 @@ export default function StudentEnrollModal() {
           status: "success",
           text: "수강생 등록을 완료했습니다.",
         });
+
+        modalController.close();
       },
       onError: () => {
         triggerToast({
@@ -89,7 +106,7 @@ export default function StudentEnrollModal() {
     setSelectedCohortId(newValue);
 
   return (
-    <Modal>
+    <Modal externalModalControl={modalController}>
       <ModalTrigger>
         <SideBarTapButton>수강생 등록</SideBarTapButton>
       </ModalTrigger>
