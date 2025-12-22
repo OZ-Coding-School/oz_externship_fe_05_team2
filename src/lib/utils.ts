@@ -12,13 +12,19 @@ export function createCoursesDropdownOptions(
 ) {
   const newCourses: DropdownOption[] = [];
 
-  availableCourses.forEach((availableCourse) => {
-    const courseDropdownOption: DropdownOption = {
-      label: availableCourse.course.name,
-      value: String(availableCourse.course.id),
-    };
+  const courseIds: number[] = [];
 
-    newCourses.push(courseDropdownOption);
+  availableCourses.forEach((availableCourse) => {
+    if (!courseIds.includes(availableCourse.course.id)) {
+      const courseDropdownOption: DropdownOption = {
+        label: availableCourse.course.name,
+        value: String(availableCourse.course.id),
+      };
+
+      courseIds.push(availableCourse.course.id);
+
+      newCourses.push(courseDropdownOption);
+    }
   });
 
   return newCourses;
