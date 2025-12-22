@@ -10,7 +10,8 @@ interface UserMenuProps {
 
 export default function UserMenu({ onLogout }: UserMenuProps) {
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [isStudent, setIsStudent] = useState(false);
+  //TODO: 실제 상태 반영
+  const [isStudent] = useState(false);
 
   return (
     <div className="relative">
