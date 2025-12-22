@@ -7,6 +7,7 @@ import useVerifyEmail from "@/hooks/api/verification/useVerifyEmail";
 import useSendSMS from "@/hooks/api/verification/useSendSMS";
 import useVerifySMS from "@/hooks/api/verification/useVerifySMS";
 import useDeleteAccount from "@/hooks/api/useDeleteAccount";
+import useExamQuestionList from "@/hooks/api/useExamQuestionList";
 
 export {
   useExamList,
@@ -18,4 +19,5 @@ export {
   useSendSMS,
   useVerifySMS,
   useDeleteAccount,
+  useExamQuestionList,
 };
