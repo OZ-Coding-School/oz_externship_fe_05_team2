@@ -86,8 +86,46 @@ const postSendSMS = http.post(
   }
 );
 
+const postVerifySMS = http.post(
+  `${MSW_BASE_URL}${API_PATHS.accounts.verification.verfiySMS}`,
+  async ({ request }) => {
+    const { phone_number, code } = (await request.clone().json()) as {
+      phone_number: string;
+      code: string;
+    };
+
+    if (!phone_number || !code) {
+      return HttpResponse.json(
+        {
+          error_detail: {
+            email: phone_number ? undefined : ["이 필드는 필수 항목입니다."],
+            code: code ? undefined : ["이 필드는 필수 항목입니다."],
+          },
+        },
+        { status: 400 }
+      );
+    }
+
+    if (code !== "qwer1234") {
+      return HttpResponse.json(
+        {
+          error_detail: {
+            message: "인증코드가 올바르지 않습니다.",
+          },
+        },
+        { status: 403 }
+      );
+    }
+    return HttpResponse.json(
+      { detail: "휴대폰 인증에 성공했습니다." },
+      { status: 200 }
+    );
+  }
+);
+
 export const verificationHandlers = [
   postSendEmail,
   postVerifyEmail,
   postSendSMS,
+  postVerifySMS,
 ];
