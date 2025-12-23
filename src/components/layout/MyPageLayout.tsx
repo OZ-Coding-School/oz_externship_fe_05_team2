@@ -1,5 +1,6 @@
   import { useLocation, Outlet } from 'react-router';
   import SideBarTapButton from '@/components/common/SideBarTapButton';
+
   const menuItems = [
     { id: 'exam', label: '쪽지시험' },
     { id: 'profile', label: '내 정보' },
@@ -26,11 +27,5 @@
      </div>
    );
   }
-        </aside>
-        <main className="w-3/4 p-10 overflow-auto bg-white">
-          <Outlet /> 
-        </main>
-      </div>
-    );
+
   
-  }
