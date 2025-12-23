@@ -10,7 +10,6 @@ import {
 } from "@/pages";
 import ProfileEdit from '@/pages/ProfileEditPage';
 import { BrowserRouter, Route, Routes } from "react-router"; 
-import { NotFound404 } from "@/components/common/not-found";
 import MyPageLayout from "@/components/layout/MyPageLayout";
 import ProfilePage from '@/pages/ProfilePage'; 
 
@@ -35,7 +34,6 @@ function MyPageWrapper() {
   };
 
 import { NotFound404 } from "@/components/common/not-found"; 
-
 
 function App() {
   return (
