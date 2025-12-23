@@ -6,6 +6,10 @@ import type { ModalContextType } from "@/types";
 import { RotateCwIcon } from "lucide-react";
 import { useState } from "react";
 
+const emailRegex = new RegExp(
+  "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+);
+
 interface AccountRestoreFormModalProps {
   externalModalControl: ModalContextType;
   setStep: React.Dispatch<React.SetStateAction<1 | 2 | 3>>;
@@ -19,6 +23,7 @@ export default function AccountRestoreFormModal({
   const [verificationCode, setVerificationCode] = useState("");
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
 
   const { triggerToast } = useToast();
 
@@ -98,12 +103,13 @@ export default function AccountRestoreFormModal({
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
+                setIsEmail(emailRegex.test(email));
               }}
               disabled={isEmailSent}
             />
             <Button
               className="flex h-12 items-center justify-center"
-              disabled={!email || isEmailSent}
+              disabled={!isEmail || isEmailSent}
               onClick={handleEmailButtonClick}
             >
               인증코드전송
