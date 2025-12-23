@@ -124,4 +124,10 @@ body {
   }
 }
 
-/* Todo: Input창 자동완성에서 제공하는 문구 클릭시 스타일이 변경되는 로직 막는 코드 추가
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #171717;
+}

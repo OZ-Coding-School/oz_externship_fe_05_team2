@@ -192,7 +192,6 @@ export default function EmailSignupPage() {
                 handlePhoneAutoAfter(e, "phone2", 3);
               }}
               placeholder="010"
-              inputClassName="text-center"
             />
             <span>-</span>
             <Input
@@ -203,15 +202,9 @@ export default function EmailSignupPage() {
                 register("phone2").onChange(e);
                 handlePhoneAutoAfter(e, "phone3", 4);
               }}
-              inputClassName="text-center"
             />
             <span>-</span>
-            <Input
-              className="flex-1"
-              maxLength={4}
-              {...register("phone3")}
-              inputClassName="text-center"
-            />
+            <Input className="flex-1" maxLength={4} {...register("phone3")} />
             <Button
               type="button"
               variant="outline"
