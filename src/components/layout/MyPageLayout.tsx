@@ -1,6 +1,7 @@
   import { useLocation, Outlet } from 'react-router';
   import SideBarTapButton from '@/components/common/SideBarTapButton'; 
 
+
   const menuItems = [
     { id: 'exam', label: '쪽지시험' },
     { id: 'profile', label: '내 정보' },
@@ -32,8 +33,12 @@
         </main>
       </div>
     );
+<<<<<<< HEAD
   }
 <<<<<<< HEAD
 
 =======
 >>>>>>> 45088ac (refactor: 공통레이아웃 수정 및 프로필페이지(진행중)추가 (#64))
+=======
+  }
+>>>>>>> e2d7341 (test: 코드 수정 (#64))
