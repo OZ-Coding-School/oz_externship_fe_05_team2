@@ -1,6 +1,5 @@
 import { Button, Dropdown, Textarea } from "@/components/common";
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
-import { cn } from "@/lib";
 import type { DropdownOption } from "@/types";
 import {
   ACCOUNT_DELETE_REASON,
