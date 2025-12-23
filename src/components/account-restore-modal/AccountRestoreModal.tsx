@@ -8,10 +8,12 @@ import {
 
 interface AccountRestoreModalProps {
   externalModalControl: ModalContextType;
+  expiredAt: Date;
 }
 
 export default function AccountRestoreModal({
   externalModalControl,
+  expiredAt,
 }: AccountRestoreModalProps) {
   const [step, setStep] = useState<1 | 2 | 3>(1);
 
@@ -20,6 +22,7 @@ export default function AccountRestoreModal({
       <AccountRestoreAlertModal
         externalModalControl={externalModalControl}
         setStep={setStep}
+        expiredAt={expiredAt}
       />
     );
   } else if (step === 2) {
