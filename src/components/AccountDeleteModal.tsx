@@ -1,11 +1,14 @@
 import { Button, Dropdown, Textarea } from "@/components/common";
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
+import { useToast } from "@/hooks";
+import useDeleteAccount from "@/hooks/api/useDeleteAccount";
 import type { DropdownOption } from "@/types";
 import {
   ACCOUNT_DELETE_REASON,
   type AccountDeleteReason,
 } from "@/types/api-request-type/account-request-types";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const dropdownOptions: DropdownOption[] = [
   {
@@ -44,10 +47,40 @@ export default function AccountDeleteModal() {
   const [deleteReason, setDeleteReason] = useState<AccountDeleteReason>();
   const [detailReason, setDetailReason] = useState("");
 
+  const { triggerToast } = useToast();
+
+  const navigation = useNavigate();
+
+  const { mutate: deleteAccount, isPending } = useDeleteAccount({
+    onSuccess: () => {
+      //TODO: 로그아웃 로직 추가
+      triggerToast({
+        variant: "small",
+        status: "success",
+        text: "회원탈퇴에 성공했습니다.",
+      });
+
+      navigation("/", { replace: true });
+    },
+    onError: () => {
+      triggerToast({
+        variant: "small",
+        status: "danger",
+        text: "회원탈퇴에 실패했습니다. 잠시후 다시 시도해주세요.",
+      });
+    },
+  });
+
   const handleDropdownChange = (value: string) => {
     if (isAccountDeleteReason(value)) {
       setDeleteReason(value);
     }
+  };
+
+  const handleDeleteAccountButtonClick = () => {
+    if (!deleteReason) return;
+
+    deleteAccount({ deleteReason, detailReason });
   };
 
   return (
@@ -85,7 +118,10 @@ export default function AccountDeleteModal() {
           />
 
           <div className="flex w-full items-center justify-center">
-            <Button disabled={!deleteReason || !detailReason}>
+            <Button
+              disabled={!deleteReason || !detailReason || isPending}
+              onClick={handleDeleteAccountButtonClick}
+            >
               회원탈퇴하기
             </Button>
           </div>
