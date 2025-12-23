@@ -1,7 +1,7 @@
 import { Button, Dropdown, Textarea } from "@/components/common";
 import { Modal, ModalContent, ModalTrigger } from "@/components/common/modal";
 import { useToast } from "@/hooks";
-import useDeleteAccount from "@/hooks/api/useDeleteAccount";
+import { useDeleteAccount } from "@/hooks/api";
 import type { DropdownOption } from "@/types";
 import {
   ACCOUNT_DELETE_REASON,
