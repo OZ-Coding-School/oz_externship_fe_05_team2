@@ -13,7 +13,7 @@ type DeleteAccountOptions = Omit<
   "mutateFn"
 >;
 
-export default function useDeleteAccount(options: DeleteAccountOptions) {
+export default function useDeleteAccount(options?: DeleteAccountOptions) {
   return useMutation({
     mutationFn: async ({ deleteReason, detailReason }) => {
       await api.delete(`${MSW_BASE_URL}${API_PATHS.accounts.me}`, {
