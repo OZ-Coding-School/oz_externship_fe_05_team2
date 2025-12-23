@@ -29,7 +29,7 @@ export const SignupSchema = z
     gender: z.enum(["M", "F"]),
 
     phone1: z.string().min(3, { message: "" }),
-    phone2: z.string().min(3, { message: "" }),
+    phone2: z.string().min(4, { message: "" }),
     phone3: z.string().min(4, { message: "" }),
   })
   .refine((data) => data.password === data.passwordConfirm, {

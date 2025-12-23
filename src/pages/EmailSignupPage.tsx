@@ -15,17 +15,31 @@ export default function EmailSignupPage() {
     handleSubmit,
     watch,
     setValue,
+    setFocus,
     formState: { errors, isValid },
   } = useForm<SignupSchemaType>({
     resolver: zodResolver(SignupSchema),
     mode: "onChange",
     defaultValues: {
       gender: "M",
-      phone1: "010",
+      phone1: "",
+      phone2: "",
+      phone3: "",
     },
   });
 
   const values = watch();
+
+  const handlePhoneAutoAfter = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    nextField?: keyof SignupSchemaType,
+    length: number = 4
+  ) => {
+    const { value } = e.target;
+    if (value.length >= length && nextField) {
+      setFocus(nextField);
+    }
+  };
 
   const onSubmit = (data: SignupSchemaType) => {
     {
@@ -164,25 +178,37 @@ export default function EmailSignupPage() {
 
         {/* Todo: useSendPhone, useVerifyPhone 파일 추가 예정 & 컴포넌트 분리를 통해 아이디 찾기에서도 사용가능하게 수정 & 인증 완료시 toast 출력 */}
         <section className="space-y-2">
-          <label className="text-sm">
+          <label className="text-sm font-semibold">
             휴대전화<span className="text-red-500">*</span>
           </label>
           <div className="flex items-center gap-2">
             {/* Todo: error와 success상태에서만 받을 수 있던 inputClassName 추가하기 */}
             <Input
-              className="w-20 text-center"
+              className="w-20"
+              maxLength={3}
               {...register("phone1")}
+              onChange={(e) => {
+                register("phone1").onChange(e);
+                handlePhoneAutoAfter(e, "phone2", 3);
+              }}
+              placeholder="010"
               inputClassName="text-center"
             />
             <span>-</span>
             <Input
-              className="flex-1 text-center"
+              className="flex-1"
+              maxLength={4}
               {...register("phone2")}
+              onChange={(e) => {
+                register("phone2").onChange(e);
+                handlePhoneAutoAfter(e, "phone3", 4);
+              }}
               inputClassName="text-center"
             />
             <span>-</span>
             <Input
-              className="flex-1 text-center"
+              className="flex-1"
+              maxLength={4}
               {...register("phone3")}
               inputClassName="text-center"
             />
