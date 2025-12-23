@@ -28,6 +28,9 @@ export default function EmailSignupPage() {
   const values = watch();
 
   const onSubmit = (data: SignupSchemaType) => {
+    {
+      /* Todo: 회원가입 로직 구현 */
+    }
     console.log("회원가입 데이터 제출:", data);
   };
 
@@ -53,7 +56,7 @@ export default function EmailSignupPage() {
           />
         </section>
 
-        {/* 닉네임 유효성 검사 추가 예정 & 컴포넌트 분리를 통해 마이페이지에서도 사용가능하게 수정 */}
+        {/* Todo: 닉네임 유효성 검사 추가 예정 & 컴포넌트 분리를 통해 마이페이지에서도 사용가능하게 수정 */}
         <section>
           <label className="mt-8 mb-1 block text-sm">
             닉네임<span className="text-red-500">*</span>
@@ -119,7 +122,7 @@ export default function EmailSignupPage() {
           </div>
         </section>
 
-        {/* useSendEmail, useVerifyEmail을 통해 인증 기능 추가 & 컴포넌트 분리를 통해 비밀번호 찾기에서도 사용가능하게 수정 */}
+        {/* Todo: useSendEmail, useVerifyEmail을 통해 인증 기능 추가 & 컴포넌트 분리를 통해 비밀번호 찾기에서도 사용가능하게 수정 & 인증 완료시 toast 출력 */}
         <section className="space-y-2">
           <label className="mb-1 text-sm">
             이메일<span className="text-red-500">*</span>
@@ -159,12 +162,13 @@ export default function EmailSignupPage() {
           </div>
         </section>
 
-        {/* useSendPhone, useVerifyPhone 파일 추가 예정 & 컴포넌트 분리를 통해 아이디 찾기에서도 사용가능하게 수정 */}
+        {/* Todo: useSendPhone, useVerifyPhone 파일 추가 예정 & 컴포넌트 분리를 통해 아이디 찾기에서도 사용가능하게 수정 & 인증 완료시 toast 출력 */}
         <section className="space-y-2">
           <label className="text-sm">
             휴대전화<span className="text-red-500">*</span>
           </label>
           <div className="flex items-center gap-2">
+            {/* Todo: error와 success상태에서만 받을 수 있던 inputClassName 추가하기 */}
             <Input
               className="w-20 text-center"
               {...register("phone1")}

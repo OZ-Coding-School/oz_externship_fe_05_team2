@@ -123,3 +123,5 @@ body {
     animation-delay: 400ms;
   }
 }
+
+/* Todo: Input창 자동완성에서 제공하는 문구 클릭시 스타일이 변경되는 로직 막는 코드 추가
