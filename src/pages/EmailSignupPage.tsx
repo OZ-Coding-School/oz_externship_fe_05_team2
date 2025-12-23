@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HeaderLogo } from "@/assets/images/logo-images";
@@ -6,10 +5,9 @@ import { Button, Input, Password } from "@/components/common";
 import { SignupSchema, type SignupSchemaType } from "@/schemas/authSchemas";
 import { cn } from "@/lib";
 import EmailVerification from "@/components/auth/EmailVerification";
+import PhoneVerification from "@/components/auth/PhoneVerification";
 
 export default function EmailSignupPage() {
-  const [isPhoneSent, setIsPhoneSent] = useState(false);
-
   const methods = useForm<SignupSchemaType>({
     resolver: zodResolver(SignupSchema),
     mode: "onChange",
@@ -26,22 +24,10 @@ export default function EmailSignupPage() {
     handleSubmit,
     watch,
     setValue,
-    setFocus,
     formState: { errors, isValid },
   } = methods;
 
   const values = watch();
-
-  const handlePhoneAutoAfter = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    nextField?: keyof SignupSchemaType,
-    length: number = 4
-  ) => {
-    const { value } = e.target;
-    if (value.length >= length && nextField) {
-      setFocus(nextField);
-    }
-  };
 
   const onSubmit = (data: SignupSchemaType) => {
     {
@@ -143,64 +129,11 @@ export default function EmailSignupPage() {
             </div>
           </section>
 
-          {/* Todo: useSendEmail, useVerifyEmail을 통해 인증 기능 추가 & 컴포넌트 분리를 통해 비밀번호 찾기에서도 사용가능하게 수정 & 인증 완료시 toast 출력 */}
+          {/* Todo: useSendEmail, useVerifyEmail을 통해 인증 기능 추가 & 인증 완료시 toast 출력 */}
           <EmailVerification />
 
-          {/* Todo: useSendPhone, useVerifyPhone 파일 추가 예정 & 컴포넌트 분리를 통해 아이디 찾기에서도 사용가능하게 수정 & 인증 완료시 toast 출력 */}
-          <section className="space-y-2">
-            <label className="text-sm font-semibold">
-              휴대전화<span className="text-red-500">*</span>
-            </label>
-            <div className="flex items-center gap-2">
-              {/* Todo: error와 success상태에서만 받을 수 있던 inputClassName 추가하기 */}
-              <Input
-                className="w-20"
-                maxLength={3}
-                {...register("phone1")}
-                onChange={(e) => {
-                  register("phone1").onChange(e);
-                  handlePhoneAutoAfter(e, "phone2", 3);
-                }}
-                placeholder="010"
-              />
-              <span>-</span>
-              <Input
-                className="flex-1"
-                maxLength={4}
-                {...register("phone2")}
-                onChange={(e) => {
-                  register("phone2").onChange(e);
-                  handlePhoneAutoAfter(e, "phone3", 4);
-                }}
-              />
-              <span>-</span>
-              <Input className="flex-1" maxLength={4} {...register("phone3")} />
-              <Button
-                type="button"
-                variant="outline"
-                className="h-12 w-28 p-0"
-                disabled={!values.phone1 || !values.phone2 || !values.phone3}
-                onClick={() => setIsPhoneSent(true)}
-              >
-                인증번호전송
-              </Button>
-            </div>
-            <div className="flex items-center gap-2">
-              <Input
-                className="flex-1"
-                placeholder="인증번호 6자리를 입력해주세요"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                className="h-12 w-28 p-0"
-                disabled={!isPhoneSent}
-              >
-                인증번호확인
-              </Button>
-            </div>
-          </section>
-
+          {/* Todo: useSendPhone, useVerifyPhone 파일 추가 예정 & 인증 완료시 toast 출력 */}
+          <PhoneVerification />
           <section>
             <div className="flex flex-col gap-2">
               <label className="block text-sm">
