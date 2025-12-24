@@ -1,7 +1,7 @@
   import { useLocation, Outlet } from 'react-router';
   import SideBarTapButton from '@/components/common/SideBarTapButton';
 
-  const menuItems = [
+    const menuItems = [
     { id: 'exam', label: '쪽지시험' },
     { id: 'profile', label: '내 정보' },
     { id: 'password', label: '비밀번호 변경' },
@@ -13,19 +13,19 @@
       <div className="flex h-screen">
         <aside className="w-1/4 bg-white py-6 flex flex-col space-y-3">
           {menuItems.map(({ id, label }) => {
-    return (
-      <div key={id} className="ml-70"> 
-        <SideBarTapButton to ={id} isActive={isActive}>
-          {label}
-        </SideBarTapButton>
+
+     return (
+       <div key={id} className="ml-70"> 
+         <SideBarTapButton to={id} isActive={currentPathSegment === id}>
+           {label}
+         </SideBarTapButton>
+       </div>
+    );
+  })}
+        </aside>
+        <main className="w-3/4 p-10 overflow-auto bg-white">
+          <Outlet /> 
+        </main>
       </div>
     );
-     <div key={id} className="ml-70"> 
-       <SideBarTapButton to={id} isActive={currentPathSegment === id}>
-         {label}
-       </SideBarTapButton>
-     </div>
-   );
   }
-
-  

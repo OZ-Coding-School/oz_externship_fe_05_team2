@@ -12,6 +12,7 @@ import ProfileEdit from '@/pages/ProfileEditPage';
 import { BrowserRouter, Route, Routes } from "react-router"; 
 import MyPageLayout from "@/components/layout/MyPageLayout";
 import ProfilePage from '@/pages/ProfilePage'; 
+import ProfileEdit from '@/pages/ProfileEditPage';
 
 function ExamPage() { return <div>쪽지시험 화면</div>; }
 function PasswordChangePage() { return <div>비밀번호 변경 화면</div>; }
