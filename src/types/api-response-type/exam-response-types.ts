@@ -14,3 +14,8 @@ export interface ExamQuestionListResponse {
   cheating_count: number;
   questions: Question[];
 }
+
+export interface ExamCheatingResponse {
+  cheating_count: number;
+  is_forced_submitted: boolean;
+}

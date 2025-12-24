@@ -1,4 +1,5 @@
 import type { Exam, Question } from "@/types";
+import type { ExamCheatingResponse } from "@/types/api-response-type/exam-response-types";
 
 export const examList: Exam[] = [
   {
@@ -132,7 +133,7 @@ export const questionList: Question[] = [
       "상위 타입 값을 하위 타입 변수에 할당",
       "하위 타입 값을 상위 타입 변수에 할당",
       "서로소 유니온 타입 간 값은 일부 유니온 타입 변수에 할당",
-      "하위 타입 값을 상위 타입 변수에 할당",
+      "하위 타입 값을 상위 타입 변수에 할당2",
     ],
     answer_input: null,
   },
@@ -219,3 +220,8 @@ export const questionList: Question[] = [
     answer_input: ["", "", "", ""],
   },
 ];
+
+export const cheatingState: ExamCheatingResponse = {
+  cheating_count: 0,
+  is_forced_submitted: false,
+};

@@ -1,6 +1,7 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { api } from "@/lib";
 import type {
+  ExamCheatingResponse,
   ExamListResponse,
   ExamQuestionListResponse,
 } from "@/types/api-response-type/exam-response-types";
@@ -29,6 +30,18 @@ export const getExamQuestionList = async (
 ): Promise<ExamQuestionListResponse> => {
   const response = await api.get(
     `${MSW_BASE_URL}${API_PATHS.exams.deployments.questionList(deploymentId)}`
+  );
+
+  return response.data;
+};
+
+export const reportExamCheating = async (
+  deploymentId: number,
+  event: string
+): Promise<ExamCheatingResponse> => {
+  const response = await api.post(
+    `${MSW_BASE_URL}${API_PATHS.exams.deployments.cheating(deploymentId)}`,
+    { event }
   );
 
   return response.data;

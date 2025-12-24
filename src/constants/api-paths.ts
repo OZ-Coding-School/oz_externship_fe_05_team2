@@ -13,6 +13,8 @@ export const API_PATHS = {
         `${API_PREFIX}/exams/deployments/${deploymentId}/check-code`,
       questionList: (deploymentId: number) =>
         `${API_PREFIX}/exams/deployments/${deploymentId}`,
+      cheating: (deploymentId: number) =>
+        `${API_PREFIX}/exams/deployments/${deploymentId}/cheating`,
     },
   },
   accounts: {

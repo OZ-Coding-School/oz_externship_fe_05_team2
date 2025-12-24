@@ -1,10 +1,12 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { http, HttpResponse } from "msw";
-import { examList, questionList } from "@/mocks/data/exam-data";
+import { cheatingState, examList, questionList } from "@/mocks/data/exam-data";
 import type {
+  ExamCheatingResponse,
   ExamListResponse,
   ExamQuestionListResponse,
 } from "@/types/api-response-type/exam-response-types";
+import type { ExamCheatingRequest } from "@/types/api-request-type/exam-request-types";
 
 const PAGE_SIZE = 5;
 const LAST_PAGE = 10;
@@ -76,4 +78,28 @@ const getExamQuestionList = http.get(
   }
 );
 
-export const examHandlers = [getExamList, checkExamCode, getExamQuestionList];
+const reportExamCheating = http.post(
+  `${MSW_BASE_URL}${API_PATHS.exams.deployments.base}/:deploymentId/cheating`,
+  async ({ request }) => {
+    const { event } = (await request.json()) as ExamCheatingRequest;
+
+    if (event !== "focus_out")
+      return HttpResponse.json(
+        { error_detail: "유효하지 않은 시험 응시 세션입니다." },
+        { status: 400 }
+      );
+
+    cheatingState.cheating_count++;
+    if (cheatingState.cheating_count > 2)
+      cheatingState.is_forced_submitted = true;
+
+    return HttpResponse.json<ExamCheatingResponse>(cheatingState);
+  }
+);
+
+export const examHandlers = [
+  getExamList,
+  checkExamCode,
+  getExamQuestionList,
+  reportExamCheating,
+];
