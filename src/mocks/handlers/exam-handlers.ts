@@ -1,7 +1,10 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { http, HttpResponse } from "msw";
 import { examList, questionList } from "@/mocks/data/exam-data";
-import type { ExamListResponse, ExamQuestionListResponse } from "@/types";
+import type {
+  ExamListResponse,
+  ExamQuestionListResponse,
+} from "@/types/api-response-type/exam-response-types";
 
 const PAGE_SIZE = 5;
 const LAST_PAGE = 10;

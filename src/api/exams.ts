@@ -1,6 +1,9 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { api } from "@/lib";
-import type { ExamListResponse, ExamQuestionListResponse } from "@/types";
+import type {
+  ExamListResponse,
+  ExamQuestionListResponse,
+} from "@/types/api-response-type/exam-response-types";
 
 export const checkExamCode = (
   deploymentId: number,

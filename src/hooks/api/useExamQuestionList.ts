@@ -1,5 +1,5 @@
 import { getExamQuestionList } from "@/api/exams";
-import type { ExamQuestionListResponse } from "@/types";
+import type { ExamQuestionListResponse } from "@/types/api-response-type/exam-response-types";
 import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
 
 type ExamQuestionListQueryOptions = Omit<

@@ -28,12 +28,6 @@ export interface Exam {
   duration_time: number;
 }
 
-export interface ExamListResponse {
-  page: number;
-  has_next: boolean;
-  results: Exam[];
-}
-
 export type QuestionType =
   | "single_choice"
   | "multiple_choice"
@@ -64,12 +58,3 @@ interface ExamQuestionContentProps {
 }
 
 export type ExamQuestionContentComponent = React.FC<ExamQuestionContentProps>;
-
-export interface ExamQuestionListResponse {
-  exam_id: number;
-  exam_name: string;
-  duration_time: number;
-  elapsed_time: number;
-  cheating_count: number;
-  questions: Question[];
-}
