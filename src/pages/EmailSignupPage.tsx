@@ -5,7 +5,7 @@ import { Button, Input, Password } from "@/components/common";
 import { SignupSchema, type SignupSchemaType } from "@/schemas/authSchemas";
 import { cn } from "@/lib";
 import EmailVerification from "@/components/auth/EmailVerification";
-import PhoneVerification from "@/components/auth/PhoneVerification";
+import SMSVerification from "@/components/auth/SMSVerification";
 
 export default function EmailSignupPage() {
   const methods = useForm<SignupSchemaType>({
@@ -133,7 +133,7 @@ export default function EmailSignupPage() {
           <EmailVerification />
 
           {/* Todo: useSendPhone, useVerifyPhone 파일 추가 예정 & 인증 완료시 toast 출력 */}
-          <PhoneVerification />
+          <SMSVerification />
           <section>
             <div className="flex flex-col gap-2">
               <label className="block text-sm">

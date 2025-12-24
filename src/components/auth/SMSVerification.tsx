@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { Input, Button } from "@/components/common";
 import type { SignupSchemaType } from "@/schemas/authSchemas";
 
-export default function PhoneVerification() {
+export default function SMSVerification() {
   const { register, watch, setFocus } = useFormContext<SignupSchemaType>();
 
   const [isPhoneSent, setIsPhoneSent] = useState(false);
