@@ -1,3 +1,4 @@
+import { CardRed, CardYellow } from "@/assets/icons/cheating-icons";
 import {
   AwsIcon,
   CssIcon,
@@ -47,3 +48,9 @@ export const EXAM_QUESTION_TYPE_LABEL_MAP: Record<QuestionType, string> = {
   short_answer: "단답형",
   single_choice: "단일선택",
 };
+
+export const CHEATING_COUNT_ICON_RULES = [
+  { threshold: 1, active: CardYellow },
+  { threshold: 2, active: CardYellow },
+  { threshold: 3, active: CardRed },
+] as const;

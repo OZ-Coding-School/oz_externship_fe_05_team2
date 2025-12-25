@@ -9,6 +9,7 @@ import {
   EXAM_CATEGORY_OPTIONS,
   EXAM_SUBJECT_ICON_MAP,
   EXAM_QUESTION_TYPE_LABEL_MAP,
+  CHEATING_COUNT_ICON_RULES,
 } from "@/constants/exam-constants";
 import { MSW_BASE_URL, API_PATHS } from "@/constants/api-paths";
 
@@ -25,4 +26,5 @@ export {
   MSW_BASE_URL,
   API_PATHS,
   EXAM_QUESTION_TYPE_LABEL_MAP,
+  CHEATING_COUNT_ICON_RULES,
 };
