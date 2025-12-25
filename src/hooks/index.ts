@@ -7,6 +7,7 @@ import useExternalModalController from "@/hooks/useExternalModalContoller";
 import useExamTimer from "@/hooks/useExamTimer";
 import useExamCheatingStatus from "@/hooks/useExamCheatingStatus";
 import useExamCheatingModal from "@/hooks/useExamCheatingModal";
+import useExamAnswers from "@/hooks/useExamAnswers";
 
 export {
   useToast,
@@ -19,4 +20,5 @@ export {
   useExamTimer,
   useExamCheatingStatus,
   useExamCheatingModal,
+  useExamAnswers,
 };
