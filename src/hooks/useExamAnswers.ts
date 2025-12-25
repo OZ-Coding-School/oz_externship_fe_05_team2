@@ -1,10 +1,5 @@
-import type { Question, QuestionType } from "@/types";
+import type { Answer, Question } from "@/types";
 import { useCallback, useEffect, useState } from "react";
-
-interface Answer {
-  type: QuestionType;
-  submittedAnswer: string | string[] | null;
-}
 
 type AnswerState = Record<number, Answer>;
 

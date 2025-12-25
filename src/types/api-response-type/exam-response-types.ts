@@ -24,3 +24,10 @@ export interface ExamStatusResponse {
   exam_status: ExamDeploymentStatus;
   force_submit: boolean;
 }
+
+export interface ExamSubmitResponse {
+  submission_id: number;
+  score: number;
+  correct_answer_count: number;
+  redirect_url: string;
+}

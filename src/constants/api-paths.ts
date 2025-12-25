@@ -18,6 +18,9 @@ export const API_PATHS = {
       status: (deploymentId: number) =>
         `${API_PREFIX}/exams/deployments/${deploymentId}/status`,
     },
+    submissions: {
+      base: `${API_PREFIX}/exams/submissions`,
+    },
   },
   accounts: {
     login: `${API_PREFIX}/accounts/login`,

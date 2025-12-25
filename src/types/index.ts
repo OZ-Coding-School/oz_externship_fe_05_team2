@@ -11,6 +11,8 @@ import type {
   Question,
   ExamQuestionContentComponent,
   ExamDeploymentStatus,
+  AnswerDto,
+  Answer,
 } from "@/types/exam-types";
 
 export type {
@@ -30,4 +32,6 @@ export type {
   Question,
   ExamQuestionContentComponent,
   ExamDeploymentStatus,
+  AnswerDto,
+  Answer,
 };

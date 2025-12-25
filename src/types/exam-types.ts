@@ -60,3 +60,14 @@ interface ExamQuestionContentProps {
 export type ExamQuestionContentComponent = React.FC<ExamQuestionContentProps>;
 
 export type ExamDeploymentStatus = "activated" | "deactivated";
+
+export interface AnswerDto {
+  question_id: number;
+  type: string;
+  submitted_answer: unknown;
+}
+
+export interface Answer {
+  type: QuestionType;
+  submittedAnswer: string | string[] | null;
+}
