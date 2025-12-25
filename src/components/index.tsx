@@ -11,6 +11,7 @@ import AccountRestoreCompleteModal from "@/components/account-restore-modal/Acco
 import ExamQuestion from "@/components/question/ExamQuestion";
 import CheatingCountIcons from "@/components/CheatingCountIcons";
 import ExamCheatingModal from "@/components/ExamCheatingModal";
+import ExamFocusWarning from "@/components/ExamFocusWarning";
 
 export {
   Footer,
@@ -26,4 +27,5 @@ export {
   ExamQuestion,
   CheatingCountIcons,
   ExamCheatingModal,
+  ExamFocusWarning,
 };
