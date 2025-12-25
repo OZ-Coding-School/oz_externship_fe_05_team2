@@ -1,4 +1,4 @@
-import { CardRed, CardYellow } from "@/assets/icons/cheating-icons";
+import { CardRedIcon, CardYellowIcon } from "@/assets/icons/cheating-icons";
 import {
   AwsIcon,
   CssIcon,
@@ -50,7 +50,7 @@ export const EXAM_QUESTION_TYPE_LABEL_MAP: Record<QuestionType, string> = {
 };
 
 export const CHEATING_COUNT_ICON_RULES = [
-  { threshold: 1, active: CardYellow },
-  { threshold: 2, active: CardYellow },
-  { threshold: 3, active: CardRed },
+  { threshold: 1, icon: CardYellowIcon },
+  { threshold: 2, icon: CardYellowIcon },
+  { threshold: 3, icon: CardRedIcon },
 ] as const;
