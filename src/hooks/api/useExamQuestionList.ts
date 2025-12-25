@@ -1,9 +1,10 @@
 import { getExamQuestionList } from "@/api/exams";
 import type { ExamQuestionListResponse } from "@/types/api-response-type/exam-response-types";
 import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
 
 type ExamQuestionListQueryOptions = Omit<
-  UseQueryOptions<ExamQuestionListResponse>,
+  UseQueryOptions<ExamQuestionListResponse, AxiosError>,
   | "queryKey"
   | "queryFn"
   | "staleTime"
