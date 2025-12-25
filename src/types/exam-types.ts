@@ -58,3 +58,5 @@ interface ExamQuestionContentProps {
 }
 
 export type ExamQuestionContentComponent = React.FC<ExamQuestionContentProps>;
+
+export type ExamDeploymentStatus = "activated" | "deactivated";

@@ -4,6 +4,7 @@ import type {
   ExamCheatingResponse,
   ExamListResponse,
   ExamQuestionListResponse,
+  ExamStatusResponse,
 } from "@/types/api-response-type/exam-response-types";
 
 export const checkExamCode = (
@@ -42,6 +43,16 @@ export const reportExamCheating = async (
   const response = await api.post(
     `${MSW_BASE_URL}${API_PATHS.exams.deployments.cheating(deploymentId)}`,
     { event }
+  );
+
+  return response.data;
+};
+
+export const checkExamStatus = async (
+  deploymentId: number
+): Promise<ExamStatusResponse> => {
+  const response = await api.get(
+    `${MSW_BASE_URL}${API_PATHS.exams.deployments.status(deploymentId)}`
   );
 
   return response.data;

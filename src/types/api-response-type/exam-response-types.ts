@@ -1,4 +1,4 @@
-import type { Exam, Question } from "@/types";
+import type { Exam, ExamDeploymentStatus, Question } from "@/types";
 
 export interface ExamListResponse {
   page: number;
@@ -18,4 +18,9 @@ export interface ExamQuestionListResponse {
 export interface ExamCheatingResponse {
   cheating_count: number;
   is_forced_submitted: boolean;
+}
+
+export interface ExamStatusResponse {
+  exam_status: ExamDeploymentStatus;
+  force_submit: boolean;
 }

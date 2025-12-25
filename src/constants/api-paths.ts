@@ -15,6 +15,8 @@ export const API_PATHS = {
         `${API_PREFIX}/exams/deployments/${deploymentId}`,
       cheating: (deploymentId: number) =>
         `${API_PREFIX}/exams/deployments/${deploymentId}/cheating`,
+      status: (deploymentId: number) =>
+        `${API_PREFIX}/exams/deployments/${deploymentId}/status`,
     },
   },
   accounts: {
