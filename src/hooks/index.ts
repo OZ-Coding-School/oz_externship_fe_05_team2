@@ -5,6 +5,7 @@ import useModalContext, { ModalContext } from "@/hooks/useModalContext";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 import useExternalModalController from "@/hooks/useExternalModalContoller";
 import useExamTimer from "@/hooks/useExamTimer";
+import useExamCheatingStatus from "@/hooks/useExamCheatingStatus";
 
 export {
   useToast,
@@ -15,4 +16,5 @@ export {
   useInfiniteScroll,
   useExternalModalController,
   useExamTimer,
+  useExamCheatingStatus,
 };
