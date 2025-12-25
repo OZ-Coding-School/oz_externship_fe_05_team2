@@ -1,4 +1,9 @@
-import { CardRedIcon, CardYellowIcon } from "@/assets/icons/cheating-icons";
+import {
+  CardRedIcon,
+  CardYellowIcon,
+  ModalRedIcon,
+  ModalYellowIcon,
+} from "@/assets/icons/cheating-icons";
 import {
   AwsIcon,
   CssIcon,
@@ -54,3 +59,24 @@ export const CHEATING_COUNT_ICON_RULES = [
   { threshold: 2, icon: CardYellowIcon },
   { threshold: 3, icon: CardRedIcon },
 ] as const;
+
+export const EXAM_CHEATING_MODAL_CONTENT_MAP: Record<
+  number,
+  { description: string; icon: string }
+> = {
+  1: {
+    description:
+      "다른 화면으로 이동했어요.\n부정행위로 간주되며, 누적 시 시험이 종료될 수 있어요.",
+    icon: ModalYellowIcon,
+  },
+  2: {
+    description:
+      "한 번 더 화면을 이탈했어요.\n3회 이상 감지되면 시험이 종료됩니다.",
+    icon: ModalYellowIcon,
+  },
+  3: {
+    description:
+      "세 번째 이탈이 감지됐어요.\n부정행위로 처리되어 시험이 종료됩니다.",
+    icon: ModalRedIcon,
+  },
+};

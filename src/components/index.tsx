@@ -10,6 +10,7 @@ import AccountRestoreFormModal from "@/components/account-restore-modal/AccountR
 import AccountRestoreCompleteModal from "@/components/account-restore-modal/AccountRestoreCompleteModal";
 import ExamQuestion from "@/components/question/ExamQuestion";
 import CheatingCountIcons from "@/components/CheatingCountIcons";
+import ExamCheatingModal from "@/components/ExamCheatingModal";
 
 export {
   Footer,
@@ -24,4 +25,5 @@ export {
   AccountRestoreCompleteModal,
   ExamQuestion,
   CheatingCountIcons,
+  ExamCheatingModal,
 };
