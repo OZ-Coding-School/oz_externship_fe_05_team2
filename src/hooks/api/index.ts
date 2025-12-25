@@ -10,6 +10,7 @@ import useDeleteAccount from "@/hooks/api/useDeleteAccount";
 import useExamQuestionList from "@/hooks/api/useExamQuestionList";
 import useReportExamCheating from "@/hooks/api/useReportExamCheating";
 import useExamStatusPolling from "@/hooks/api/useExamStatusPolling";
+import useSubmitExam from "@/hooks/api/useSubmitExam";
 
 export {
   useExamList,
@@ -24,4 +25,5 @@ export {
   useExamQuestionList,
   useReportExamCheating,
   useExamStatusPolling,
+  useSubmitExam,
 };
