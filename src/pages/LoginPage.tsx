@@ -5,34 +5,14 @@ import { Input, Button, Password } from "@/components/common";
 import { LoginSchema, type LoginSchemaType } from "@/schemas/authSchemas";
 import HeaderLogo from "@/assets/images/logo-images/header-logo.svg";
 import { KakaoLoginButton, NaverLoginButton } from "@/components/auth";
-import { useLoginMutation } from "@/hooks/useLogin";
+import { useLogin } from "@/hooks/useLogin";
 import { useExternalModalController } from "@/hooks";
 import { AccountRestoreModal } from "@/components";
-import { useState } from "react";
 
 export default function LoginPage() {
   const accountRestoreModalControl = useExternalModalController();
 
-  const [expiredDate, setExpiredDate] = useState<Date>();
-
-  const {
-    mutate: loginFn,
-    isPending,
-    isError,
-  } = useLoginMutation({
-    onError: (error) => {
-      if (
-        error.response &&
-        error.response.status === 403 &&
-        error.response.data &&
-        "error_detail" in error.response.data &&
-        "expire_at" in error.response.data.error_detail
-      ) {
-        setExpiredDate(new Date(error.response.data.error_detail.expire_at));
-        accountRestoreModalControl.open();
-      }
-    },
-  });
+  const { login, isPending, error, expiredDate } = useLogin();
 
   const {
     register,
@@ -44,7 +24,9 @@ export default function LoginPage() {
   });
 
   const onSubmit = (data: LoginSchemaType) => {
-    loginFn(data);
+    login(data, () => {
+      accountRestoreModalControl.open();
+    });
   };
 
   return (
@@ -107,7 +89,7 @@ export default function LoginPage() {
               </button>
             </div>
 
-            {isError && (
+            {error && (
               <div className="mb-2 text-center text-sm font-medium text-red-500">
                 {"로그인에 실패했습니다."}
               </div>
