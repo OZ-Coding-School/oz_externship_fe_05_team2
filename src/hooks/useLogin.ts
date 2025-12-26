@@ -1,55 +1,47 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import { loginUser, getUserMe } from "@/api/auth";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useNavigate } from "react-router";
+import { AxiosError } from "axios";
 import type { LoginRequest } from "@/types/api-request-type/auth-request-type";
-import axios from "axios";
+import type {
+  LoginResponse,
+  ErrorResponse,
+  ExpiredAccountErrorResponse,
+} from "@/types/api-response-type/auth-response-type";
 
-export const useLogin = () => {
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+type LoginMutationOptions = UseMutationOptions<
+  LoginResponse,
+  AxiosError<ErrorResponse | ExpiredAccountErrorResponse>,
+  LoginRequest
+>;
 
-  const [expiredDate, setExpiredDate] = useState<Date | null>(null);
-
+export const useLoginMutation = (options?: LoginMutationOptions) => {
   const navigate = useNavigate();
   const { setAccessToken, setUserInfo } = useAuthStore();
 
-  const login = async (
-    data: LoginRequest,
-    onExpired?: (date: Date) => void
-  ) => {
-    setIsPending(true);
-    setError(null);
+  return useMutation({
+    mutationFn: loginUser,
+    ...options,
+    onSuccess: async (data, variables, context) => {
+      const { access_token: accessToken } = data;
+      console.log("로그인 성공!", data);
 
-    try {
-      const loginData = await loginUser(data);
-      setAccessToken(loginData.access_token);
+      setAccessToken(accessToken);
 
-      const userInfo = await getUserMe();
-      setUserInfo(userInfo);
+      try {
+        const userInfo = await getUserMe();
+        setUserInfo(userInfo);
 
-      navigate("/");
-    } catch (err) {
-      if (axios.isAxiosError(err) && err.response) {
-        const status = err.response.status;
-        const errorData = err.response.data;
-
-        if (status === 403 && errorData?.error_detail?.expire_at) {
-          const date = new Date(errorData.error_detail.expire_at);
-          setExpiredDate(date);
-          if (onExpired) onExpired(date);
-        } else {
-          setError(
-            errorData?.message || "아이디 또는 비밀번호가 일치하지 않습니다."
-          );
-        }
-      } else {
-        setError("네트워크 오류가 발생했습니다.");
+        console.log("유저 정보 저장 완료:", userInfo);
+        navigate("/");
+      } catch (error) {
+        console.error("유저 정보를 가져오는 중 에러 발생:", error);
       }
-    } finally {
-      setIsPending(false);
-    }
-  };
 
-  return { login, isPending, error, expiredDate };
+      if (options?.onSuccess) {
+        options.onSuccess(data, variables, context);
+      }
+    },
+  });
 };

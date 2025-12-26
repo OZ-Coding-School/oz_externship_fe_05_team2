@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router";
@@ -5,14 +6,33 @@ import { Input, Button, Password } from "@/components/common";
 import { LoginSchema, type LoginSchemaType } from "@/schemas/authSchemas";
 import HeaderLogo from "@/assets/images/logo-images/header-logo.svg";
 import { KakaoLoginButton, NaverLoginButton } from "@/components/auth";
-import { useLogin } from "@/hooks/useLogin";
+import { useLoginMutation } from "@/hooks/useLogin";
 import { useExternalModalController } from "@/hooks";
 import { AccountRestoreModal } from "@/components";
 
 export default function LoginPage() {
   const accountRestoreModalControl = useExternalModalController();
 
-  const { login, isPending, error, expiredDate } = useLogin();
+  const [expiredDate, setExpiredDate] = useState<Date>();
+
+  const {
+    mutate: loginFn,
+    isPending,
+    isError,
+  } = useLoginMutation({
+    onError: (error) => {
+      if (
+        error.response &&
+        error.response.status === 403 &&
+        error.response.data &&
+        "error_detail" in error.response.data &&
+        "expire_at" in error.response.data.error_detail
+      ) {
+        setExpiredDate(new Date(error.response.data.error_detail.expire_at));
+        accountRestoreModalControl.open();
+      }
+    },
+  });
 
   const {
     register,
@@ -24,9 +44,7 @@ export default function LoginPage() {
   });
 
   const onSubmit = (data: LoginSchemaType) => {
-    login(data, () => {
-      accountRestoreModalControl.open();
-    });
+    loginFn(data);
   };
 
   return (
@@ -89,9 +107,9 @@ export default function LoginPage() {
               </button>
             </div>
 
-            {error && (
+            {isError && (
               <div className="mb-2 text-center text-sm font-medium text-red-500">
-                {"로그인에 실패했습니다."}
+                {"이메일 또는 비밀번호가 일치하지 않습니다"}
               </div>
             )}
 
