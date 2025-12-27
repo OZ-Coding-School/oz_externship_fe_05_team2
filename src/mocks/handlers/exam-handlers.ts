@@ -6,7 +6,7 @@ import type {
   ExamListResponseDto,
   ExamQuestionListResponseDto,
   ExamStatusResponseDto,
-  ExamSubmitResponse,
+  ExamSubmitResponseDto,
 } from "@/types/api-response-type/exam-response-types";
 import type { ExamCheatingRequest } from "@/types/api-request-type/exam-request-types";
 
@@ -118,7 +118,7 @@ const checkExamStatus = http.get(
 const submitExam = http.post(
   `${MSW_BASE_URL}${API_PATHS.exams.submissions.base}`,
   () => {
-    return HttpResponse.json<ExamSubmitResponse>({
+    return HttpResponse.json<ExamSubmitResponseDto>({
       submission_id: 350,
       score: 85,
       correct_answer_count: 17,

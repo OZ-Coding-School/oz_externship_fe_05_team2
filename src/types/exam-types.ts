@@ -107,7 +107,7 @@ export type ExamDeploymentStatus = "activated" | "deactivated";
 
 export interface AnswerDto {
   question_id: number;
-  type: string;
+  type: QuestionTypeDto;
   submitted_answer: unknown;
 }
 

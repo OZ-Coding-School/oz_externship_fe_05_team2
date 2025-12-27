@@ -6,7 +6,7 @@ import type {
   ExamListResponseDto,
   ExamQuestionListResponseDto,
   ExamStatusResponseDto,
-  ExamSubmitResponse,
+  ExamSubmitResponseDto,
 } from "@/types/api-response-type/exam-response-types";
 
 export const checkExamCode = (
@@ -64,7 +64,7 @@ export const submitExam = async ({
   started_at,
   cheating_count,
   answers,
-}: ExamSubmitRequest): Promise<ExamSubmitResponse> => {
+}: ExamSubmitRequest): Promise<ExamSubmitResponseDto> => {
   const response = await api.post(
     `${MSW_BASE_URL}${API_PATHS.exams.submissions.base}`,
     { started_at, cheating_count, answers }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useSubmitExam } from "@/hooks/api";
-import type { Answer } from "@/types";
+import type { Answer, QuestionType, QuestionTypeDto } from "@/types";
 import type { ExamSubmitRequest } from "@/types/api-request-type/exam-request-types";
 import { useNavigate } from "react-router";
 
@@ -14,7 +14,7 @@ function useExamSubmitControl(
   const navigate = useNavigate();
   const { mutate: submitExam, isPending } = useSubmitExam({
     onSuccess: (data) => {
-      const redirectUrl = `/exam/${deploymentId}/result/${data.submission_id}`;
+      const redirectUrl = `/exam/${deploymentId}/result/${data.submissionId}`;
 
       if (cheatingCount > 2) {
         setTimeout(() => navigate(redirectUrl), 3000);
@@ -52,7 +52,16 @@ const buildSubmitPayload = (
   cheating_count: cheatingCount,
   answers: Object.entries(localAnswers).map(([questionId, answer]) => ({
     question_id: Number(questionId),
-    type: answer.type,
+    type: QUESTION_TYPE_MAP[answer.type],
     submitted_answer: answer.submittedAnswer,
   })),
 });
+
+const QUESTION_TYPE_MAP: Record<QuestionType, QuestionTypeDto> = {
+  fillBlank: "fill_blank",
+  multipleChoice: "multiple_choice",
+  ordering: "ordering",
+  ox: "ox",
+  shortAnswer: "short_answer",
+  singleChoice: "single_choice",
+};

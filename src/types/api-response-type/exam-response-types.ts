@@ -56,9 +56,16 @@ export interface ExamStatusResponse {
   forceSubmit: boolean;
 }
 
-export interface ExamSubmitResponse {
+export interface ExamSubmitResponseDto {
   submission_id: number;
   score: number;
   correct_answer_count: number;
   redirect_url: string;
+}
+
+export interface ExamSubmitResponse {
+  submissionId: number;
+  score: number;
+  correctAnswerCount: number;
+  redirectUrl: string;
 }
