@@ -1,5 +1,6 @@
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
-import { loginUser, getUserMe, transformUserInfo } from "@/api/auth";
+import { loginUser, getUserMe } from "@/api/auth";
+import { transformUserInfo } from "@/lib";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useNavigate } from "react-router";
 import { AxiosError } from "axios";
@@ -31,7 +32,7 @@ export const useLoginMutation = (options?: LoginMutationOptions) => {
 
       const MAX_RETRIES = 3;
 
-      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
         try {
           const rawUserInfo = await getUserMe();
 
@@ -47,7 +48,7 @@ export const useLoginMutation = (options?: LoginMutationOptions) => {
         } catch (error) {
           console.error(`${attempt}회차 불러오기 실패:`, error);
 
-          if (attempt === MAX_RETRIES) {
+          if (attempt >= MAX_RETRIES) {
             console.error("최대 재시도 횟수 초과");
             navigate("/");
           } else {
