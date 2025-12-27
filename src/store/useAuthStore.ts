@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { UserInfoResponse } from "@/types/api-response-type/auth-response-type";
+import type { UserInfo } from "@/types/api-response-type/auth-response-type";
 
 interface AuthState {
   isLoggedIn: boolean;
   accessToken: string | null;
-  user: UserInfoResponse | null;
+  user: UserInfo | null;
   setAccessToken: (token: string) => void;
-  setUserInfo: (user: UserInfoResponse) => void;
+  setUserInfo: (user: UserInfo) => void;
   deleteAccessToken: () => void;
 }
 

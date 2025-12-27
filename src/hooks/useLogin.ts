@@ -1,5 +1,5 @@
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
-import { loginUser, getUserMe } from "@/api/auth";
+import { loginUser, getUserMe, transformUserInfo } from "@/api/auth";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useNavigate } from "react-router";
 import { AxiosError } from "axios";
@@ -29,14 +29,31 @@ export const useLoginMutation = (options?: LoginMutationOptions) => {
 
       setAccessToken(accessToken);
 
-      try {
-        const userInfo = await getUserMe();
-        setUserInfo(userInfo);
+      const MAX_RETRIES = 3;
 
-        console.log("유저 정보 저장 완료:", userInfo);
-        navigate("/");
-      } catch (error) {
-        console.error("유저 정보를 가져오는 중 에러 발생:", error);
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          const rawUserInfo = await getUserMe();
+
+          const cleanuserInfo = transformUserInfo(rawUserInfo);
+          setUserInfo(cleanuserInfo);
+
+          console.log(
+            `유저 정보 저장 완료 (시도: ${attempt}회):`,
+            cleanuserInfo
+          );
+          navigate("/");
+          break;
+        } catch (error) {
+          console.error(`${attempt}회차 불러오기 실패:`, error);
+
+          if (attempt === MAX_RETRIES) {
+            console.error("최대 재시도 횟수 초과");
+            navigate("/");
+          } else {
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+          }
+        }
       }
 
       if (options?.onSuccess) {

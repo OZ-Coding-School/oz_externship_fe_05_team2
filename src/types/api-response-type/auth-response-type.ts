@@ -1,3 +1,24 @@
+export interface BaseUserInfo {
+  id: number;
+  email: string;
+  nickname: string;
+  name: string;
+  birthday: string;
+  gender: "M" | "F";
+}
+
+export interface UserInfoResponse extends BaseUserInfo {
+  phone_number: string;
+  profile_img_url: string;
+  created_at: string;
+}
+
+export interface UserInfo extends BaseUserInfo {
+  phoneNumber: string;
+  profileImgUrl: string;
+  createdAt: string;
+}
+
 export interface LoginResponse {
   access_token: string;
   refresh_token: string;
@@ -9,18 +30,6 @@ export interface LoginResponse {
     profileImage: string;
     role: string;
   };
-}
-
-export interface UserInfoResponse {
-  id: number;
-  email: string;
-  nickname: string;
-  name: string;
-  phone_number: string;
-  birthday: string;
-  gender: "M" | "F";
-  profile_img_url: string;
-  created_at: string;
 }
 
 export interface ErrorResponse {
