@@ -2,7 +2,7 @@ import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { http, HttpResponse } from "msw";
 import { cheatingState, examList, questionList } from "@/mocks/data/exam-data";
 import type {
-  ExamCheatingResponse,
+  ExamCheatingResponseDto,
   ExamListResponseDto,
   ExamQuestionListResponseDto,
   ExamStatusResponseDto,
@@ -95,7 +95,7 @@ const reportExamCheating = http.post(
     if (cheatingState.cheating_count > 2)
       cheatingState.is_forced_submitted = true;
 
-    return HttpResponse.json<ExamCheatingResponse>(cheatingState);
+    return HttpResponse.json<ExamCheatingResponseDto>(cheatingState);
   }
 );
 

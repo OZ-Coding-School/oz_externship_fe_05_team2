@@ -2,7 +2,7 @@ import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { api } from "@/lib";
 import type { ExamSubmitRequest } from "@/types/api-request-type/exam-request-types";
 import type {
-  ExamCheatingResponse,
+  ExamCheatingResponseDto,
   ExamListResponseDto,
   ExamQuestionListResponseDto,
   ExamStatusResponseDto,
@@ -41,7 +41,7 @@ export const getExamQuestionList = async (
 export const reportExamCheating = async (
   deploymentId: number,
   event: string
-): Promise<ExamCheatingResponse> => {
+): Promise<ExamCheatingResponseDto> => {
   const response = await api.post(
     `${MSW_BASE_URL}${API_PATHS.exams.deployments.cheating(deploymentId)}`,
     { event }

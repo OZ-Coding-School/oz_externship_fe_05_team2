@@ -1,5 +1,5 @@
 import type { ExamDto, QuestionDto } from "@/types";
-import type { ExamCheatingResponse } from "@/types/api-response-type/exam-response-types";
+import type { ExamCheatingResponseDto } from "@/types/api-response-type/exam-response-types";
 
 export const examList: ExamDto[] = [
   {
@@ -221,7 +221,7 @@ export const questionList: QuestionDto[] = [
   },
 ];
 
-export const cheatingState: ExamCheatingResponse = {
+export const cheatingState: ExamCheatingResponseDto = {
   cheating_count: 0,
   is_forced_submitted: false,
 };

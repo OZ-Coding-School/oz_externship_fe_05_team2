@@ -36,9 +36,14 @@ export interface ExamQuestionListResponse {
   questions: Question[];
 }
 
-export interface ExamCheatingResponse {
+export interface ExamCheatingResponseDto {
   cheating_count: number;
   is_forced_submitted: boolean;
+}
+
+export interface ExamCheatingResponse {
+  cheatingCount: number;
+  isForcedSubmitted: boolean;
 }
 
 export interface ExamStatusResponseDto {
