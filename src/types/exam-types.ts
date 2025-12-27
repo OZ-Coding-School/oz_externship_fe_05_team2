@@ -4,7 +4,7 @@ export type ExamCategory = "all" | ExamStatus;
 
 export type ExamCategoryOption = { label: string; value: ExamCategory };
 
-export interface Exam {
+export interface ExamDto {
   id: number;
   submission_id: number | null;
   exam: {
@@ -26,6 +26,30 @@ export interface Exam {
   };
   is_done: boolean;
   duration_time: number;
+}
+
+export interface Exam {
+  id: number;
+  submissionId: number | null;
+  exam: {
+    id: number;
+    title: string;
+    thumbnailImgUrl: string;
+    subject: {
+      id: number;
+      title: string;
+      thumbnailImgUrl: string | null;
+    };
+  };
+  questionCount: number;
+  totalScore: number;
+  examInfo: {
+    status: string;
+    score: number | null;
+    correctAnswerCount: number | null;
+  };
+  isDone: boolean;
+  durationTime: number;
 }
 
 export type QuestionType =

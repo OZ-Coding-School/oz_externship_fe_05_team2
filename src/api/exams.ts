@@ -3,7 +3,7 @@ import { api } from "@/lib";
 import type { ExamSubmitRequest } from "@/types/api-request-type/exam-request-types";
 import type {
   ExamCheatingResponse,
-  ExamListResponse,
+  ExamListResponseDto,
   ExamQuestionListResponse,
   ExamStatusResponse,
   ExamSubmitResponse,
@@ -20,7 +20,7 @@ export const checkExamCode = (
 
 export const getExamList = async (
   page: number = 1
-): Promise<ExamListResponse> => {
+): Promise<ExamListResponseDto> => {
   const response = await api.get(
     `${MSW_BASE_URL}${API_PATHS.exams.deployments.list(page)}`
   );

@@ -1,7 +1,7 @@
-import type { Exam, Question } from "@/types";
+import type { ExamDto, Question } from "@/types";
 import type { ExamCheatingResponse } from "@/types/api-response-type/exam-response-types";
 
-export const examList: Exam[] = [
+export const examList: ExamDto[] = [
   {
     id: 101,
     submission_id: 333,

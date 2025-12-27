@@ -1,8 +1,14 @@
-import type { Exam, ExamDeploymentStatus, Question } from "@/types";
+import type { Exam, ExamDeploymentStatus, ExamDto, Question } from "@/types";
+
+export interface ExamListResponseDto {
+  page: number;
+  has_next: boolean;
+  results: ExamDto[];
+}
 
 export interface ExamListResponse {
   page: number;
-  has_next: boolean;
+  hasNext: boolean;
   results: Exam[];
 }
 

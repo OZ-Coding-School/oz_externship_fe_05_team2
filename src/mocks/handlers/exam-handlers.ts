@@ -3,7 +3,7 @@ import { http, HttpResponse } from "msw";
 import { cheatingState, examList, questionList } from "@/mocks/data/exam-data";
 import type {
   ExamCheatingResponse,
-  ExamListResponse,
+  ExamListResponseDto,
   ExamQuestionListResponse,
   ExamStatusResponse,
   ExamSubmitResponse,
@@ -12,7 +12,7 @@ import type { ExamCheatingRequest } from "@/types/api-request-type/exam-request-
 
 const PAGE_SIZE = 5;
 const LAST_PAGE = 10;
-const getExamListResponse = (page: number): ExamListResponse => {
+const getExamListResponse = (page: number): ExamListResponseDto => {
   const results = Array.from({ length: PAGE_SIZE }, (_, index) => {
     const exam = examList[index % examList.length];
     const id = page === 1 ? index : index + PAGE_SIZE * page;
