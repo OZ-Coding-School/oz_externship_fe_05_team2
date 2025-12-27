@@ -1,4 +1,10 @@
-import type { Exam, ExamDeploymentStatus, ExamDto, Question } from "@/types";
+import type {
+  Exam,
+  ExamDeploymentStatus,
+  ExamDto,
+  Question,
+  QuestionDto,
+} from "@/types";
 
 export interface ExamListResponseDto {
   page: number;
@@ -12,12 +18,21 @@ export interface ExamListResponse {
   results: Exam[];
 }
 
-export interface ExamQuestionListResponse {
+export interface ExamQuestionListResponseDto {
   exam_id: number;
   exam_name: string;
   duration_time: number;
   elapsed_time: number;
   cheating_count: number;
+  questions: QuestionDto[];
+}
+
+export interface ExamQuestionListResponse {
+  examId: number;
+  examName: string;
+  durationTime: number;
+  elapsedTime: number;
+  cheatingCount: number;
   questions: Question[];
 }
 

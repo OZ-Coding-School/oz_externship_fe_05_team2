@@ -4,7 +4,7 @@ import { cheatingState, examList, questionList } from "@/mocks/data/exam-data";
 import type {
   ExamCheatingResponse,
   ExamListResponseDto,
-  ExamQuestionListResponse,
+  ExamQuestionListResponseDto,
   ExamStatusResponse,
   ExamSubmitResponse,
 } from "@/types/api-response-type/exam-response-types";
@@ -65,7 +65,7 @@ const getExamQuestionList = http.get(
     const { deploymentId } = params;
 
     if (deploymentId === "1")
-      return HttpResponse.json<ExamQuestionListResponse>({
+      return HttpResponse.json<ExamQuestionListResponseDto>({
         exam_id: 1,
         exam_name: "TypeScript 기본 문법 테스트",
         duration_time: 30,
