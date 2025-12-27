@@ -41,9 +41,14 @@ export interface ExamCheatingResponse {
   is_forced_submitted: boolean;
 }
 
-export interface ExamStatusResponse {
+export interface ExamStatusResponseDto {
   exam_status: ExamDeploymentStatus;
   force_submit: boolean;
+}
+
+export interface ExamStatusResponse {
+  examStatus: ExamDeploymentStatus;
+  forceSubmit: boolean;
 }
 
 export interface ExamSubmitResponse {

@@ -5,7 +5,7 @@ import type {
   ExamCheatingResponse,
   ExamListResponseDto,
   ExamQuestionListResponseDto,
-  ExamStatusResponse,
+  ExamStatusResponseDto,
   ExamSubmitResponse,
 } from "@/types/api-response-type/exam-response-types";
 
@@ -52,7 +52,7 @@ export const reportExamCheating = async (
 
 export const checkExamStatus = async (
   deploymentId: number
-): Promise<ExamStatusResponse> => {
+): Promise<ExamStatusResponseDto> => {
   const response = await api.get(
     `${MSW_BASE_URL}${API_PATHS.exams.deployments.status(deploymentId)}`
   );
