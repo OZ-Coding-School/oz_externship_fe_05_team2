@@ -52,9 +52,10 @@ export default function EmailVerification({
   });
 
   const { mutate: verifyEmail, isPending: isVerifying } = useVerifyEmail({
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsVerified(true);
       onVerify(true);
+      setValue("emailToken", data.emailToken);
       triggerToast({
         text: "이메일 인증이 완료되었습니다.",
         status: "success",

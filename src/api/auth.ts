@@ -5,6 +5,8 @@ import type {
   LoginResponse,
   UserInfoResponse,
 } from "@/types/api-response-type/auth-response-type";
+import type { SignupRequest } from "@/types/api-request-type/auth-request-type";
+import type { SignupResponse } from "@/types/api-response-type/auth-response-type";
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
   const response = await api.post(
@@ -25,6 +27,16 @@ export const checkNickname = async (nickname: string) => {
     {
       params: { nickname },
     }
+  );
+  return response.data;
+};
+
+export const signupUser = async (
+  data: SignupRequest
+): Promise<SignupResponse> => {
+  const response = await api.post(
+    `${MSW_BASE_URL}${API_PATHS.accounts.signup}`,
+    data
   );
   return response.data;
 };

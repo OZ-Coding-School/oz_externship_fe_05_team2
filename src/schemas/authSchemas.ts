@@ -20,6 +20,7 @@ export const LoginSchema = z.object({
 export const EmailVerificationSchema = z.object({
   email: emailPart,
   emailcode: verificationCodePart,
+  emailToken: z.string().optional(),
 });
 
 export const SMSVerificationSchema = z.object({
@@ -27,6 +28,7 @@ export const SMSVerificationSchema = z.object({
   smscode: verificationCodePart.regex(/^\d+$/, {
     message: "숫자만 입력 가능합니다.",
   }),
+  smsToken: z.string().optional(),
 });
 
 export const SignupSchema = z

@@ -66,9 +66,10 @@ export default function SMSVerification({ onVerify }: SMSVerificationProps) {
   });
 
   const { mutate: verifySMS, isPending: isVerifying } = useVerifySMS({
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsVerified(true);
       onVerify(true);
+      setValue("smsToken", data.smsToken);
       triggerToast({
         text: "인증번호 확인이 완료되었습니다.",
         status: "success",
