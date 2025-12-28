@@ -80,6 +80,7 @@ export default function EmailSignupPage() {
             <Input
               {...register("birthday")}
               errorMessage={errors.birthday?.message}
+              maxLength={8}
               placeholder="8자리 숫자로 입력해주세요 (ex. 20001110)"
             />
           </section>
