@@ -44,8 +44,12 @@ export const SignupSchema = z
     name: z.string().min(1, { message: "이름을 입력해주세요." }),
     nickname: z
       .string()
-      .min(1, { message: "닉네임을 입력해주세요." })
-      .max(10, { message: "닉네임은 10자 이내여야 합니다." }),
+      .min(2, { message: "닉네임은 2자 이상 입력해주세요." })
+      .max(10, { message: "닉네임은 10자 이내여야 합니다." })
+      .regex(
+        /[a-zA-Z0-9가-힣]+$/,
+        "특수문자를 제외한 한글, 영문, 숫자만 사용 가능합니다."
+      ),
     birthday: z.string().regex(/^\d{8}$/, {
       message: "생년월일은 8자리 숫자로 입력해주세요 (ex. 20001110)",
     }),

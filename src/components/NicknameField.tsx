@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Input, Button } from "@/components/common";
 import { useNicknameCheck } from "@/hooks/api";
-import { cn } from "@/lib";
 
-export default function NicknameField() {
+interface NicknameFieldProps {
+  onVerifyStatusChange: (status: boolean) => void;
+}
+
+export default function NicknameField({
+  onVerifyStatusChange,
+}: NicknameFieldProps) {
   const {
     register,
     watch,
@@ -17,10 +22,17 @@ export default function NicknameField() {
   const [isVerified, setIsVerified] = useState(false);
   const { mutate: checkNickname, isPending } = useNicknameCheck();
 
+  const getInputVariant = () => {
+    if (errors.nickname) return "danger";
+    if (isVerified) return "success";
+    return "default";
+  };
+
   useEffect(() => {
     setIsVerified(false);
+    onVerifyStatusChange(false);
     if (nicknameValue) clearErrors("nickname");
-  }, [nicknameValue, clearErrors]);
+  }, [nicknameValue, clearErrors, onVerifyStatusChange]);
 
   const handleCheck = () => {
     if (!nicknameValue || errors.nickname) return;
@@ -29,30 +41,19 @@ export default function NicknameField() {
       onSuccess: (data) => {
         if (data.available) {
           setIsVerified(true);
+          onVerifyStatusChange(true);
           clearErrors("nickname");
-        } else {
-          setError("nickname", {
-            type: "manual",
-            message: data.detail || "이미 사용 중인 닉네임입니다.",
-          });
         }
       },
       onError: (error) => {
         const serverMessage =
           error.response?.data?.error_detail ||
           "중복 확인 중 오류가 발생했습니다.";
-
-        setError("nickname", {
-          type: "manual",
-          message: serverMessage,
-        });
+        setError("nickname", { type: "manual", message: serverMessage });
+        setIsVerified(false);
+        onVerifyStatusChange(false);
       },
     });
-  };
-
-  const getInputVariant = () => {
-    if (errors.nickname) return "danger";
-    if (isVerified) return "success";
   };
 
   return (
@@ -71,8 +72,10 @@ export default function NicknameField() {
         <Button
           type="button"
           variant="outline"
-          className={cn("h-12 w-28 p-0")}
-          disabled={!nicknameValue || !!errors.nickname || isPending}
+          className="h-12 w-28 p-0"
+          disabled={
+            !nicknameValue || !!errors.nickname || isPending || isVerified
+          }
           onClick={handleCheck}
         >
           {isPending ? "확인 중..." : isVerified ? "사용가능" : "중복확인"}

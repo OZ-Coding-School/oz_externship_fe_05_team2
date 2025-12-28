@@ -7,8 +7,13 @@ import { SignupSchema, type SignupSchemaType } from "@/schemas/authSchemas";
 import { cn } from "@/lib";
 import EmailVerification from "@/components/auth/EmailVerification";
 import SMSVerification from "@/components/auth/SMSVerification";
+import { useState } from "react";
 
 export default function EmailSignupPage() {
+  const [isNicknameVerified, setIsNicknameVerified] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isSmsVerified, setIsSmsVerified] = useState(false);
+
   const methods = useForm<SignupSchemaType>({
     resolver: zodResolver(SignupSchema),
     mode: "onChange",
@@ -29,6 +34,8 @@ export default function EmailSignupPage() {
   } = methods;
 
   const values = watch();
+  const isSubmitDisabled =
+    !isValid || !isNicknameVerified || !isEmailVerified || !isSmsVerified;
 
   const onSubmit = (data: SignupSchemaType) => {
     {
@@ -64,7 +71,7 @@ export default function EmailSignupPage() {
             />
           </section>
 
-          <NicknameField />
+          <NicknameField onVerifyStatusChange={setIsNicknameVerified} />
 
           <section>
             <label className="mt-8 mb-1 block text-sm">
@@ -109,9 +116,9 @@ export default function EmailSignupPage() {
             </div>
           </section>
 
-          <EmailVerification />
+          <EmailVerification onVerify={setIsEmailVerified} />
 
-          <SMSVerification />
+          <SMSVerification onVerify={setIsSmsVerified} />
 
           <section>
             <div className="flex flex-col gap-2">
@@ -134,7 +141,11 @@ export default function EmailSignupPage() {
             </div>
           </section>
 
-          <Button type="submit" className="mt-2 w-full" disabled={!isValid}>
+          <Button
+            type="submit"
+            className="mt-2 w-full"
+            disabled={isSubmitDisabled}
+          >
             가입하기
           </Button>
         </form>
