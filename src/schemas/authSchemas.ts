@@ -57,6 +57,8 @@ export const SignupSchema = z
     }),
     gender: z.enum(["M", "F"]),
     ...phoneParts,
+    emailToken: z.string().min(1, "이메일 인증이 필요합니다."),
+    smsToken: z.string().min(1, "휴대폰 인증이 필요합니다."),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: "비밀번호가 일치하지 않습니다.",
