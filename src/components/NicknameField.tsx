@@ -3,7 +3,6 @@ import { useFormContext } from "react-hook-form";
 import { Input, Button } from "@/components/common";
 import { useNicknameCheck } from "@/hooks/api";
 import { cn } from "@/lib";
-import { AxiosError } from "axios";
 
 export default function NicknameField() {
   const {
@@ -38,7 +37,7 @@ export default function NicknameField() {
           });
         }
       },
-      onError: (error: AxiosError<{ error_detail: string }>) => {
+      onError: (error) => {
         const serverMessage =
           error.response?.data?.error_detail ||
           "중복 확인 중 오류가 발생했습니다.";
@@ -47,7 +46,6 @@ export default function NicknameField() {
           type: "manual",
           message: serverMessage,
         });
-        setIsVerified(false);
       },
     });
   };
