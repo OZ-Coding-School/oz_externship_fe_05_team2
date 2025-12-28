@@ -4,7 +4,6 @@ import type { LoginRequest } from "@/types/api-request-type/auth-request-type";
 import type {
   LoginResponse,
   UserInfoResponse,
-  UserInfo,
 } from "@/types/api-response-type/auth-response-type";
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
@@ -20,13 +19,12 @@ export const getUserMe = async (): Promise<UserInfoResponse> => {
   return response.data;
 };
 
-export const transformUserInfo = (raw: UserInfoResponse): UserInfo => {
-  const { phone_number, profile_img_url, created_at, ...base } = raw;
-
-  return {
-    ...base,
-    phoneNumber: phone_number,
-    profileImgUrl: profile_img_url,
-    createdAt: created_at,
-  };
+export const checkNickname = async (nickname: string) => {
+  const response = await api.get(
+    `${MSW_BASE_URL}${API_PATHS.accounts.checkNickname}`,
+    {
+      params: { nickname },
+    }
+  );
+  return response.data;
 };

@@ -2,6 +2,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HeaderLogo } from "@/assets/images/logo-images";
 import { Button, Input, Password } from "@/components/common";
+import { NicknameField } from "@/components";
 import { SignupSchema, type SignupSchemaType } from "@/schemas/authSchemas";
 import { cn } from "@/lib";
 import EmailVerification from "@/components/auth/EmailVerification";
@@ -63,28 +64,7 @@ export default function EmailSignupPage() {
             />
           </section>
 
-          {/* Todo: 닉네임 유효성 검사 추가 예정 & 컴포넌트 분리를 통해 마이페이지에서도 사용가능하게 수정 */}
-          <section>
-            <label className="mt-8 mb-1 block text-sm">
-              닉네임<span className="text-red-500">*</span>
-            </label>
-            <div className="flex items-start gap-2">
-              <Input
-                className="flex-1"
-                {...register("nickname")}
-                errorMessage={errors.nickname?.message}
-                placeholder="닉네임을 입력해주세요"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                className="h-12 w-28 p-0"
-                disabled={!values.nickname}
-              >
-                중복확인
-              </Button>
-            </div>
-          </section>
+          <NicknameField />
 
           <section>
             <label className="mt-8 mb-1 block text-sm">
@@ -129,11 +109,10 @@ export default function EmailSignupPage() {
             </div>
           </section>
 
-          {/* Todo: useSendEmail, useVerifyEmail을 통해 인증 기능 추가 & 인증 완료시 toast 출력 */}
           <EmailVerification />
 
-          {/* Todo: useSendPhone, useVerifyPhone 파일 추가 예정 & 인증 완료시 toast 출력 */}
           <SMSVerification />
+
           <section>
             <div className="flex flex-col gap-2">
               <label className="block text-sm">
