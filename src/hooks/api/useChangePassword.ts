@@ -44,10 +44,8 @@ export default function useChangePassword(options?: ChangePasswordOptions) {
         triggerToast({
           variant: "small",
           status: "danger",
-          text: "로그인 후 이용해주세요.",
+          text: "기존 비밀번호가 올바르지 않습니다.",
         });
-
-        navigate("/login", { replace: true });
       } else if (error.status === 500) {
         triggerToast({
           variant: "small",
