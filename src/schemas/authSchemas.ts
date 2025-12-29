@@ -57,6 +57,7 @@ export const ChangePasswordSchema = z
 
 export const SignupSchema = z
   .object({
+    name: z.string().min(1, { message: "이름을 입력해주세요." }),
     email: emailPart,
     password: PasswordSchema,
     passwordConfirm: PasswordConfirmSchema,
