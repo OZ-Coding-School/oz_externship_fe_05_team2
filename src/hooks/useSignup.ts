@@ -15,7 +15,7 @@ type UseSignupOptions = Omit<
     AxiosError<SignupErrorResponse>,
     SignupRequest
   >,
-  "mutationFn"
+  "mutationFn" | "onSuccess" | "onError"
 >;
 
 export const useSignup = (options?: UseSignupOptions) => {
@@ -25,16 +25,15 @@ export const useSignup = (options?: UseSignupOptions) => {
   return useMutation({
     ...options,
     mutationFn: signupUser,
-    onSuccess: (data, variables, context) => {
+    onSuccess: () => {
       triggerToast({
         text: "회원가입이 완료되었습니다! 로그인해주세요.",
         status: "success",
         variant: "small",
       });
       navigate("/login");
-      options?.onSuccess?.(data, variables, context);
     },
-    onError: (error, variables, context) => {
+    onError: (error) => {
       const errorDetail = error.response?.data.error_detail;
 
       const message =
@@ -42,8 +41,6 @@ export const useSignup = (options?: UseSignupOptions) => {
           ? errorDetail
           : "입력 정보를 다시 확인해주세요.";
       triggerToast({ text: message, status: "danger", variant: "small" });
-
-      options?.onError?.(error, variables, context);
     },
   });
 };
