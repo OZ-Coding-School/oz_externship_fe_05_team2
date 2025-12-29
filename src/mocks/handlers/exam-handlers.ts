@@ -130,6 +130,7 @@ const submitExam = http.post(
     //   { error_detail: "자격 인증 데이터가 제공되지 않았습니다." },
     //   { status: 401 }
     // );
+    // return HttpResponse.json(null, { status: 500 });
   }
 );
 

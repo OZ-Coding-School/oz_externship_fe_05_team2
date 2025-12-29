@@ -3,6 +3,10 @@ import { useSubmitExam } from "@/hooks/api";
 import type { Answer, QuestionType, QuestionTypeDto } from "@/types";
 import type { ExamSubmitRequest } from "@/types/api-request-type/exam-request-types";
 import { useNavigate } from "react-router";
+import { useToast } from "@/hooks";
+import type { AxiosResponse } from "axios";
+
+const CHEATING_LIMIT = 3;
 
 function useExamSubmitControl(
   startedAt: number,
@@ -12,18 +16,28 @@ function useExamSubmitControl(
   deploymentId: number
 ) {
   const navigate = useNavigate();
+  const hasSubmittedRef = useRef(false);
+  const { triggerToast } = useToast();
   const { mutate: submitExam, isPending } = useSubmitExam({
     onSuccess: (data) => {
       const redirectUrl = `/exam/${deploymentId}/result/${data.submissionId}`;
 
-      if (cheatingCount > 2) {
+      if (cheatingCount >= CHEATING_LIMIT) {
         setTimeout(() => navigate(redirectUrl), 3000);
         return;
       }
       navigate(redirectUrl);
     },
+    onError: (error) => {
+      triggerToast({
+        variant: "big",
+        title: "답안 제출 실패",
+        text: getToastErrorText(error.response?.data),
+        status: "danger",
+      });
+      hasSubmittedRef.current = false;
+    },
   });
-  const hasSubmittedRef = useRef(false);
 
   const submit = useCallback(
     () => submitExam(buildSubmitPayload(startedAt, cheatingCount, answers)),
@@ -64,4 +78,14 @@ const QUESTION_TYPE_MAP: Record<QuestionType, QuestionTypeDto> = {
   ox: "ox",
   shortAnswer: "short_answer",
   singleChoice: "single_choice",
+};
+
+const getToastErrorText = (data: AxiosResponse["data"]) => {
+  const fallback = "일시적인 오류로 답안 제출에 실패했습니다.";
+
+  if (!data) return fallback;
+  const { error_detail: errorDetail } = data;
+
+  if (typeof errorDetail === "string") return errorDetail;
+  return fallback;
 };
