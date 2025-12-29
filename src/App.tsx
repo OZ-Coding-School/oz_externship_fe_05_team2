@@ -12,6 +12,7 @@ import {
 } from "@/pages";
 import MyPageLayout from "@/components/layout/MyPageLayout";  
 import ProfilePage from '@/pages/ProfilePage'; 
+import ProfileEdit from '@/pages/ProfileEditPage';
 
 function ExamPage() { return <div>쪽지시험 화면</div>; }
 function PasswordChangePage() { return <div>비밀번호 변경 화면</div>; }
@@ -40,11 +41,13 @@ function App() {
           <Route path="/my-page" element={<MyPageLayout />}>
           <Route path="exam" element={<ExamPage />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="profileedit" element={<ProfileEdit />} /> 
           <Route path="password" element={<PasswordChangePage />} />
       </Route>
           <Route path="*" element={<NotFound404 />} />
         </Route>
         <Route path="/exam" element={<ExamLayout />}>
+        </Route>
           <Route path=":deploymentId" element={<TakeExam />} />
         <Route path="/exam" element={<div>쪽지시험 레이아웃</div>}>
           <Route
