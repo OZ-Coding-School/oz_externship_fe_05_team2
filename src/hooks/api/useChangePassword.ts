@@ -5,7 +5,7 @@ import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { useNavigate } from "react-router";
 
-type ChangePassordOptions = Omit<
+type ChangePasswordOptions = Omit<
   UseMutationOptions<
     unknown,
     AxiosError,
@@ -14,7 +14,7 @@ type ChangePassordOptions = Omit<
   "mutationFn" | "onSuccess" | "onError"
 >;
 
-export default function useChangePassord(options?: ChangePassordOptions) {
+export default function useChangePassword(options?: ChangePasswordOptions) {
   const { triggerToast } = useToast();
   const navigate = useNavigate();
 
