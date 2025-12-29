@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ProfileImage from '@/assets/images/mypage-images/mypage-profile.png';
 import Button from '@/components/common/Button';
 
@@ -12,33 +12,49 @@ export default function ProfileEdit() {
   const [profilePreview, setProfilePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const [phoneStep, setPhoneStep] = useState<'idle' | 'editing' | 'verifying'>('idle');
+  const [authNumber, setAuthNumber] = useState('');
+  const [timer, setTimer] = useState(300);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (phoneStep === 'verifying' && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [phoneStep, timer]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
+
   const uploadProfileImage = async (file: File) => {
     const formData = new FormData();
     formData.append('profileImage', file); 
-
     try {
       const response = await fetch('api/v1/accounts/me/profile-image', {
         method: 'PATCH', 
         body: formData,
       });
-
       if (!response.ok) {
-        throw new Error('이미지 업로드에 실패했습니다.');
+        const errorData = await response.json();
+        throw new Error(errorData.error_detail?.error_detail || '이미지 업로드 실패');
       }
-
       const data = await response.json();
       setProfilePreview(data.imageUrl); 
-      alert('프로필 사진이 등록되었습니다.');
-    } catch (e) {
-      console.error(e);
-      alert('잘못된 파일 형식입니다.');
+      alert(data.detail || '프로필 사진이 등록되었습니다.');
+    } catch (e: any) {
+      alert(e.message || '잘못된 파일 형식입니다.');
     }
   };
 
   const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     if (!file.type.startsWith('image/')) {
       alert('이미지 파일만 업로드할 수 있어요.');
       return;
@@ -56,7 +72,6 @@ export default function ProfileEdit() {
       setError("닉네임을 입력해 주세요.");
       return;
     }
-
     setLoading(true);
     setError(null);
     setIsDuplicate(null);
@@ -66,9 +81,7 @@ export default function ProfileEdit() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nickname }),
       });
-
       if (!response.ok) throw new Error('서버 응답 오류');
-
       const data = await response.json();
       setIsDuplicate(data.duplicate);
     } catch (e) {
@@ -80,7 +93,7 @@ export default function ProfileEdit() {
 
   return (
     <>
-      <div className="max-w-xl mx-auto flex items-center justify-between mb-4">
+      <div className="max-w-xl mx-auto flex items-center justify-between mb-4 mt-8">
         <h2 className="text-2xl font-extrabold text-gray-900">내 정보</h2>
         <Button
           type="button"
@@ -132,12 +145,12 @@ export default function ProfileEdit() {
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
               placeholder="닉네임 입력"
-              className="grow rounded-md border border-gray-300 px-3 py-2 focus:border-purple-600 focus:ring focus:ring-purple-200"
+              className="grow rounded-md border border-gray-300 px-3 py-2 focus:border-purple-600 outline-none h-[44px]"
             />
             <button
               onClick={checkDuplicateNickname}
               disabled={loading || nickname.trim() === ''}
-              className="whitespace-nowrap rounded-md border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 hover:bg-gray-200 transition disabled:opacity-50"
+              className="whitespace-nowrap rounded-md border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 hover:bg-gray-200 transition disabled:opacity-50 h-[44px]"
             >
               {loading ? '확인중...' : '중복확인'}
             </button>
@@ -150,22 +163,64 @@ export default function ProfileEdit() {
 
         <div className="space-y-1">
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">이메일 (아이디)</label>
-          <input id="email" type="email" value="ozschool1234@gmail.com" readOnly className="block w-full rounded-md border border-gray-300 bg-gray-100 px-3 py-2 cursor-not-allowed text-gray-500" />
+          <input id="email" type="email" value="ozschool1234@gmail.com" readOnly className="block w-full rounded-md border border-gray-300 bg-gray-100 px-3 py-2 cursor-not-allowed text-gray-500 outline-none h-[44px]" />
         </div>
 
         <h3 className="text-purple-700 font-semibold border-b border-gray-300 pb-2 mt-8 mb-4">개인 정보 수정</h3>
         
         <div className="space-y-1">
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">이름</label>
-          <input id="name" type="text" value="김오즈" readOnly className="block w-full rounded-md border border-gray-300 bg-gray-100 px-3 py-2 cursor-not-allowed text-gray-500" />
+          <input id="name" type="text" value="김오즈" readOnly className="block w-full rounded-md border border-gray-300 bg-gray-100 px-3 py-2 cursor-not-allowed text-gray-500 outline-none h-[44px]" />
         </div>
 
-        <div className="space-y-1">
+        {/* 휴대전화 영역: 정렬 및 텍스트 위치 수정 */}
+        <div className="space-y-2">
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700">휴대전화</label>
-          <div className="flex gap-2">
-            <input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="010-1234-1234" className="grow rounded-md border border-gray-300 px-3 py-2 focus:border-purple-600 focus:ring focus:ring-purple-200" />
-            <Button className="px-3 py-1 border border-purple-600 rounded-md text-purple-600 hover:bg-purple-50 transition whitespace-nowrap" variant="outline">변경</Button>
+          
+          <div className="flex gap-2 h-[44px]">
+            <input 
+              id="phone" 
+              type="tel" 
+              value={phone} 
+              onChange={(e) => setPhone(e.target.value)} 
+              placeholder="010-1234-1234" 
+              readOnly={phoneStep === 'idle'}
+              className={`flex-1 rounded-md border px-3 outline-none transition ${
+                phoneStep === 'idle' ? 'bg-gray-100 border-gray-300 text-gray-500' : 'border-purple-600 ring-1 ring-purple-600'
+              }`} 
+            />
+            <Button 
+              onClick={() => {
+                if (phoneStep === 'idle') setPhoneStep('editing');
+                else { setPhoneStep('verifying'); setTimer(300); }
+              }}
+              className="w-[110px] h-full border border-purple-600 rounded-md text-purple-600 bg-purple-50 hover:bg-purple-100 transition text-xs font-bold flex items-center justify-center leading-none" 
+              variant="outline"
+            >
+              {phoneStep === 'idle' ? '변경' : phoneStep === 'editing' ? '인증번호 받기' : '재전송'}
+            </Button>
           </div>
+
+          {phoneStep === 'verifying' && (
+            <div className="flex gap-2 h-[44px] animate-fadeIn">
+              <div className="relative flex-1">
+                <input 
+                  placeholder="인증 번호" 
+                  value={authNumber}
+                  onChange={(e) => setAuthNumber(e.target.value)}
+                  className="w-full h-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-purple-600" 
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500 text-xs font-medium">
+                  {formatTime(timer)}
+                </span>
+              </div>
+              <Button 
+                className="w-[110px] h-full bg-gray-100 text-gray-400 border border-gray-200 rounded-md text-xs font-bold cursor-default flex items-center justify-center leading-none text-center"
+              >
+                인증번호 확인
+              </Button>
+            </div>
+          )}
         </div>
 
         <div className="space-y-1">
@@ -186,7 +241,7 @@ export default function ProfileEdit() {
 
         <div className="space-y-1">
           <label htmlFor="birth" className="block text-sm font-medium text-gray-700">생년월일</label>
-          <input id="birth" type="text" value="2000.12.25" readOnly className="block w-full rounded-md border border-gray-300 bg-gray-100 px-3 py-2 cursor-not-allowed text-gray-500" />
+          <input id="birth" type="text" value="2000.12.25" readOnly className="block w-full rounded-md border border-gray-300 bg-gray-100 px-3 py-2 cursor-not-allowed text-gray-500 outline-none h-[44px]" />
         </div>
       </div>
     </>
