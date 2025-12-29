@@ -24,9 +24,7 @@ export const getUserMe = async (): Promise<UserInfoResponse> => {
 export const checkNickname = async (nickname: string) => {
   const response = await api.post(
     `${API_BASE_URL}${API_PATHS.accounts.checkNickname}`,
-    {
-      params: { nickname },
-    }
+    { nickname }
   );
   return response.data;
 };
