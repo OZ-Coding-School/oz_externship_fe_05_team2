@@ -36,9 +36,7 @@ function App() {
           <Route path="/my-page" />
           <Route path="/my-page/exams" element={<Exams />} />
           <Route path="/my-page" />
-          <Route path="/my-page/exams" element={<Exams />} />
-          <Route path="/my-page" element={<MyPageWrapper />} /> 
-          <Route path="/my-page" element={<MyPage />} />             
+          <Route path="/my-page/exams" element={<Exams />} />             
           <Route path="/my-page" element={<MyPageLayout />}>
           <Route path="exam" element={<ExamPage />} />
           <Route path="profile" element={<ProfilePage />} />
