@@ -21,18 +21,7 @@ export default function EmailSignupPage() {
     resolver: zodResolver(SignupSchema),
     mode: "onChange",
     defaultValues: {
-      email: "",
-      name: "",
-      nickname: "",
-      password: "",
-      passwordConfirm: "",
-      birthday: "",
       gender: "M",
-      phone1: "",
-      phone2: "",
-      phone3: "",
-      emailToken: "",
-      smsToken: "",
     },
   });
 
