@@ -1,4 +1,5 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
+import { API_BASE_URL } from "@/constants/api-paths";
 import { api } from "@/lib";
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
@@ -20,7 +21,7 @@ export default function useVerifyEmail(options?: VerifyEmailMutationOptions) {
   return useMutation({
     mutationFn: async ({ email, code }) => {
       const response = await api.post<EmailVerifyServerResponse>(
-        `${MSW_BASE_URL}${API_PATHS.accounts.verification.verfiyEmail}`,
+        `${API_BASE_URL}${API_PATHS.accounts.verification.verfiyEmail}`,
         {
           email,
           code,

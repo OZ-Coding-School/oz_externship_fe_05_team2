@@ -7,6 +7,7 @@ import App from "./App.tsx";
 const queryClient = new QueryClient();
 
 async function enableMocking() {
+  return;
   if (process.env.NODE_ENV !== "development") {
     // 개발 모드인 경우에는 워커 실행 X
     return;
