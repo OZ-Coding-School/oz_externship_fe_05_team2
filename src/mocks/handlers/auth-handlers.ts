@@ -35,6 +35,16 @@ const meHandler = http.get(`${MSW_BASE_URL}${API_PATHS.accounts.me}`, () => {
   return HttpResponse.json(mockUserInfoResponse, { status: 200 });
 });
 
+const signupHandler = http.post(
+  `${MSW_BASE_URL}${API_PATHS.accounts.signup}`,
+  async () => {
+    return HttpResponse.json(
+      { detail: "회원가입이 완료되었습니다." },
+      { status: 201 }
+    );
+  }
+);
+
 const loginHandler = http.post<
   PathParams,
   LoginRequest,
@@ -63,4 +73,9 @@ const loginHandler = http.post<
   );
 });
 
-export const authHandlers = [loginHandler, meHandler, checkNicknameHandler];
+export const authHandlers = [
+  loginHandler,
+  meHandler,
+  checkNicknameHandler,
+  signupHandler,
+];

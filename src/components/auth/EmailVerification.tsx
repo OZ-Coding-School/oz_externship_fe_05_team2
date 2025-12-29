@@ -55,7 +55,7 @@ export default function EmailVerification({
     onSuccess: (data) => {
       setIsVerified(true);
       onVerify(true);
-      setValue("emailToken", data.emailToken);
+      setValue("emailToken", data.emailToken, { shouldValidate: true });
       triggerToast({
         text: "이메일 인증이 완료되었습니다.",
         status: "success",

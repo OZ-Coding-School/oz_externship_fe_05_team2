@@ -8,20 +8,31 @@ import { cn } from "@/lib";
 import EmailVerification from "@/components/auth/EmailVerification";
 import SMSVerification from "@/components/auth/SMSVerification";
 import { useState } from "react";
+import { useSignup } from "@/hooks/useSignup";
+import type { SignupRequest } from "@/types/api-request-type/auth-request-type";
 
 export default function EmailSignupPage() {
   const [isNicknameVerified, setIsNicknameVerified] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isSmsVerified, setIsSmsVerified] = useState(false);
+  const { mutate: signup, isPending } = useSignup();
 
   const methods = useForm<SignupSchemaType>({
     resolver: zodResolver(SignupSchema),
     mode: "onChange",
     defaultValues: {
+      email: "",
+      name: "",
+      nickname: "",
+      password: "",
+      passwordConfirm: "",
+      birthday: "",
       gender: "M",
       phone1: "",
       phone2: "",
       phone3: "",
+      emailToken: "",
+      smsToken: "",
     },
   });
 
@@ -38,10 +49,24 @@ export default function EmailSignupPage() {
     !isValid || !isNicknameVerified || !isEmailVerified || !isSmsVerified;
 
   const onSubmit = (data: SignupSchemaType) => {
-    {
-      /* 회원가입 로직 구현 */
-    }
-    console.log("회원가입 데이터 제출:", data);
+    const formattedBirthday = data.birthday.replace(
+      /(\d{4})(\d{2})(\d{2})/,
+      "$1-$2-$3"
+    );
+
+    const signupData: SignupRequest = {
+      password: data.password,
+      nickname: data.nickname,
+      name: data.name,
+      birthday: formattedBirthday,
+      gender: data.gender,
+      email_token: data.emailToken,
+      sms_token: data.smsToken,
+    };
+
+    console.log("서버로 전송할 최종 데이터:", signupData);
+
+    signup(signupData);
   };
 
   return (
@@ -145,9 +170,9 @@ export default function EmailSignupPage() {
           <Button
             type="submit"
             className="mt-2 w-full"
-            disabled={isSubmitDisabled}
+            disabled={isSubmitDisabled || isPending}
           >
-            가입하기
+            {isPending ? "가입 중..." : "가입하기"}
           </Button>
         </form>
       </div>
