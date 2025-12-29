@@ -11,7 +11,7 @@ import useExamQuestionList from "@/hooks/api/useExamQuestionList";
 import useReportExamCheating from "@/hooks/api/useReportExamCheating";
 import useExamStatusPolling from "@/hooks/api/useExamStatusPolling";
 import useSubmitExam from "@/hooks/api/useSubmitExam";
-import { useNicknameCheck } from "@/hooks/api/useNickcanmeCheck";
+import { useNicknameCheck } from "@/hooks/api/useNicknameCheck";
 
 export {
   useExamList,

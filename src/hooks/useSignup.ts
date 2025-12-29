@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { signupUser } from "@/api/auth";
 import { useToast } from "@/hooks";
@@ -9,33 +9,41 @@ import type {
   SignupErrorResponse,
 } from "@/types/api-response-type/auth-response-type";
 
-export const useSignup = () => {
-  const { triggerToast } = useToast();
-  const navigate = useNavigate();
-
-  return useMutation<
+type UseSignupOptions = Omit<
+  UseMutationOptions<
     SignupResponse,
     AxiosError<SignupErrorResponse>,
     SignupRequest
-  >({
+  >,
+  "mutationFn"
+>;
+
+export const useSignup = (options?: UseSignupOptions) => {
+  const { triggerToast } = useToast();
+  const navigate = useNavigate();
+
+  return useMutation({
+    ...options,
     mutationFn: signupUser,
-    onSuccess: () => {
+    onSuccess: (data, variables, context) => {
       triggerToast({
         text: "회원가입이 완료되었습니다! 로그인해주세요.",
         status: "success",
         variant: "small",
       });
       navigate("/login");
+      options?.onSuccess?.(data, variables, context);
     },
-    onError: (error) => {
+    onError: (error, variables, context) => {
       const errorDetail = error.response?.data.error_detail;
 
       const message =
         typeof errorDetail === "string"
           ? errorDetail
           : "입력 정보를 다시 확인해주세요.";
-
       triggerToast({ text: message, status: "danger", variant: "small" });
+
+      options?.onError?.(error, variables, context);
     },
   });
 };
