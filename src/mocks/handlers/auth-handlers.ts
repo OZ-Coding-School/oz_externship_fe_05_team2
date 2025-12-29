@@ -73,9 +73,28 @@ const loginHandler = http.post<
   );
 });
 
+const changePasswordHandler = http.post(
+  `${MSW_BASE_URL}${API_PATHS.accounts.changePassword}`,
+  async ({ request }) => {
+    const body = (await request.clone().json()) as {
+      old_password: string;
+      new_password: string;
+    };
+
+    const { old_password, new_password } = body;
+
+    if (!(old_password && new_password)) {
+      return HttpResponse.json({}, { status: 400 });
+    }
+
+    return HttpResponse.json({}, { status: 200 });
+  }
+);
+
 export const authHandlers = [
   loginHandler,
   meHandler,
   checkNicknameHandler,
   signupHandler,
+  changePasswordHandler,
 ];

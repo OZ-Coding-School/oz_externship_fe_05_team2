@@ -31,19 +31,36 @@ export const SMSVerificationSchema = z.object({
   smsToken: z.string().optional(),
 });
 
+export const PasswordSchema = z
+  .string()
+  .min(8, { message: "비밀번호는 8자 이상이어야 합니다." })
+  .regex(/[a-zA-Z]/, { message: "영문이 포함되어야 합니다." })
+  .regex(/[0-9]/, { message: "숫자가 포함되어야 합니다." })
+  .regex(/[^a-zA-Z0-9]/, { message: "특수문자가 포함되어야 합니다." });
+
+export const PasswordConfirmSchema = z
+  .string()
+  .min(1, { message: "비밀번호 확인을 입력해주세요." });
+
+export const ChangePasswordSchema = z
+  .object({
+    oldPassword: z
+      .string()
+      .min(1, { message: "기존 비밀번호를 입력해주세요." }),
+    newPassword: PasswordSchema,
+    passwordConfirm: PasswordConfirmSchema,
+  })
+  .refine((data) => data.newPassword === data.passwordConfirm, {
+    message: "비밀번호가 일치하지 않습니다.",
+    path: ["passwordConfirm"],
+  });
+
 export const SignupSchema = z
   .object({
-    email: emailPart,
-    password: z
-      .string()
-      .min(8, { message: "비밀번호는 8자 이상이어야 합니다." })
-      .regex(/[a-zA-Z]/, { message: "영문이 포함되어야 합니다." })
-      .regex(/[0-9]/, { message: "숫자가 포함되어야 합니다." })
-      .regex(/[^a-zA-Z0-9]/, { message: "특수문자가 포함되어야 합니다." }),
-    passwordConfirm: z
-      .string()
-      .min(1, { message: "비밀번호 확인을 입력해주세요." }),
     name: z.string().min(1, { message: "이름을 입력해주세요." }),
+    email: emailPart,
+    password: PasswordSchema,
+    passwordConfirm: PasswordConfirmSchema,
     nickname: z
       .string()
       .min(2, { message: "닉네임은 2자 이상 입력해주세요." })
@@ -71,3 +88,4 @@ export type EmailVerificationSchemaType = z.infer<
   typeof EmailVerificationSchema
 >;
 export type SMSVerificationSchemaType = z.infer<typeof SMSVerificationSchema>;
+export type ChangePasswordSchema = z.infer<typeof ChangePasswordSchema>;
