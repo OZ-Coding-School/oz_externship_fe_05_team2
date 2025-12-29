@@ -12,7 +12,8 @@ function useExamSubmitControl(
   answers: Record<number, Answer>,
   shouldForceSubmit: boolean,
   deploymentId: number,
-  isCheatingModalOpen: boolean
+  isCheatingModalOpen: boolean,
+  stopTimer: () => void
 ) {
   const navigate = useNavigate();
   const hasSubmittedRef = useRef(false);
@@ -45,8 +46,9 @@ function useExamSubmitControl(
     if (hasSubmittedRef.current) return;
 
     hasSubmittedRef.current = true;
+    stopTimer();
     submit();
-  }, [shouldForceSubmit, submit]);
+  }, [shouldForceSubmit, submit, stopTimer]);
 
   useEffect(() => {
     if (!isSuccess || !data) return;
