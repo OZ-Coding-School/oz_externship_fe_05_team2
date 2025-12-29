@@ -54,7 +54,8 @@ function TakeExam() {
     cheatingCount,
     answers,
     shouldForceSubmit,
-    deploymentId
+    deploymentId,
+    modalControl.isOpen
   );
 
   const handleExamSubmit = () => {

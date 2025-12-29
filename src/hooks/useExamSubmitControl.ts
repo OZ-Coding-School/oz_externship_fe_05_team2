@@ -6,28 +6,24 @@ import { useNavigate } from "react-router";
 import { useToast } from "@/hooks";
 import type { AxiosResponse } from "axios";
 
-const CHEATING_LIMIT = 3;
-
 function useExamSubmitControl(
   startedAt: number,
   cheatingCount: number,
   answers: Record<number, Answer>,
   shouldForceSubmit: boolean,
-  deploymentId: number
+  deploymentId: number,
+  isCheatingModalOpen: boolean
 ) {
   const navigate = useNavigate();
   const hasSubmittedRef = useRef(false);
+  const hasNavigatedRef = useRef(false);
   const { triggerToast } = useToast();
-  const { mutate: submitExam, isPending } = useSubmitExam({
-    onSuccess: (data) => {
-      const redirectUrl = `/exam/${deploymentId}/result/${data.submissionId}`;
-
-      if (cheatingCount >= CHEATING_LIMIT) {
-        setTimeout(() => navigate(redirectUrl), 3000);
-        return;
-      }
-      navigate(redirectUrl);
-    },
+  const {
+    mutate: submitExam,
+    isPending,
+    isSuccess,
+    data,
+  } = useSubmitExam({
     onError: (error) => {
       triggerToast({
         variant: "big",
@@ -51,6 +47,26 @@ function useExamSubmitControl(
     hasSubmittedRef.current = true;
     submit();
   }, [shouldForceSubmit, submit]);
+
+  useEffect(() => {
+    if (!isSuccess || !data) return;
+    if (hasNavigatedRef.current) return;
+
+    const redirectUrl = `/exam/${deploymentId}/result/${data.submissionId}`;
+    const handleNavigate = () => {
+      hasNavigatedRef.current = true;
+      navigate(redirectUrl, { replace: true });
+    };
+
+    if (!isCheatingModalOpen) {
+      handleNavigate();
+      return;
+    }
+    const timeoutId = setTimeout(handleNavigate, 3000);
+
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, deploymentId, isCheatingModalOpen, isSuccess]);
 
   return { submit, isPending };
 }
