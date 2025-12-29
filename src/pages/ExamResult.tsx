@@ -1,5 +1,7 @@
+import { ExamHeaderContainer } from "@/components";
+
 function ExamResult() {
-  return <div></div>;
+  return <ExamHeaderContainer>시험 결과</ExamHeaderContainer>;
 }
 
 export default ExamResult;
