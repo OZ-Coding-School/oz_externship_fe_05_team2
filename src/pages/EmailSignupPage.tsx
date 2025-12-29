@@ -53,8 +53,6 @@ export default function EmailSignupPage() {
       sms_token: data.smsToken,
     };
 
-    console.log("서버로 전송할 최종 데이터:", signupData);
-
     signup(signupData);
   };
 

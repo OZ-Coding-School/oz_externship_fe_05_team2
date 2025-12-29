@@ -1,4 +1,4 @@
-import { API_PATHS, MSW_BASE_URL } from "@/constants";
+import { API_PATHS } from "@/constants";
 import { API_BASE_URL } from "@/constants/api-paths";
 import { api } from "@/lib";
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
@@ -24,7 +24,7 @@ export default function useVerifyEmail(options?: VerifyEmailMutationOptions) {
         `${API_BASE_URL}${API_PATHS.accounts.verification.verfiyEmail}`,
         {
           email,
-          code,
+          email_code: code,
         }
       );
       return {
