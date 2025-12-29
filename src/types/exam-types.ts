@@ -122,16 +122,16 @@ export interface Answer {
   submittedAnswer: string | string[] | null;
 }
 
+export type ResultAnswerValue = string | string[];
+
 export interface QuestionResultDto extends QuestionBaseDto {
   prompt: string; // 빈 문자열이면 없음
   options: string[]; // 빈 배열이면 없음
-  submitted_answer: unknown; // null이 아니면 correct_answer와 타입 동일
-  correct_answer: unknown;
+  submitted_answer: ResultAnswerValue | null; // null이 아니면 correct_answer와 타입 동일
+  correct_answer: ResultAnswerValue;
   is_correct: boolean;
   explanation: string; // 빈 문자열이면 없음
 }
-
-export type ResultAnswerValue = string | string[];
 
 export interface QuestionResult extends QuestionBase {
   prompt: string; // 빈 문자열이면 없음
