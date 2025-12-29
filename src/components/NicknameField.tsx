@@ -78,7 +78,7 @@ export default function NicknameField({
           disabled={!nicknameValue || isPending || isVerified}
           onClick={handleCheck}
         >
-          {isPending ? "확인 중..." : isVerified ? "사용가능" : "중복 확인"}
+          {isPending ? "확인 중..." : isVerified ? "사용가능" : "중복확인"}
         </Button>
       </div>
     </section>
