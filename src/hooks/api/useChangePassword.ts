@@ -14,7 +14,7 @@ type ChangePassordOptions = Omit<
   "mutationFn" | "onSuccess" | "onError"
 >;
 
-export default function useChangePassord(options: ChangePassordOptions) {
+export default function useChangePassord(options?: ChangePassordOptions) {
   const { triggerToast } = useToast();
   const navigate = useNavigate();
 
