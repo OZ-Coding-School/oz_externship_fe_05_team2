@@ -1,6 +1,7 @@
 import {
   CheatingCountIcons,
   ExamCheatingModal,
+  ExamContentContainer,
   ExamFocusWarning,
   ExamHeaderContainer,
   ExamHeaderTitle,
@@ -100,7 +101,7 @@ function TakeExam() {
         {isPopUpOpen && (
           <ExamFocusWarning onClose={() => setIsPopUpOpen(false)} />
         )}
-        <ul className="mx-auto mt-8 flex max-w-7xl flex-col gap-10">
+        <ExamContentContainer>
           {examDto?.questions?.map((question) => (
             <ExamQuestion
               key={question.questionId}
@@ -109,7 +110,7 @@ function TakeExam() {
               onChange={handleAnswerChange}
             />
           ))}
-        </ul>
+        </ExamContentContainer>
         <ExamCheatingModal
           modalControl={modalControl}
           cheatingCount={cheatingCount}

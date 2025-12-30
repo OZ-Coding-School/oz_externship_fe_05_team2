@@ -15,6 +15,7 @@ import ExamFocusWarning from "@/components/ExamFocusWarning";
 import NicknameField from "@/components/NicknameField";
 import ExamHeaderContainer from "@/components/ExamHeaderContainer";
 import ExamHeaderTitle from "@/components/ExamHeaderTitle";
+import ExamContentContainer from "@/components/ExamContentContainer";
 
 export {
   Footer,
@@ -34,4 +35,5 @@ export {
   NicknameField,
   ExamHeaderContainer,
   ExamHeaderTitle,
+  ExamContentContainer,
 };
