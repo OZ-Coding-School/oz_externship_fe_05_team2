@@ -1,5 +1,6 @@
 import {
   CheatingCountIcons,
+  ExamBottomButton,
   ExamCheatingModal,
   ExamContentContainer,
   ExamFocusWarning,
@@ -7,7 +8,7 @@ import {
   ExamHeaderTitle,
   ExamQuestion,
 } from "@/components";
-import { Button, LoadingUi } from "@/components/common";
+import { LoadingUi } from "@/components/common";
 import { NotFound } from "@/components/common/not-found";
 import {
   useExamAnswers,
@@ -116,15 +117,12 @@ function TakeExam() {
           cheatingCount={cheatingCount}
           isForcedSubmitted={isForcedSubmitted}
         />
-        <div className="flex pt-58.5 pb-24.5">
-          <Button
-            className="mx-auto h-16 w-31 p-0 text-lg"
-            onClick={handleExamSubmit}
-            disabled={isPending}
-          >
-            제출하기
-          </Button>
-        </div>
+        <ExamBottomButton
+          type="button"
+          label="제출하기"
+          onClick={handleExamSubmit}
+          disabled={isPending}
+        />
       </main>
     </>
   );

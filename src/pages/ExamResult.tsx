@@ -1,4 +1,5 @@
 import {
+  ExamBottomButton,
   ExamContentContainer,
   ExamHeaderContainer,
   ExamHeaderTitle,
@@ -68,6 +69,8 @@ function ExamResult() {
             </div>
           </li>
         </ExamContentContainer>
+        {/**  TODO 마이페이지 레이아웃 추가되면 경로 수정하기*/}
+        <ExamBottomButton type="link" label="완료" to="/exams" />
       </main>
     </>
   );
