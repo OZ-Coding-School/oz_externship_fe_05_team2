@@ -96,3 +96,5 @@ export const EXAM_QUESTION_TYPE_DTO_TO_MODEL_MAP: Record<
   short_answer: "shortAnswer",
   single_choice: "singleChoice",
 };
+
+export const EXAM_LAYOUT_BASE = "mx-auto max-w-6xl px-6";

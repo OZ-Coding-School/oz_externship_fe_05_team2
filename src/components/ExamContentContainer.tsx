@@ -1,10 +1,13 @@
+import { EXAM_LAYOUT_BASE } from "@/constants";
+import { cn } from "@/lib";
+
 interface ExamContentContainerProps {
   children: React.ReactNode;
 }
 
 function ExamContentContainer({ children }: ExamContentContainerProps) {
   return (
-    <ul className="mx-auto mt-15 flex max-w-6xl flex-col gap-10 px-6">
+    <ul className={cn(EXAM_LAYOUT_BASE, "mt-15 flex flex-col gap-10")}>
       {children}
     </ul>
   );
