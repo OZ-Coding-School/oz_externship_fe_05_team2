@@ -11,7 +11,6 @@ export default function ProfilePage() {
           <h2 className="text-2xl font-extrabold text-gray-900">내 정보</h2>
           <Button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md"
           onClick={() => navigate('../profileedit')}>
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md">
             수정하기
           </Button>
         </div>
