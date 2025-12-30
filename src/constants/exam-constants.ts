@@ -100,3 +100,10 @@ export const EXAM_QUESTION_TYPE_DTO_TO_MODEL_MAP: Record<
 export const EXAM_LAYOUT_BASE = "mx-auto max-w-6xl px-6";
 
 export const EXAM_QUESTION_CONTENT_LAYOUT_BASE = "pt-5 pl-7";
+
+export const EXAM_QUESTION_RADIO_STYLE_MAP = {
+  base: "size-4 appearance-none rounded-full border-4 border-white bg-neutral-200 shadow-[0_0_0_1px] shadow-neutral-400",
+  checked:
+    "checked:border-primary-700 checked:shadow-primary-700 checked:bg-white",
+  focus: "focus:outline-none",
+} as const;
