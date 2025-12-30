@@ -18,7 +18,7 @@ function SingleChoice({ question }: SingleChoiceProps) {
           >
             <input
               type="radio"
-              name={question.question}
+              name={`${question.questionId}-${question.number}`}
               className={cn(
                 EXAM_QUESTION_RADIO_STYLE_MAP.base,
                 EXAM_QUESTION_RADIO_STYLE_MAP.checked,
