@@ -98,3 +98,5 @@ export const EXAM_QUESTION_TYPE_DTO_TO_MODEL_MAP: Record<
 };
 
 export const EXAM_LAYOUT_BASE = "mx-auto max-w-6xl px-6";
+
+export const EXAM_QUESTION_CONTENT_LAYOUT_BASE = "pt-5 pl-7";
