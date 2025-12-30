@@ -3,6 +3,7 @@ import {
   ExamCheatingModal,
   ExamFocusWarning,
   ExamHeaderContainer,
+  ExamHeaderTitle,
   ExamQuestion,
 } from "@/components";
 import { Button, LoadingUi } from "@/components/common";
@@ -18,7 +19,6 @@ import {
 } from "@/hooks";
 import { useExamQuestionList } from "@/hooks/api";
 import { cn } from "@/lib";
-import { ArrowLeftIcon } from "lucide-react";
 import { useState } from "react";
 import { useLocation, useParams } from "react-router";
 
@@ -84,15 +84,10 @@ function TakeExam() {
   return (
     <>
       <ExamHeaderContainer>
-        <div className="flex grow items-start gap-3">
-          <ArrowLeftIcon className="mt-1 size-6" />
-          <div className="flex flex-col gap-1">
-            <span className="text-xl font-semibold">{examDto?.examName}</span>
-            <span className="text-neutral-700">
-              집중해서 천천히, 끝까지 응시해 주세요. 응원할게요💪
-            </span>
-          </div>
-        </div>
+        <ExamHeaderTitle
+          title={examDto?.examName ?? "쪽지시험"}
+          subText="집중해서 천천히, 끝까지 응시해 주세요. 응원할게요💪"
+        />
         <div className={cn(EXAM_INFO_BADGE_BASE, "text-primary-700 mr-5.5")}>
           {formatRemainingTime(remainingMs)} 뒤에 끝나요
         </div>
