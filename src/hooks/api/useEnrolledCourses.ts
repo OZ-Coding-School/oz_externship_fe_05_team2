@@ -1,4 +1,5 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
+import { API_BASE_URL } from "@/constants/api-paths";
 import { api } from "@/lib";
 import type { EnrolledCourse } from "@/types/student-enrollment-types";
 import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
@@ -15,7 +16,7 @@ export default function useEnrolledCourses(
     queryKey: ["enrollement", "enrolled-courses"],
     queryFn: async () => {
       const res = await api.get(
-        `${MSW_BASE_URL}${API_PATHS.accounts.enrolledCourses}`
+        `${API_BASE_URL}${API_PATHS.accounts.enrolledCourses}`
       );
 
       return res.data;
