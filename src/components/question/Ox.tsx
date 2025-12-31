@@ -33,14 +33,14 @@ const Ox = memo(function Ox({ question, value, onChange }: OxProps) {
           {option.value === "O" ? (
             <CircleIcon
               className={cn(ICON_BASE, {
-                "text-success": option.value === value,
+                "text-green-500": option.value === value,
               })}
               strokeWidth={ICON_STROKE}
             />
           ) : (
             <XIcon
               className={cn(ICON_BASE, {
-                "text-danger": option.value === value,
+                "text-red-600": option.value === value,
               })}
               strokeWidth={ICON_STROKE}
             />
