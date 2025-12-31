@@ -1,6 +1,6 @@
 import { LinkButton } from "@/components/common";
 
-import { ProfileSection } from "@/components/profile";
+import { EnrolledCouresSection, ProfileSection } from "@/components/profile";
 
 export default function MyPage() {
   return (
@@ -11,6 +11,8 @@ export default function MyPage() {
       </div>
 
       <ProfileSection />
+
+      <EnrolledCouresSection />
     </div>
   );
 }
