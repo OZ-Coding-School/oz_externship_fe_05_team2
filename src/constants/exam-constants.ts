@@ -113,3 +113,9 @@ export const EXAM_QUESTION_CHECKBOX_STYLE_MAP = {
   checked: "checked:bg-primary-700 checked:border-primary-700",
   focus: "focus:outline-none",
 } as const;
+
+export const EXAM_QUESTION_SHORT_ANSWER_STYLE_MAP = {
+  base: "h-12 w-3/5 rounded-sm bg-neutral-200 px-4",
+  focus: "focus:outline-none",
+  placeholder: "placeholder:text-neutral-400",
+} as const;
