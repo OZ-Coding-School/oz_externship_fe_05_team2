@@ -18,6 +18,7 @@ import ExamHeaderTitle from "@/components/ExamHeaderTitle";
 import ExamContentContainer from "@/components/ExamContentContainer";
 import ExamBottomButton from "@/components/ExamBottomButton";
 import QuestionHeader from "@/components/QuestionHeader";
+import ExamQuestionResult from "@/components/questionResult/ExamQuestionResult";
 
 export {
   Footer,
@@ -40,4 +41,5 @@ export {
   ExamContentContainer,
   ExamBottomButton,
   QuestionHeader,
+  ExamQuestionResult,
 };
