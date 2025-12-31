@@ -107,3 +107,9 @@ export const EXAM_QUESTION_RADIO_STYLE_MAP = {
     "checked:border-primary-700 checked:shadow-primary-700 checked:bg-white",
   focus: "focus:outline-none",
 } as const;
+
+export const EXAM_QUESTION_CHECKBOX_STYLE_MAP = {
+  base: "peer size-5 appearance-none rounded-xs border border-neutral-400 bg-white",
+  checked: "checked:bg-primary-700 checked:border-primary-700",
+  focus: "focus:outline-none",
+} as const;
