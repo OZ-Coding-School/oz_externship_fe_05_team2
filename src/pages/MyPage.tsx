@@ -15,7 +15,7 @@ export default function MyPage() {
 
       <EnrolledCouresSection />
 
-      <section className="flex items-center justify-between">
+      <section className="flex items-center justify-between gap-5">
         <div className="flex flex-col gap-3 text-neutral-500">
           <span className="text-lg">회원 탈퇴 안내</span>
           <span className="text-sm">
