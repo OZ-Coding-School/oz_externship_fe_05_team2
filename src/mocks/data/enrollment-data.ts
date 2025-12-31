@@ -112,7 +112,7 @@ export const enrolledCourseListMock: EnrolledCourse[] = [
       id: 1,
       name: "웹 개발 초격차 프론트엔드 부트캠프",
       tag: "FE",
-      thumbnail_img_url: "",
+      thumbnail_img_url: "https://dummyimage.com/600x400/000/fff",
     },
     cohort: {
       id: 101,
@@ -127,7 +127,7 @@ export const enrolledCourseListMock: EnrolledCourse[] = [
       id: 2,
       name: "웹 개발 초격차 백엔드 부트캠프",
       tag: "BE",
-      thumbnail_img_url: "",
+      thumbnail_img_url: "https://dummyimage.com/600x400/000/fff",
     },
     cohort: {
       id: 102,
