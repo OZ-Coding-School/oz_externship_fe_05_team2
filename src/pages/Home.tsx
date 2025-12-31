@@ -8,10 +8,6 @@ import { MainContentSelector } from "@/components";
 import { useWindowSize } from "@/hooks";
 import { useEffect, useRef, useState } from "react";
 
-import api from "@/lib/axios";
-import { API_PATHS, API_BASE_URL } from "@/constants/api-paths";
-import { useAuthStore } from "@/store/useAuthStore";
-
 export type mainContents = "exam" | "qna" | "community";
 
 const MAIN_TEXTS: Record<mainContents, string> = {
