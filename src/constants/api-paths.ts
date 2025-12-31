@@ -31,7 +31,7 @@ export const API_PATHS = {
     checkNickname: `${API_PREFIX}/accounts/check-nickname`,
     signup: `${API_PREFIX}/accounts/signup`,
     availableCourses: `${API_PREFIX}/accounts/available-courses`,
-    enrolledCourses: `${API_PREFIX}/accounts/enrolled-courses`,
+    enrolledCourses: `${API_PREFIX}/accounts/me/enrolled-courses`,
     enrollStudent: `${API_PREFIX}/accounts/enroll-student`,
     verification: {
       sendEmail: `${API_PREFIX}${VERIFICATION_API_PREFIX}/send-email`,
