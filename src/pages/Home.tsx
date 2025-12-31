@@ -36,32 +36,15 @@ export default function Home() {
   const imageRef = useRef<HTMLImageElement>(null);
   const { windowWidth } = useWindowSize();
 
-  const handleNullifyToken = () => {
-    useAuthStore.setState({ accessToken: null });
-    console.log("현재 스토어 상태:", useAuthStore.getState());
-  };
-
   useEffect(() => {
     if (imageRef.current) {
       setImageHeight(imageRef.current.height);
     }
   }, [windowWidth]);
 
-  const handleFetchMe = async () => {
-    try {
-      const response = await api.get(`${API_BASE_URL}${API_PATHS.accounts.me}`);
-      console.log("내 정보 불러오기 성공:", response.data);
-    } catch (error) {
-      console.error("요청 실패:", error);
-      alert("요청에 실패했습니다. 네트워크 탭을 확인하세요.");
-    }
-  };
-
   return (
     <div className="flex flex-col items-center bg-neutral-50 px-5 py-32">
       <div className="flex w-full max-w-5xl flex-col gap-16">
-        <button onClick={handleNullifyToken}>토큰 비우기</button>
-        <button onClick={handleFetchMe}>내 정보 불러오기</button>
         <section className="flex w-full flex-col items-center justify-center gap-16">
           <h1
             key={content + "-text"}
