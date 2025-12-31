@@ -1,4 +1,4 @@
-import { API_PATHS, MSW_BASE_URL } from "@/constants";
+import { API_PATHS } from "@/constants";
 import { API_BASE_URL } from "@/constants/api-paths";
 import { api } from "@/lib";
 import type { EnrolledCourse } from "@/types/student-enrollment-types";
