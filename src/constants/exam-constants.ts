@@ -119,3 +119,7 @@ export const EXAM_QUESTION_SHORT_ANSWER_STYLE_MAP = {
   focus: "focus:outline-none",
   placeholder: "placeholder:text-neutral-400",
 } as const;
+
+export const EXAM_QUESTION_BLANK_TOKEN = "__";
+
+export const EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE = 65;
