@@ -2,7 +2,7 @@ import type { QuestionResult } from "@/types";
 import ResultExplanation from "@/components/questionResult/ResultExplanation";
 import { cn } from "@/lib";
 import {
-  EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE,
+  EXAM_QUESTION_LABEL_START_CHAR_CODE,
   EXAM_QUESTION_BLANK_TOKEN,
 } from "@/constants";
 
@@ -24,7 +24,7 @@ function FillBlank({ question }: FillBlankProps) {
             <span key={`${question.questionId}-prompt-${index}`}>
               {part}
               {index < promptParts.length - 1 && (
-                <strong>{`(${String.fromCharCode(EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE + index)}) ________`}</strong>
+                <strong>{`(${String.fromCharCode(EXAM_QUESTION_LABEL_START_CHAR_CODE + index)}) ________`}</strong>
               )}
             </span>
           ))}
@@ -42,7 +42,7 @@ function FillBlank({ question }: FillBlankProps) {
                   })}
                 >
                   {String.fromCharCode(
-                    EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE + index
+                    EXAM_QUESTION_LABEL_START_CHAR_CODE + index
                   )}
                 </span>
                 <input

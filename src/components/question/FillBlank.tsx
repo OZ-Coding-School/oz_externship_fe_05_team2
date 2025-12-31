@@ -1,5 +1,5 @@
 import {
-  EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE,
+  EXAM_QUESTION_LABEL_START_CHAR_CODE,
   EXAM_QUESTION_BLANK_TOKEN,
 } from "@/constants";
 import { cn } from "@/lib";
@@ -42,7 +42,7 @@ const FillBlank = memo(function FillBlank({
           <span key={`${question.questionId}-prompt-${index}`}>
             {part}
             {index < promptParts.length - 1 && (
-              <strong>{`(${String.fromCharCode(EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE + index)}) ________`}</strong>
+              <strong>{`(${String.fromCharCode(EXAM_QUESTION_LABEL_START_CHAR_CODE + index)}) ________`}</strong>
             )}
           </span>
         ))}
@@ -54,9 +54,7 @@ const FillBlank = memo(function FillBlank({
             className="flex h-12 w-4/12 items-center gap-2 rounded-sm bg-neutral-200 px-4"
           >
             <span className="text-lg font-bold">
-              {String.fromCharCode(
-                EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE + index
-              )}
+              {String.fromCharCode(EXAM_QUESTION_LABEL_START_CHAR_CODE + index)}
             </span>
             <input
               type="text"

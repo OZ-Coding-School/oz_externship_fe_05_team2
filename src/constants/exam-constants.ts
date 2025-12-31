@@ -122,7 +122,7 @@ export const EXAM_QUESTION_SHORT_ANSWER_STYLE_MAP = {
 
 export const EXAM_QUESTION_BLANK_TOKEN = "__";
 
-export const EXAM_QUESTION_BLANK_LABEL_START_CHAR_CODE = 65;
+export const EXAM_QUESTION_LABEL_START_CHAR_CODE = 65;
 
 export const EXAM_QUESTION_OX_OPTIONS = [
   { label: "맞아요", value: "O" },
