@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function MyPageEdit() {
   const { data: user, isPending } = useUserInformation();
+
   const [imageError, setImageError] = useState(false);
 
   if (isPending) {
@@ -38,10 +39,10 @@ export default function MyPageEdit() {
   const profileImageUrl = creatProfileImageUrl(userId);
 
   return (
-    <div className="flex flex-col gap-5">
+    <form className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">내 정보</h1>
-        <Button>저장하기</Button>
+        <Button type="submit">저장하기</Button>
       </div>
 
       <section className="flex flex-col items-center gap-20 rounded-lg border p-11">
@@ -80,6 +81,7 @@ export default function MyPageEdit() {
                 <Button
                   className="flex h-11 items-center justify-center"
                   variant={"outline"}
+                  type="button"
                 >
                   중복확인
                 </Button>
@@ -118,6 +120,7 @@ export default function MyPageEdit() {
                 <Button
                   className="flex h-11 items-center justify-center"
                   variant={"outline"}
+                  type="button"
                 >
                   인증번호 전송
                 </Button>
@@ -159,6 +162,6 @@ export default function MyPageEdit() {
           </div>
         </div>
       </section>
-    </div>
+    </form>
   );
 }
