@@ -157,7 +157,7 @@ const getExamResult = http.get(
         },
         questions: questionResultList,
         cheating_count: 1,
-        total_score: 100,
+        total_score: 40,
         correct_answer_count: 3,
         elapsed_time: "14:29:07.503Z",
         started_at: "2025-12-31T15:20:35.033Z",
