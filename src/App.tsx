@@ -11,6 +11,7 @@ import {
   ChangePasswordPage,
   ExamResult,
   MyPage,
+  MyPageEdit,
 } from "@/pages";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 
           <Route path="/my-page" element={<MyPageLayout />}>
             <Route index element={<MyPage />} />
+            <Route path="edit" element={<MyPageEdit />} />
             <Route path="change-password" element={<ChangePasswordPage />} />
             <Route path="exams" element={<Exams />} />
           </Route>
