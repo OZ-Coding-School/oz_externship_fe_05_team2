@@ -113,8 +113,6 @@ export default function MyPageEdit() {
                   type="button"
                   disabled={isNicknameChecked || isCheckingNickname}
                   onClick={() => {
-                    console.log(getValues("name"));
-
                     checkNickname(getValues("name"));
                   }}
                 >
