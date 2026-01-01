@@ -1,27 +1,13 @@
-import { UserIcon } from "@/assets/icons/interface-icons";
 import { Button, Input, LoadingUi } from "@/components/common";
-import { useToast } from "@/hooks";
+import ImageInput from "@/components/profile/ImageInput";
 import { useUserInformation } from "@/hooks/api";
 import { cn, creatProfileImageUrl } from "@/lib/utils";
-import { CameraIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function MyPageEdit() {
   const { data: user, isPending } = useUserInformation();
 
-  const [imageError, setImageError] = useState(false);
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const [image, setImage] = useState<File | null>(null);
-
-  const { triggerToast } = useToast();
-
-  useEffect(() => {
-    return () => {
-      if (previewImage) {
-        URL.revokeObjectURL(previewImage);
-      }
-    };
-  }, [previewImage]);
+  const [, setImage] = useState<File | null>(null);
 
   if (isPending) {
     return (
@@ -51,38 +37,6 @@ export default function MyPageEdit() {
 
   const profileImageUrl = creatProfileImageUrl(userId);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-    const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png"];
-
-    if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-      triggerToast({
-        variant: "small",
-        text: "이미지 파일은 png, jpg 형식만 가능합니다.",
-        status: "danger",
-      });
-      e.target.value = "";
-      return;
-    }
-
-    if (file.size > MAX_FILE_SIZE) {
-      triggerToast({
-        variant: "small",
-        text: "이미지 파일 크기는 5MB를 초과할 수 없습니다.",
-        status: "danger",
-      });
-      e.target.value = "";
-      return;
-    }
-
-    const newPreviewUrl = URL.createObjectURL(file);
-    setPreviewImage(newPreviewUrl);
-    setImage(file);
-  };
-
   return (
     <form className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
@@ -100,33 +54,7 @@ export default function MyPageEdit() {
             <hr className="w-full" />
           </div>
 
-          <div className="relative flex items-center justify-center">
-            <img
-              src={
-                previewImage ||
-                (imageError || !profileImageUrl ? UserIcon : profileImageUrl)
-              }
-              alt="프로필 이미지"
-              width={184}
-              height={184}
-              className="aspect-square h-full max-h-44 w-full max-w-44 rounded-full object-cover object-center"
-              onError={() => {
-                if (!previewImage) {
-                  setImageError(true);
-                }
-              }}
-            />
-
-            <label className="absolute right-2 bottom-2 flex cursor-pointer items-center justify-center rounded-full border-3 border-white bg-neutral-400 p-1.5 transition-colors hover:bg-neutral-500">
-              <CameraIcon className="text-white" />
-              <input
-                type="file"
-                className="hidden"
-                accept="image/png, image/jpeg"
-                onChange={handleImageChange}
-              />
-            </label>
-          </div>
+          <ImageInput setImage={setImage} defaultImageUrl={profileImageUrl} />
 
           <div className="flex w-full flex-col gap-5">
             <div className="flex w-full flex-col gap-2">
