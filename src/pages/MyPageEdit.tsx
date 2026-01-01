@@ -1,13 +1,54 @@
 import { Button, Input, LoadingUi } from "@/components/common";
 import ImageInput from "@/components/profile/ImageInput";
-import { useUserInformation } from "@/hooks/api";
+import { useToast } from "@/hooks";
+import { useNicknameCheck, useUserInformation } from "@/hooks/api";
 import { cn, creatProfileImageUrl } from "@/lib/utils";
+import {
+  EditProfileSchema,
+  type EditProfileSchemaType,
+} from "@/schemas/authSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function MyPageEdit() {
   const { data: user, isPending } = useUserInformation();
+  const { register, getValues } = useForm<EditProfileSchemaType>({
+    resolver: zodResolver(EditProfileSchema),
+  });
 
   const [, setImage] = useState<File | null>(null);
+
+  const { triggerToast } = useToast();
+
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const { mutate: checkNickname, isPending: isCheckingNickname } =
+    useNicknameCheck({
+      onSuccess: () => {
+        triggerToast({
+          variant: "small",
+          status: "success",
+          text: "사용가능한 닉네임입니다.",
+        });
+
+        setIsNicknameChecked(true);
+      },
+      onError: (error) => {
+        if (error.status === 409) {
+          triggerToast({
+            variant: "small",
+            status: "danger",
+            text: "이미 사용중인 닉네임입니다.",
+          });
+        } else {
+          triggerToast({
+            variant: "small",
+            status: "danger",
+            text: "알 수 없는 에러가 발생했습니다. 잠시후 다시 시도해주세요.",
+          });
+        }
+      },
+    });
 
   if (isPending) {
     return (
@@ -60,13 +101,24 @@ export default function MyPageEdit() {
             <div className="flex w-full flex-col gap-2">
               <label>닉네임</label>
               <div className="flex w-full items-center gap-2">
-                <Input defaultValue={nickname} className="flex-1" />
+                <Input
+                  defaultValue={nickname}
+                  className="flex-1"
+                  disabled={isNicknameChecked}
+                  {...register("name")}
+                />
                 <Button
                   className="flex h-11 items-center justify-center"
                   variant={"outline"}
                   type="button"
+                  disabled={isNicknameChecked || isCheckingNickname}
+                  onClick={() => {
+                    console.log(getValues("name"));
+
+                    checkNickname(getValues("name"));
+                  }}
                 >
-                  중복확인
+                  {isCheckingNickname ? "로딩중" : "중복확인"}
                 </Button>
               </div>
             </div>
