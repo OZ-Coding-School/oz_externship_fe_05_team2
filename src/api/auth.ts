@@ -9,6 +9,7 @@ import type {
   UserInfoResponse,
   SignupResponse,
 } from "@/types/api-response-type/auth-response-type";
+import axios from "axios";
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
   const response = await api.post(
@@ -62,5 +63,10 @@ export const changeProfileImage = async (image: File) => {
 
   imageForm.append("image", image);
 
-  api.patch(`${API_BASE_URL}${API_PATHS.accounts.profileImage}`, imageForm);
+  api.patch(`${API_BASE_URL}${API_PATHS.accounts.profileImage}`, imageForm, {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
