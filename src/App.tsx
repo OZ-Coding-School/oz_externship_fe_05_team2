@@ -20,8 +20,6 @@ function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/community" element={<div>커뮤니티 페이지</div>} />
-          <Route path="/qna" element={<div>질의응답 페이지</div>} />
           <Route path="/profile" element={<div>수강생 등록 페이지</div>} />
 
           <Route path="/my-page" element={<MyPageLayout />}>
