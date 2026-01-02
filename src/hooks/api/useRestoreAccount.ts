@@ -13,10 +13,9 @@ export default function useRestoreAccount(
   options?: RestoreAccountMutationOptions
 ) {
   return useMutation({
-    mutationFn: async ({ code, email }) => {
+    mutationFn: async ({ code }) => {
       await api.patch(`${API_BASE_URL}${API_PATHS.accounts.restore}`, {
-        code,
-        email,
+        email_token: code,
       });
     },
     ...options,
