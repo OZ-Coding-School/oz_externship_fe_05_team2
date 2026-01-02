@@ -1,17 +1,25 @@
 import { Button, Input } from "@/components/common";
 import { useToast } from "@/hooks";
 import { useNicknameCheck } from "@/hooks/api";
-import { useState } from "react";
+import type { EditProfileSchemaType } from "@/schemas/authSchemas";
 import { useFormContext } from "react-hook-form";
 
 interface EditNicknameProps {
-  defaultValue: string;
+  setIsNicknameChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  isNicknameChecked: boolean;
 }
 
-export default function EditNickname({ defaultValue }: EditNicknameProps) {
-  const { register, getValues } = useFormContext();
+export default function EditNickname({
+  setIsNicknameChecked,
+  isNicknameChecked,
+}: EditNicknameProps) {
+  const {
+    register,
+    getValues,
+    formState: { errors },
+  } = useFormContext<EditProfileSchemaType>();
+
   const { triggerToast } = useToast();
-  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
 
   const { mutate: checkNickname, isPending: isCheckingNickname } =
     useNicknameCheck({
@@ -45,10 +53,10 @@ export default function EditNickname({ defaultValue }: EditNicknameProps) {
       <label>닉네임</label>
       <div className="flex w-full items-center gap-2">
         <Input
-          defaultValue={defaultValue}
           className="flex-1"
           disabled={isNicknameChecked}
-          {...register("name")}
+          {...register("nickname")}
+          errorMessage={errors.nickname?.message}
         />
         <Button
           className="flex h-11 items-center justify-center"
@@ -56,7 +64,7 @@ export default function EditNickname({ defaultValue }: EditNicknameProps) {
           type="button"
           disabled={isNicknameChecked || isCheckingNickname}
           onClick={() => {
-            checkNickname(getValues("name"));
+            checkNickname(getValues("nickname"));
           }}
         >
           {isCheckingNickname ? "로딩중" : "중복확인"}

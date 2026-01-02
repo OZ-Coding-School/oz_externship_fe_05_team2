@@ -1,24 +1,92 @@
 import { Button, Input, LoadingUi } from "@/components/common";
 import { EditNickname } from "@/components/profile";
 import ImageInput from "@/components/profile/ImageInput";
-import { useUserInformation } from "@/hooks/api";
+import { useToast } from "@/hooks";
+import { useEditProfile, useUserInformation } from "@/hooks/api";
 import { cn, creatProfileImageUrl } from "@/lib/utils";
 import {
   EditProfileSchema,
   type EditProfileSchemaType,
 } from "@/schemas/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 export default function MyPageEdit() {
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [isNicknameChanged, setIsNicknameChanged] = useState(false);
+
+  const { triggerToast } = useToast();
+  const navigate = useNavigate();
+
   const { data: user, isPending } = useUserInformation();
+  const { mutate: editProfile } = useEditProfile({
+    onSuccess: () => {
+      triggerToast({
+        variant: "small",
+        text: "내 정보 수정을 완료했습니다.",
+        status: "success",
+      });
+
+      navigate("/my-page");
+    },
+    onError: () => {
+      triggerToast({
+        variant: "small",
+        text: "내 정보 수정에 실패했습니다. 잠시후 다시 시도해주세요.",
+        status: "danger",
+      });
+    },
+  });
 
   const methods = useForm<EditProfileSchemaType>({
     resolver: zodResolver(EditProfileSchema),
+    mode: "onChange",
   });
 
+  const {
+    register,
+    formState: { errors, isValid },
+    setValue,
+    handleSubmit,
+    watch,
+    reset,
+  } = methods;
+
+  const gender = watch("gender");
+  const nickname = watch("nickname");
+
   const [, setImage] = useState<File | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user.name,
+        nickname: user.nickname,
+        birthday: user.birthday,
+        gender: user.gender,
+      });
+    }
+  }, [user, reset]);
+
+  useEffect(() => {
+    if (user) {
+      setIsNicknameChanged(user.nickname !== nickname);
+    }
+  }, [user, nickname]);
+
+  const onSubmit = (form: EditProfileSchemaType) => {
+    if (isNicknameChanged && !isNicknameChecked) {
+      triggerToast({
+        variant: "small",
+        status: "danger",
+        text: "닉네임 중복확인 후 수정할 수 있습니다.",
+      });
+    } else {
+      editProfile(form);
+    }
+  };
 
   if (isPending) {
     return (
@@ -36,24 +104,20 @@ export default function MyPageEdit() {
     );
   }
 
-  const {
-    nickname,
-    email,
-    name,
-    phone_number: phoneNumber,
-    gender,
-    birthday,
-    id: userId,
-  } = user;
+  const { email, phone_number: phoneNumber, id: userId } = user;
 
   const profileImageUrl = creatProfileImageUrl(userId);
 
   return (
     <FormProvider {...methods}>
-      <form className="flex flex-col gap-5">
+      <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">내 정보</h1>
-          <Button type="submit">저장하기</Button>
+          <div>
+            <Button type="submit" disabled={!isValid}>
+              저장하기
+            </Button>
+          </div>
         </div>
 
         <section className="flex flex-col items-center gap-20 rounded-lg border p-11">
@@ -69,7 +133,10 @@ export default function MyPageEdit() {
             <ImageInput setImage={setImage} defaultImageUrl={profileImageUrl} />
 
             <div className="flex w-full flex-col gap-5">
-              <EditNickname defaultValue={nickname} />
+              <EditNickname
+                setIsNicknameChecked={setIsNicknameChecked}
+                isNicknameChecked={isNicknameChecked}
+              />
 
               <div className="flex w-full flex-col gap-2">
                 <label>이메일</label>
@@ -90,7 +157,10 @@ export default function MyPageEdit() {
             <div className="flex w-full flex-col gap-5">
               <div className="flex w-full flex-col gap-2">
                 <label>이름</label>
-                <Input defaultValue={name} />
+                <Input
+                  {...register("name")}
+                  errorMessage={errors.name?.message}
+                />
               </div>
 
               <div className="flex w-full flex-col gap-2">
@@ -121,6 +191,9 @@ export default function MyPageEdit() {
                       gender !== "M" &&
                         "border-neutral-400 bg-neutral-200 text-neutral-700"
                     )}
+                    onClick={() => {
+                      setValue("gender", "M", { shouldDirty: true });
+                    }}
                   >
                     남
                   </Button>
@@ -132,6 +205,9 @@ export default function MyPageEdit() {
                       gender !== "F" &&
                         "border-neutral-400 bg-neutral-200 text-neutral-700"
                     )}
+                    onClick={() => {
+                      setValue("gender", "F", { shouldDirty: true });
+                    }}
                   >
                     여
                   </Button>
@@ -140,7 +216,10 @@ export default function MyPageEdit() {
 
               <div className="flex w-full flex-col gap-2">
                 <label>생년월일</label>
-                <Input defaultValue={birthday} />
+                <Input
+                  {...register("birthday")}
+                  errorMessage={errors.birthday?.message}
+                />
               </div>
             </div>
           </div>
