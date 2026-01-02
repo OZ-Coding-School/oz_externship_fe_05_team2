@@ -1,7 +1,7 @@
 import { Button, Input } from "@/components/common";
 import { Modal, ModalContent } from "@/components/common/modal";
 import { useToast } from "@/hooks";
-import { useSendEmail, useVerifyEmail } from "@/hooks/api";
+import { useSendEmail, useRestoreAccount } from "@/hooks/api";
 import type { ModalContextType } from "@/types";
 import { RotateCwIcon } from "lucide-react";
 import { useState } from "react";
@@ -45,7 +45,7 @@ export default function AccountRestoreFormModal({
     },
   });
 
-  const { mutate: verifyEmail } = useVerifyEmail({
+  const { mutate: verifyEmail } = useRestoreAccount({
     onSuccess: () => {
       setIsVerified(true);
       triggerToast({
@@ -76,7 +76,7 @@ export default function AccountRestoreFormModal({
   };
 
   const handleVerifyButtonClick = () => {
-    verifyEmail({ email, code: verificationCode });
+    verifyEmail({ code: verificationCode });
   };
 
   return (
