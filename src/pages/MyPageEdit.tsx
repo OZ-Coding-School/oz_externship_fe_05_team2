@@ -1,3 +1,4 @@
+import { changeProfileImage } from "@/api/auth";
 import { Button, Input, LoadingUi } from "@/components/common";
 import { EditNickname } from "@/components/profile";
 import ImageInput from "@/components/profile/ImageInput";
@@ -57,7 +58,23 @@ export default function MyPageEdit() {
   const gender = watch("gender");
   const nickname = watch("nickname");
 
-  const [, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
+
+  const onSubmit = (form: EditProfileSchemaType) => {
+    if (isNicknameChanged && !isNicknameChecked) {
+      triggerToast({
+        variant: "small",
+        status: "danger",
+        text: "닉네임 중복확인 후 수정할 수 있습니다.",
+      });
+    } else {
+      editProfile(form);
+
+      if (image) {
+        changeProfileImage(image);
+      }
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -75,18 +92,6 @@ export default function MyPageEdit() {
       setIsNicknameChanged(user.nickname !== nickname);
     }
   }, [user, nickname]);
-
-  const onSubmit = (form: EditProfileSchemaType) => {
-    if (isNicknameChanged && !isNicknameChecked) {
-      triggerToast({
-        variant: "small",
-        status: "danger",
-        text: "닉네임 중복확인 후 수정할 수 있습니다.",
-      });
-    } else {
-      editProfile(form);
-    }
-  };
 
   if (isPending) {
     return (
