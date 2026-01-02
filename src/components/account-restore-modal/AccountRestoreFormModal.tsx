@@ -46,6 +46,7 @@ export default function AccountRestoreFormModal({
   });
 
   const { mutate: restoreAccount } = useRestoreAccount({
+
     onSuccess: () => {
       setIsVerified(true);
       triggerToast({
