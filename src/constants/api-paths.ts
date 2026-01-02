@@ -28,6 +28,7 @@ export const API_PATHS = {
   },
   accounts: {
     login: `${API_PREFIX}/accounts/login`,
+    findEmail: `${API_PREFIX}/accounts/find-email`,
     checkNickname: `${API_PREFIX}/accounts/check-nickname`,
     signup: `${API_PREFIX}/accounts/signup`,
     availableCourses: `${API_PREFIX}/accounts/available-courses`,
