@@ -72,7 +72,7 @@ export default function AccountRestoreFormModal({
   });
 
   const handleEmailButtonClick = () => {
-    sendEmail({ email });
+    sendEmail({ email, purpose: "restore" });
   };
 
   const handleVerifyButtonClick = () => {
