@@ -9,7 +9,6 @@ import type {
   UserInfoResponse,
   SignupResponse,
 } from "@/types/api-response-type/auth-response-type";
-import axios from "axios";
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
   const response = await api.post(
