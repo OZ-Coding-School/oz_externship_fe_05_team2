@@ -1,5 +1,5 @@
 import { Button, Input, LoadingUi } from "@/components/common";
-import EditNickname from "@/components/profile/EditNickname";
+import { EditNickname } from "@/components/profile";
 import ImageInput from "@/components/profile/ImageInput";
 import { useUserInformation } from "@/hooks/api";
 import { cn, creatProfileImageUrl } from "@/lib/utils";
