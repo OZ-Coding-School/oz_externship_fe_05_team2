@@ -76,7 +76,7 @@ export default function AccountRestoreFormModal({
   };
 
   const handleVerifyButtonClick = () => {
-    verifyEmail({ code: verificationCode });
+    verifyEmail({ code: verificationCode, email });
   };
 
   return (

@@ -5,7 +5,7 @@ import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
 type RestoreAccountMutationOptions = Omit<
-  UseMutationOptions<unknown, AxiosError, { code: string }>,
+  UseMutationOptions<unknown, AxiosError, { code: string; email: string }>,
   "mutateFn"
 >;
 
@@ -13,9 +13,10 @@ export default function useRestoreAccount(
   options?: RestoreAccountMutationOptions
 ) {
   return useMutation({
-    mutationFn: async ({ code }) => {
+    mutationFn: async ({ code, email }) => {
       await api.patch(`${API_BASE_URL}${API_PATHS.accounts.restore}`, {
-        email_token: code,
+        code,
+        email,
       });
     },
     ...options,
