@@ -7,7 +7,7 @@ import type { SignupErrorResponse } from "@/types/api-response-type/auth-respons
 
 export interface SendEmailRequest {
   email: string;
-  purpose: "signup" | "find" | "restore";
+  purpose?: "signup" | "find" | "restore";
 }
 
 type SendEmailMutationOptons = Omit<
@@ -25,7 +25,7 @@ export default function useSendEmail(options?: SendEmailMutationOptons) {
     AxiosError<SignupErrorResponse>,
     SendEmailRequest
   >({
-    mutationFn: async ({ email, purpose }) => {
+    mutationFn: async ({ email, purpose = "restore" }) => {
       await api.post(
         `${API_BASE_URL}${API_PATHS.accounts.verification.sendEmail}`,
         {
