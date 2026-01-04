@@ -45,4 +45,3 @@ export default function MyPageLayout() {
     </div>
   );
 }
->>>>>>> 9d30dae7b1fcefeec38c51c5b80b279b405bb492
