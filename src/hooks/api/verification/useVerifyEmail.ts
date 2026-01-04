@@ -1,23 +1,36 @@
-import { API_PATHS, MSW_BASE_URL } from "@/constants";
+import { API_PATHS } from "@/constants";
+import { API_BASE_URL } from "@/constants/api-paths";
 import { api } from "@/lib";
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
+import type {
+  EmailVerifyServerResponse,
+  EmailVerifyResponse,
+} from "@/types/api-response-type/auth-response-type";
 
-type VerifyEmailMutationOptons = Omit<
-  UseMutationOptions<unknown, AxiosError, { email: string; code: string }>,
+type VerifyEmailMutationOptions = Omit<
+  UseMutationOptions<
+    EmailVerifyResponse,
+    AxiosError,
+    { email: string; code: string }
+  >,
   "mutateFn"
 >;
 
-export default function useVerifyEmail(options?: VerifyEmailMutationOptons) {
+export default function useVerifyEmail(options?: VerifyEmailMutationOptions) {
   return useMutation({
     mutationFn: async ({ email, code }) => {
-      await api.post(
-        `${MSW_BASE_URL}${API_PATHS.accounts.verification.verfiyEmail}`,
+      const response = await api.post<EmailVerifyServerResponse>(
+        `${API_BASE_URL}${API_PATHS.accounts.verification.verfiyEmail}`,
         {
           email,
-          code,
+          email_code: code,
         }
       );
+      return {
+        detail: response.data.detail,
+        emailToken: response.data.email_token,
+      };
     },
     ...options,
   });

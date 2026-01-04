@@ -11,6 +11,12 @@ import useExamQuestionList from "@/hooks/api/useExamQuestionList";
 import useReportExamCheating from "@/hooks/api/useReportExamCheating";
 import useExamStatusPolling from "@/hooks/api/useExamStatusPolling";
 import useSubmitExam from "@/hooks/api/useSubmitExam";
+import { useNicknameCheck } from "@/hooks/api/useNicknameCheck";
+import useChangePassword from "@/hooks/api/useChangePassword";
+import useExamResult from "@/hooks/api/useExamResult";
+import useUserInformation from "@/hooks/api/useUserInformation";
+import useEnrolledCourses from "@/hooks/api/useEnrolledCourses";
+import useEditProfile from "@/hooks/api/useEditProfile";
 
 export {
   useExamList,
@@ -26,4 +32,10 @@ export {
   useReportExamCheating,
   useExamStatusPolling,
   useSubmitExam,
+  useNicknameCheck,
+  useChangePassword,
+  useExamResult,
+  useUserInformation,
+  useEnrolledCourses,
+  useEditProfile,
 };

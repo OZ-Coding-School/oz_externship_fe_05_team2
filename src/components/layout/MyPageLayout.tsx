@@ -1,40 +1,48 @@
-import type { ReactNode } from 'react';
+import { SideBarTapButton } from "@/components/common";
+import { Link, Outlet, useLocation } from "react-router";
 
-interface LayoutProps {
-  children: ReactNode;
-  selectedMenu: string;
-  onSelectMenu: (id: string) => void;
-}
+const EXAM_PATH = "/my-page/exams";
+const PROFILE_PATH = "/my-page";
+const PROFILE_EDIT_PATH = "/my-page/edit";
+const CHANGE_PASSWORD_PATH = "/my-page/change-password";
 
-const menuItems = [
-  { id: 'exam', label: '쪽지시험' },
-  { id: 'profile', label: '내 정보' },
-  { id: 'password', label: '비밀번호 변경' },
-  { id: 'withdraw', label: '회원 탈퇴' },
-];
+export default function MyPageLayout() {
+  const { pathname } = useLocation();
 
-export default function MyPageLayout({ children, selectedMenu, onSelectMenu }: LayoutProps) {
   return (
-    <div className="flex h-screen">
-      <aside className="w-48 bg-white border-r border-gray-200 p-6 flex flex-col space-y-3">
-        {menuItems.map(({ id, label }) => (
-          <button
-            key={id}
-            onClick={() => onSelectMenu(id)}
-            className={`text-left text-sm font-medium px-3 py-2 rounded-md transition select-none
-              ${
-                selectedMenu === id
-                  ? 'bg-purple-600 text-white'
-                  : 'text-purple-700 hover:bg-purple-200'
-              }`}
+    <div className="flex w-full items-start justify-center p-10">
+      <div className="flex w-full max-w-6xl items-start justify-center gap-5">
+        <aside className="w-45">
+          <SideBarTapButton
+            as={Link}
+            to={EXAM_PATH}
+            isActive={pathname === EXAM_PATH}
           >
-            {label}
-          </button>
-        ))}
-      </aside>
-      <main className="flex-1 p-10 overflow-auto bg-white">
-        {children}
-      </main>
+            쪽지시험
+          </SideBarTapButton>
+          <SideBarTapButton
+            as={Link}
+            to={PROFILE_PATH}
+            isActive={
+              pathname === PROFILE_PATH || pathname === PROFILE_EDIT_PATH
+            }
+          >
+            마이페이지
+          </SideBarTapButton>
+          <SideBarTapButton
+            as={Link}
+            to={CHANGE_PASSWORD_PATH}
+            isActive={pathname === CHANGE_PASSWORD_PATH}
+          >
+            비밀번호 변경
+          </SideBarTapButton>
+        </aside>
+
+        <main className="flex-1">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }
+>>>>>>> 9d30dae7b1fcefeec38c51c5b80b279b405bb492

@@ -1,10 +1,16 @@
 import { API_PATHS, MSW_BASE_URL } from "@/constants";
 import { http, HttpResponse } from "msw";
-import { cheatingState, examList, questionList } from "@/mocks/data/exam-data";
+import {
+  cheatingState,
+  examList,
+  questionList,
+  questionResultList,
+} from "@/mocks/data/exam-data";
 import type {
   ExamCheatingResponseDto,
   ExamListResponseDto,
   ExamQuestionListResponseDto,
+  ExamResultResponseDto,
   ExamStatusResponseDto,
   ExamSubmitResponseDto,
 } from "@/types/api-response-type/exam-response-types";
@@ -134,6 +140,37 @@ const submitExam = http.post(
   }
 );
 
+const getExamResult = http.get(
+  `${MSW_BASE_URL}${API_PATHS.exams.submissions.base}/:submissionId`,
+  ({ params }) => {
+    const { submissionId } = params;
+
+    if (submissionId === "350") {
+      return HttpResponse.json<ExamResultResponseDto>({
+        id: 1,
+        submitter_id: 1,
+        deployment_id: 1,
+        exam: {
+          id: 1,
+          title: "TypeScript 기본 문법 테스트",
+          thumbnail_img_url: "https://cdn.exam/logo.png",
+        },
+        questions: questionResultList,
+        cheating_count: 1,
+        total_score: 40,
+        correct_answer_count: 3,
+        elapsed_time: "14:29:07.503Z",
+        started_at: "2025-12-31T15:20:35.033Z",
+        submitted_at: "2025-12-31T15:20:35.033Z",
+      });
+    }
+    return HttpResponse.json(
+      { error_detail: "유효하지 않은 시험 응시 세션입니다." },
+      { status: 400 }
+    );
+  }
+);
+
 export const examHandlers = [
   getExamList,
   checkExamCode,
@@ -141,4 +178,5 @@ export const examHandlers = [
   reportExamCheating,
   checkExamStatus,
   submitExam,
+  getExamResult,
 ];

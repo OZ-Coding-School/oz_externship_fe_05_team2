@@ -115,3 +115,38 @@ export interface Answer {
   type: QuestionType;
   submittedAnswer: string | string[] | null;
 }
+
+export interface QuestionResultDto {
+  id: number;
+  question: string;
+  prompt: string;
+  blank_count: number;
+  options: string[];
+  type: QuestionTypeDto;
+  answer: string[];
+  point: number;
+  explanation: string;
+  is_correct: boolean;
+  submitted_answer: string[];
+}
+
+export interface QuestionResult {
+  id: number;
+  question: string;
+  prompt: string;
+  blankCount: number;
+  options: string[];
+  type: QuestionType;
+  answer: string[];
+  point: number;
+  explanation: string;
+  isCorrect: boolean;
+  submittedAnswer: string[];
+}
+
+interface ExamQuestionResultContentProps {
+  question: QuestionResult;
+}
+
+export type ExamQuestionResultContentComponent =
+  React.FC<ExamQuestionResultContentProps>;

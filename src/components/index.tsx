@@ -12,6 +12,15 @@ import ExamQuestion from "@/components/question/ExamQuestion";
 import CheatingCountIcons from "@/components/CheatingCountIcons";
 import ExamCheatingModal from "@/components/ExamCheatingModal";
 import ExamFocusWarning from "@/components/ExamFocusWarning";
+import NicknameField from "@/components/NicknameField";
+import ExamHeaderContainer from "@/components/ExamHeaderContainer";
+import ExamHeaderTitle from "@/components/ExamHeaderTitle";
+import ExamContentContainer from "@/components/ExamContentContainer";
+import ExamBottomButton from "@/components/ExamBottomButton";
+import QuestionHeader from "@/components/QuestionHeader";
+import ExamQuestionResult from "@/components/questionResult/ExamQuestionResult";
+import FindEmailModal from "@/components/FindEmailModal";
+import FindPasswordModal from "@/components/FindPasswordModal";
 
 export {
   Footer,
@@ -28,4 +37,13 @@ export {
   CheatingCountIcons,
   ExamCheatingModal,
   ExamFocusWarning,
+  NicknameField,
+  ExamHeaderContainer,
+  ExamHeaderTitle,
+  ExamContentContainer,
+  ExamBottomButton,
+  QuestionHeader,
+  ExamQuestionResult,
+  FindEmailModal,
+  FindPasswordModal,
 };

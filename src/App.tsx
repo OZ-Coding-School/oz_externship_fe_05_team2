@@ -1,4 +1,4 @@
-import { ExamLayout, RootLayout } from "@/components/layout";
+import { ExamLayout, RootLayout, MyPageLayout } from "@/components/layout";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { NotFound404 } from "@/components/common/not-found";
 import { NotFound } from "@/components/common/not-found";
@@ -9,9 +9,12 @@ import {
   Exams,
   Home,
   TakeExam,
+  ChangePasswordPage,
+  ExamResult,
+  MyPage,
+  MyPageEdit,
 } from "@/pages";
-import  { useState } from "react";
-import MyPageLayout from "@/components/layout/MyPageLayout";  
+import  { useState } from "react"; 
 
 
 function ExamPage() { return <div>쪽지시험 화면</div>; }
@@ -46,14 +49,19 @@ function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/community" element={<div>커뮤니티 페이지</div>} />
-          <Route path="/qna" element={<div>질의응답 페이지</div>} />
           <Route path="/profile" element={<div>수강생 등록 페이지</div>} />
-          <Route path="/my-page/exams" element={<Exams />} />
-          <Route path="/my-page" element={<div>마이페이지</div>} />
+
+          <Route path="/my-page" element={<MyPageLayout />}>
+            <Route index element={<MyPage />} />
+            <Route path="edit" element={<MyPageEdit />} />
+            <Route path="change-password" element={<ChangePasswordPage />} />
+            <Route path="exams" element={<Exams />} />
+          </Route>
+
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/email-signup" element={<EmailSignupPage />} />
+
           <Route path="*" element={<NotFound />} />
           <Route path="/my-page" />
           <Route path="/my-page/exams" element={<Exams />} />
@@ -66,7 +74,7 @@ function App() {
           <Route path=":deploymentId" element={<TakeExam />} />
           <Route
             path=":deploymentId/result/:submissionId"
-            element={<div>쪽지시험 결과</div>}
+            element={<ExamResult />}
           />
         </Route>
 
