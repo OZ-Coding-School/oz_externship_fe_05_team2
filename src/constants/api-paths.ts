@@ -44,5 +44,6 @@ export const API_PATHS = {
     refresh: `${API_PREFIX}/accounts/refresh`,
     changePassword: `${API_PREFIX}/accounts/change-password`,
     profileImage: `${API_PREFIX}/accounts/me/profile-image`,
+    restore: `${API_PREFIX}/accounts/restore`,
   },
 } as const;
