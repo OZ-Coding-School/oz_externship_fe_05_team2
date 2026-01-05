@@ -84,3 +84,21 @@ export const findUserPassword = async (data: {
 
   return response.data;
 };
+
+export const kakaoLoginCallback = async (code: string) => {
+  const response = await api.get(
+    `${API_BASE_URL}${API_PATHS.accounts.kakaoCallback}`,
+    {
+      params: { code },
+    }
+  );
+  return response.data;
+};
+
+export const naverLogin = async (code: string, state: string) => {
+  const response = await api.get(
+    `${API_BASE_URL}${API_PATHS.accounts.naverLogin}`,
+    { params: { code, state } }
+  );
+  return response.data;
+};

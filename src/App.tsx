@@ -12,6 +12,8 @@ import {
   ExamResult,
   MyPage,
   MyPageEdit,
+  KakaoCallback,
+  NaverCallback,
 } from "@/pages";
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/email-signup" element={<EmailSignupPage />} />
+          <Route path="kakao/callback" element={<KakaoCallback />} />
+          <Route path="/naver/callback" element={<NaverCallback />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>

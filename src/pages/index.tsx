@@ -8,6 +8,8 @@ import ChangePasswordPage from "@/pages/ChangePasswordPage";
 import ExamResult from "@/pages/ExamResult";
 import MyPage from "@/pages/MyPage";
 import MyPageEdit from "@/pages/MyPageEdit";
+import KakaoCallback from "@/pages/KakaoCallback";
+import NaverCallback from "@/pages/NaverCallback";
 
 export {
   Home,
@@ -20,4 +22,6 @@ export {
   ExamResult,
   MyPage,
   MyPageEdit,
+  KakaoCallback,
+  NaverCallback,
 };

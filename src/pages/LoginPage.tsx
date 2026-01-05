@@ -32,8 +32,10 @@ export default function LoginPage() {
         error.response &&
         error.response.status === 403 &&
         error.response.data &&
-        "error_detail" in error.response.data
+        "error_detail" in error.response.data &&
+        "expire_at" in error.response.data.error_detail
       ) {
+        setExpiredDate(new Date(error.response.data.error_detail.expire_at));
         accountRestoreModalControl.open();
       }
     },
