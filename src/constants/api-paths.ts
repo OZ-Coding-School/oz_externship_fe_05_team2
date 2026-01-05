@@ -10,7 +10,6 @@ export const API_PATHS = {
   exams: {
     deployments: {
       base: `${API_PREFIX}/exams/deployments`,
-      list: (page: number) => `${API_PREFIX}/exams/deployments?page=${page}`,
       checkCode: (deploymentId: number) =>
         `${API_PREFIX}/exams/deployments/${deploymentId}/check-code`,
       questionList: (deploymentId: number) =>
@@ -28,6 +27,7 @@ export const API_PATHS = {
   },
   accounts: {
     login: `${API_PREFIX}/accounts/login`,
+    logout: `${API_PREFIX}/accounts/logout`,
     findEmail: `${API_PREFIX}/accounts/find-email`,
     findPassword: `${API_PREFIX}/accounts/find-password`,
     checkNickname: `${API_PREFIX}/accounts/check-nickname`,
@@ -45,5 +45,6 @@ export const API_PATHS = {
     refresh: `${API_PREFIX}/accounts/refresh`,
     changePassword: `${API_PREFIX}/accounts/change-password`,
     profileImage: `${API_PREFIX}/accounts/me/profile-image`,
+    restore: `${API_PREFIX}/accounts/restore`,
   },
 } as const;
