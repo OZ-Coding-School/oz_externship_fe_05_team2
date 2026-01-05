@@ -27,6 +27,7 @@ export const API_PATHS = {
   },
   accounts: {
     login: `${API_PREFIX}/accounts/login`,
+    logout: `${API_PREFIX}/accounts/logout`,
     findEmail: `${API_PREFIX}/accounts/find-email`,
     findPassword: `${API_PREFIX}/accounts/find-password`,
     checkNickname: `${API_PREFIX}/accounts/check-nickname`,
