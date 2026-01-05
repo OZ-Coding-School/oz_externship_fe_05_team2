@@ -20,7 +20,7 @@ export default function LoginPage() {
   const findEmailModalControl = useExternalModalController();
   const findPasswordModalControl = useExternalModalController();
 
-  const [expiredDate, setExpiredDate] = useState<Date>();
+  const [expiredDate] = useState<Date>();
 
   const {
     mutate: loginFn,
