@@ -32,6 +32,8 @@ export const API_PATHS = {
     findPassword: `${API_PREFIX}/accounts/find-password`,
     checkNickname: `${API_PREFIX}/accounts/check-nickname`,
     signup: `${API_PREFIX}/accounts/signup`,
+    kakaoLogin: `${API_PREFIX}/accounts/social-login/kakao`,
+    naverLogin: `${API_PREFIX}/accounts/social-login/naver`,
     availableCourses: `${API_PREFIX}/courses/available`,
     enrolledCourses: `${API_PREFIX}/accounts/me/enrolled-courses`,
     enrollStudent: `${API_PREFIX}/accounts/enroll-student`,

@@ -1,6 +1,7 @@
 import BaseSocialButton from "@/components/auth/BaseSocialButton";
 import { kakao } from "@/assets/icons/login-icons";
 import { cn } from "@/lib";
+import { API_BASE_URL, API_PATHS } from "@/constants/api-paths";
 
 interface KakaoLoginButtonProps {
   className?: string;
@@ -11,8 +12,10 @@ export default function KakaoLoginButton({
   className,
   children,
 }: KakaoLoginButtonProps) {
+  const KAKAO_LOGIN_URL = `${API_BASE_URL}${API_PATHS.accounts.kakaoLogin}`;
+
   const handleLogin = () => {
-    console.log("카카오 로그인 시도");
+    window.location.href = KAKAO_LOGIN_URL;
   };
 
   return (
@@ -21,7 +24,7 @@ export default function KakaoLoginButton({
       icon={kakao}
       className={cn("bg-yellow-300 text-black hover:bg-yellow-200", className)}
     >
-      {children || "카카오 로그인"}
+      {children}
     </BaseSocialButton>
   );
 }
