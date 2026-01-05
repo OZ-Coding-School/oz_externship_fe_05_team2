@@ -1,6 +1,7 @@
 import BaseSocialButton from "@/components/auth/BaseSocialButton";
 import { naver } from "@/assets/icons/login-icons";
 import { cn } from "@/lib";
+import { API_BASE_URL, API_PATHS } from "@/constants/api-paths";
 
 interface NaverLoginButtonProps {
   className?: string;
@@ -11,17 +12,19 @@ export default function NaverLoginButton({
   className,
   children,
 }: NaverLoginButtonProps) {
+  const NAVER_LOGIN_URL = `${API_BASE_URL}${API_PATHS.accounts.naverLogin}`;
+
   const handleLogin = () => {
-    console.log("네이버 로그인 시도");
+    window.location.href = NAVER_LOGIN_URL;
   };
 
   return (
     <BaseSocialButton
       onClick={handleLogin}
       icon={naver}
-      className={cn(`bg-green-500 text-white hover:bg-green-400`, className)}
+      className={cn("bg-[#03C75A] text-white hover:bg-[#02b351]", className)}
     >
-      {children || "네이버 로그인"}
+      {children}
     </BaseSocialButton>
   );
 }
