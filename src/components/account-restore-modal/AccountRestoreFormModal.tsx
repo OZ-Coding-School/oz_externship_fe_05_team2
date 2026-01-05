@@ -1,7 +1,7 @@
 import { Button, Input } from "@/components/common";
 import { Modal, ModalContent } from "@/components/common/modal";
 import { useToast } from "@/hooks";
-import { useSendEmail, useRestoreAccount } from "@/hooks/api";
+import { useSendEmail, useRestoreAccount, useVerifyEmail } from "@/hooks/api";
 import type { ModalContextType } from "@/types";
 import { RotateCwIcon } from "lucide-react";
 import { useState } from "react";
@@ -45,7 +45,7 @@ export default function AccountRestoreFormModal({
     },
   });
 
-  const { mutate: verifyEmail } = useRestoreAccount({
+  const { mutate: restoreAccount } = useRestoreAccount({
     onSuccess: () => {
       setIsVerified(true);
       triggerToast({
@@ -68,6 +68,19 @@ export default function AccountRestoreFormModal({
           text: "이메일 인증에 실패했습니다. 잠시후 다시 시도해주세요.",
         });
       }
+    },
+  });
+
+  const { mutate: verifyEmail } = useVerifyEmail({
+    onSuccess: () => {
+      restoreAccount({ code: verificationCode, email });
+    },
+    onError: () => {
+      triggerToast({
+        variant: "small",
+        status: "danger",
+        text: "이메일 인증에 실패했습니다. 잠시후 다시 시도해주세요.",
+      });
     },
   });
 
